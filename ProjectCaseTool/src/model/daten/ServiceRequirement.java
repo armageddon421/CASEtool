@@ -1,4 +1,4 @@
-<>package model.daten;
+package model.daten;
 
 public class ServiceRequirement extends Requirements {
 
