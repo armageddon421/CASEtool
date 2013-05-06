@@ -23,4 +23,18 @@ public abstract class Requirements {
 		return description;
 	}
 
+	/**
+	 * @return the type
+	 */
+	public RequirementTyp getType() {
+		return Type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(RequirementTyp type) {
+		Type = type;
+	}
+
 }
