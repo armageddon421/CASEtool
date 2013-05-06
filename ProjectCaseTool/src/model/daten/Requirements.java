@@ -4,7 +4,7 @@ public abstract class Requirements {
 	
 	private String name;
 	private String description;
-	
+	private RequirementTyp Type;
 	
 	
 	public void setName(String newName){
