@@ -1,0 +1,5 @@
+package model.daten;
+
+public class ProductRequirement extends Requirements {
+
+}

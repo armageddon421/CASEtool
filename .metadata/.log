@@ -1,0 +1,78 @@
+!SESSION 2013-05-08 11:00:28.133 -----------------------------------------------
+eclipse.buildId=M20130204-1200
+java.version=1.7.0_17
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2013-05-08 11:03:36.515
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.515
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE Software being installed: SWT Designer XWT Support (requires Eclipse WTP/WST) 1.5.2.r42x201303071709 (org.eclipse.wb.xwt.feature.feature.group 1.5.2.r42x201303071709)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE Missing requirement: WindowBuilder Core for XML GUI's 1.5.2.r42x201303061518 (org.eclipse.wb.core.xml 1.5.2.r42x201303061518) requires 'bundle org.eclipse.wst.sse.core 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.515
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE From: XWT Databinding Support 1.5.2.r42x201303071709 (org.eclipse.wb.rcp.databinding.xwt 1.5.2.r42x201303071709)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE To: bundle org.eclipse.wb.core.xml 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.515
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE From: SWT Designer XWT Support (requires Eclipse WTP/WST) 1.5.2.r42x201303071709 (org.eclipse.wb.xwt.feature.feature.group 1.5.2.r42x201303071709)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.515
+!MESSAGE To: org.eclipse.wb.rcp.databinding.xwt [1.5.2.r42x201303071709]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2013-05-08 11:03:36.528
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.528
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.528
+!MESSAGE Software being installed: SWT Designer XWT Support (requires Eclipse WTP/WST) 1.5.2.r42x201303071709 (org.eclipse.wb.xwt.feature.feature.group 1.5.2.r42x201303071709)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.528
+!MESSAGE Missing requirement: WindowBuilder Core for XML GUI's 1.5.2.r42x201303061518 (org.eclipse.wb.core.xml 1.5.2.r42x201303061518) requires 'bundle org.eclipse.wst.sse.core 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.528
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.529
+!MESSAGE From: XWT Databinding Support 1.5.2.r42x201303071709 (org.eclipse.wb.rcp.databinding.xwt 1.5.2.r42x201303071709)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.529
+!MESSAGE To: bundle org.eclipse.wb.core.xml 0.0.0
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:03:36.529
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.529
+!MESSAGE From: SWT Designer XWT Support (requires Eclipse WTP/WST) 1.5.2.r42x201303071709 (org.eclipse.wb.xwt.feature.feature.group 1.5.2.r42x201303071709)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:03:36.529
+!MESSAGE To: org.eclipse.wb.rcp.databinding.xwt [1.5.2.r42x201303071709]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2013-05-08 11:04:32.133
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:04:32.133
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.133
+!MESSAGE Software being installed: WindowBuilder XML Core (requires Eclipse WTP/WST) 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml.feature.feature.group 1.5.1.r42x201209161132)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.133
+!MESSAGE Missing requirement: WindowBuilder Core for XML GUI's 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml 1.5.1.r42x201209161132) requires 'bundle org.eclipse.wst.sse.core 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:04:32.133
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.133
+!MESSAGE From: WindowBuilder XML Core (requires Eclipse WTP/WST) 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml.feature.feature.group 1.5.1.r42x201209161132)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.133
+!MESSAGE To: org.eclipse.wb.core.xml [1.5.1.r42x201209161132]
+
+!ENTRY org.eclipse.equinox.p2.operations 4 0 2013-05-08 11:04:32.139
+!MESSAGE Operation details
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:04:32.139
+!MESSAGE Cannot complete the install because one or more required items could not be found.
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.139
+!MESSAGE Software being installed: WindowBuilder XML Core (requires Eclipse WTP/WST) 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml.feature.feature.group 1.5.1.r42x201209161132)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.139
+!MESSAGE Missing requirement: WindowBuilder Core for XML GUI's 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml 1.5.1.r42x201209161132) requires 'bundle org.eclipse.wst.sse.core 0.0.0' but it could not be found
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 1 2013-05-08 11:04:32.139
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.139
+!MESSAGE From: WindowBuilder XML Core (requires Eclipse WTP/WST) 1.5.1.r42x201209161132 (org.eclipse.wb.core.xml.feature.feature.group 1.5.1.r42x201209161132)
+!SUBENTRY 3 org.eclipse.equinox.p2.director 4 0 2013-05-08 11:04:32.139
+!MESSAGE To: org.eclipse.wb.core.xml [1.5.1.r42x201209161132]

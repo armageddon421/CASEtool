@@ -1,0 +1,10 @@
+package model.daten;
+
+public class Data {
+
+	static Data instance;
+	
+	private Data() {
+		
+	}
+}
