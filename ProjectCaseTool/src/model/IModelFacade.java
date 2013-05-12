@@ -9,5 +9,8 @@ public interface IModelFacade {
 	//getCalcMethods
 	//public Field calculate(String / Enum CalculationMethod);
 	public ArrayList<Project> listAllProject();
-	public openProjectNum ()
+	public void openProjectNum(int index);
+	public ArrayList<Field> getProjectFields();
+	public ArrayList<Field> getRequirementFields();
+	public void setField(Field field);
 }
