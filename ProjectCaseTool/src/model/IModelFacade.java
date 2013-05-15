@@ -7,10 +7,12 @@ public interface IModelFacade {
 	public void saveProject();
 	public void exportProject();
 	//getCalcMethods
-	//public Field calculate(String / Enum CalculationMethod);
 	public ArrayList<Project> listAllProject();
 	public void openProjectNum(int index);
 	public ArrayList<Field> getProjectFields();
 	public ArrayList<Field> getRequirementFields();
 	public void setField(Field field);
+	public ArrayList<String> getCalculationMethods();
+	public void setCalculationMethod(String calculationMethod);
+	public Field calculate();
 }
