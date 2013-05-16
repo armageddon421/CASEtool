@@ -12,10 +12,17 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.swt.widgets.TableItem;
 
 public class MainWindow {
 
-	protected Shell shell;
+	protected Shell shlCase;
 
 	/**
 	 * Launch the application.
@@ -36,9 +43,9 @@ public class MainWindow {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shell.open();
-		shell.layout();
-		while (!shell.isDisposed()) {
+		shlCase.open();
+		shlCase.layout();
+		while (!shlCase.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -49,76 +56,79 @@ public class MainWindow {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		shell = new Shell();
-		shell.setSize(563, 421);
-		shell.setText("SWT Application");
-		shell.setLayout(new GridLayout(1, false));
+		shlCase = new Shell();
+		shlCase.setSize(1000, 600);
+		shlCase.setText("CASETOOL");
+		shlCase.setLayout(new GridLayout(1, false));
 		
-		Menu menu = new Menu(shell, SWT.BAR);
-		shell.setMenuBar(menu);
+		TabFolder tabFolder = new TabFolder(shlCase, SWT.NONE);
+		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		MenuItem mntmFile = new MenuItem(menu, SWT.CASCADE);
-		mntmFile.setText("Datei");
+		TabItem tbtmProjekt = new TabItem(tabFolder, SWT.NONE);
+		tbtmProjekt.setText("Projekt");
 		
-		Menu menu_1 = new Menu(mntmFile);
-		mntmFile.setMenu(menu_1);
+		Composite composite = new Composite(tabFolder, SWT.NONE);
+		tbtmProjekt.setControl(composite);
 		
-		MenuItem mntmSpeichern = new MenuItem(menu_1, SWT.NONE);
-		mntmSpeichern.setText("Speichern");
-		
-		MenuItem mntmSpeichernUnter = new MenuItem(menu_1, SWT.NONE);
-		mntmSpeichernUnter.setText("Speichern unter");
-		
-		MenuItem mntmffnen = new MenuItem(menu_1, SWT.NONE);
-		mntmffnen.setText("\u00D6ffnen");
-		
-		new MenuItem(menu_1, SWT.SEPARATOR);
-		
-		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
-		mntmBeenden.setText("Beenden");
-		
-		MenuItem mntmProjekt = new MenuItem(menu, SWT.CASCADE);
-		mntmProjekt.setText("Projekt");
-		
-		Menu menu_3 = new Menu(mntmProjekt);
-		mntmProjekt.setMenu(menu_3);
-		
-		MenuItem mntmNeuesProjekt = new MenuItem(menu_3, SWT.NONE);
-		mntmNeuesProjekt.setText("Neues Projekt");
-		
-		MenuItem mntmProjektLschen = new MenuItem(menu_3, SWT.NONE);
-		mntmProjektLschen.setText("Projekt L\u00F6schen");
-		
-		MenuItem mntmExport = new MenuItem(menu_3, SWT.CASCADE);
-		mntmExport.setText("Export");
-		
-		Menu menu_2 = new Menu(mntmExport);
-		mntmExport.setMenu(menu_2);
-		
-		MenuItem mntmXml = new MenuItem(menu_2, SWT.NONE);
-		mntmXml.setText("XML");
-		
-		MenuItem mntmPdf = new MenuItem(menu_2, SWT.NONE);
-		mntmPdf.setText("PDF");
-		
-		TabFolder tabFolder = new TabFolder(shell, SWT.NONE);
-		GridData gd_tabFolder = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_tabFolder.heightHint = 92;
-		gd_tabFolder.widthHint = 433;
-		tabFolder.setLayoutData(gd_tabFolder);
+		Label lblNewLabel = new Label(composite, SWT.NONE);
+		lblNewLabel.setBounds(10, 10, 55, 15);
+		lblNewLabel.setText("New Label");
 		
 		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem.setText("New Item");
+		tbtmNewItem.setText("Zielbestimmung");
+		
+		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
+		tbtmNewItem.setControl(composite_1);
+		composite_1.setLayout(new GridLayout(1, false));
+		
+		TabItem tbtmProdukteinsatz = new TabItem(tabFolder, SWT.NONE);
+		tbtmProdukteinsatz.setText("Produkteinsatz");
+		
+		Composite composite_2 = new Composite(tabFolder, SWT.NONE);
+		tbtmProdukteinsatz.setControl(composite_2);
+		composite_2.setLayout(new GridLayout(1, false));
 		
 		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setText("New Item");
+		tbtmNewItem_1.setText("Produktanforderungen");
 		
-		CTabFolder tabFolder_1 = new CTabFolder(shell, SWT.BORDER);
-		tabFolder_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		tabFolder_1.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+		Composite composite_3 = new Composite(tabFolder, SWT.NONE);
+		tbtmNewItem_1.setControl(composite_3);
+		composite_3.setLayout(new GridLayout(1, false));
 		
-		CTabItem tbtmTest = new CTabItem(tabFolder_1, SWT.NONE);
-		tbtmTest.setText("test");
+		TabItem tbtmProduktdaten = new TabItem(tabFolder, SWT.NONE);
+		tbtmProduktdaten.setText("ProduktDaten");
+		
+		Composite composite_4 = new Composite(tabFolder, SWT.NONE);
+		tbtmProduktdaten.setControl(composite_4);
+		composite_4.setLayout(new GridLayout(1, false));
+		
+		TabItem tbtmProduktleistungen = new TabItem(tabFolder, SWT.NONE);
+		tbtmProduktleistungen.setText("Produktleistungen");
+		
+		Composite composite_5 = new Composite(tabFolder, SWT.NONE);
+		tbtmProduktleistungen.setControl(composite_5);
+		composite_5.setLayout(new GridLayout(1, false));
+		
+		TabItem tbtmNewItem_2 = new TabItem(tabFolder, SWT.NONE);
+		tbtmNewItem_2.setText("Glossareintrag");
+		
+		Composite composite_6 = new Composite(tabFolder, SWT.NONE);
+		tbtmNewItem_2.setControl(composite_6);
+		composite_6.setLayout(new GridLayout(1, false));
+		
+		TabItem tbtmQualittsanforderung = new TabItem(tabFolder, SWT.NONE);
+		tbtmQualittsanforderung.setText("Qualit\u00E4tsanforderung");
+		
+		Composite composite_7 = new Composite(tabFolder, SWT.NONE);
+		tbtmQualittsanforderung.setControl(composite_7);
+		composite_7.setLayout(new GridLayout(1, false));
+		
+		TabItem tbtmAufwandsschtzung = new TabItem(tabFolder, SWT.NONE);
+		tbtmAufwandsschtzung.setText("Aufwandssch\u00E4tzung");
+		
+		Composite composite_8 = new Composite(tabFolder, SWT.NONE);
+		tbtmAufwandsschtzung.setControl(composite_8);
+		composite_8.setLayout(new GridLayout(1, false));
 
 	}
 }
