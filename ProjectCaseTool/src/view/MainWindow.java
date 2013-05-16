@@ -19,6 +19,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.eclipse.swt.layout.FillLayout;
 
 public class MainWindow {
 
@@ -64,15 +65,8 @@ public class MainWindow {
 		TabFolder tabFolder = new TabFolder(shlCase, SWT.NONE);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		TabItem tbtmProjekt = new TabItem(tabFolder, SWT.NONE);
-		tbtmProjekt.setText("Projekt");
-		
-		Composite composite = new Composite(tabFolder, SWT.NONE);
-		tbtmProjekt.setControl(composite);
-		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setBounds(10, 10, 55, 15);
-		lblNewLabel.setText("New Label");
+		TabItem tbtmProjektliste = new TabItem(tabFolder, SWT.NONE);
+		tbtmProjektliste.setText("Projektliste");
 		
 		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
 		tbtmNewItem.setText("Zielbestimmung");
@@ -129,6 +123,41 @@ public class MainWindow {
 		Composite composite_8 = new Composite(tabFolder, SWT.NONE);
 		tbtmAufwandsschtzung.setControl(composite_8);
 		composite_8.setLayout(new GridLayout(1, false));
+		
+		Menu menu = new Menu(shlCase, SWT.BAR);
+		shlCase.setMenuBar(menu);
+		
+		MenuItem mntmDatei = new MenuItem(menu, SWT.CASCADE);
+		mntmDatei.setText("Datei");
+		
+		Menu menu_1 = new Menu(mntmDatei);
+		mntmDatei.setMenu(menu_1);
+		
+		MenuItem mntmNeuesProjektAnlegen = new MenuItem(menu_1, SWT.NONE);
+		mntmNeuesProjektAnlegen.setText("Neues Projekt anlegen");
+		
+		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
+		mntmProjektffnen.setText("Projekt \u00F6ffnen");
+		
+		MenuItem mntmProjektSchlieen = new MenuItem(menu_1, SWT.NONE);
+		mntmProjektSchlieen.setText("Projekt speichern");
+		
+		MenuItem mntmExport = new MenuItem(menu_1, SWT.CASCADE);
+		mntmExport.setText("XML");
+		
+		Menu menu_2 = new Menu(mntmExport);
+		mntmExport.setMenu(menu_2);
+		
+		MenuItem mntmExport_1 = new MenuItem(menu_2, SWT.NONE);
+		mntmExport_1.setText("Export");
+		
+		MenuItem mntmImport = new MenuItem(menu_2, SWT.NONE);
+		mntmImport.setText("Import");
+		
+		new MenuItem(menu_1, SWT.SEPARATOR);
+		
+		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
+		mntmBeenden.setText("Beenden");
 
 	}
 }
