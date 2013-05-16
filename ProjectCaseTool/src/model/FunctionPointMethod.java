@@ -16,10 +16,4 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return null;
 	}
 
-	@Override
-	public void setField(Field fieldToSet) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
