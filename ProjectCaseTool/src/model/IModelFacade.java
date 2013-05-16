@@ -3,16 +3,15 @@ package model;
 import java.util.ArrayList;
 
 public interface IModelFacade {
-	public void openProject(String filepath);
-	public void saveProject();
-	public void exportProject();
-	//getCalcMethods
-	public ArrayList<Project> listAllProject();
-	public void openProjectNum(int index);
-	public ArrayList<Field> getProjectFields();
-	public ArrayList<Field> getRequirementFields();
-	public void setField(Field field);
-	public ArrayList<String> getCalculationMethods();
-	public void setCalculationMethod(String calculationMethod);
-	public Field calculate();
-}
+	public void loadProject(String _filepath);
+	public void saveProject(String _filepath);
+	public void setCurrentProject(Field _fieldOfProject);
+	public ArrayList<Field> getCurrentProjectFields();
+	public ArrayList<ArrayList<Field>> getAllProjectFields();
+	public ArrayList<ArrayList<Field>> getFunctionRequirementFields();
+	public ArrayList<ArrayList<Field>> getDataRequirementFields();
+	public ArrayList<ArrayList<Field>> getPerformanceRequirementFields();
+	public void setCalculationMethod(CalculationEnum _calcMethod);
+	public CalculationEnum getCalculationMethod();
+	public ArrayList<Field> calculate();
+} 

@@ -1,11 +1,11 @@
 package model;
 
 public class Field {
-	private String name;
-	private Type type;
-	private Boolean editable;
-	private Object owner;
-	private Object value;
+	private String _name;
+	private Type _type;
+	private Boolean _editable;
+	private Object _owner;
+	private Object _value;
 	
 	/**
 	 * @param name Name of field.
@@ -15,37 +15,37 @@ public class Field {
 	 * @param value Whatever value the field is supposed to hold.
 	 */
 	public Field(String name, Type type, Boolean editable, Object owner, Object value){
-		this.name = name;
-		this.type = type;
-		this.editable = editable;
-		this.owner = owner;
-		this.value = value;
+		this._name = name;
+		this._type = type;
+		this._editable = editable;
+		this._owner = owner;
+		this._value = value;
 	}
 
 	public Object getValue() {
-		return value;
+		return _value;
 	}
 
 	public void setValue(Object value) {
-		if(editable == true){
-			this.value = value;
+		if(_editable == true){
+			this._value = value;
 		}
 	}
 
 	public String getName() {
-		return name;
+		return _name;
 	}
 
 	public Type getType() {
-		return type;
+		return _type;
 	}
 
 	public Boolean getEditable() {
-		return editable;
+		return _editable;
 	}
 
 	public Object getOwner() {
-		return owner;
+		return _owner;
 	}
 	
 	

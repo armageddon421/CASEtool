@@ -1,5 +1,5 @@
 package model;
 
-public enum CalculationMethod {
+public enum CalculationEnum {
 	FunctionPoint, COCOMO;
 }

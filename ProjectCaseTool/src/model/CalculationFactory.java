@@ -1,7 +1,7 @@
 package model;
 
 public class CalculationFactory {
-	public AbstractCalculationMethod createCalculationMethod(CalculationMethod method) {
+	public AbstractCalculationMethod createCalculationMethod(CalculationEnum method) {
 		AbstractCalculationMethod returnMethod;
 		
 		switch(method){
