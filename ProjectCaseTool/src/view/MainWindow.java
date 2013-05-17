@@ -6,36 +6,21 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.custom.CTabFolder;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.layout.FillLayout;
 
 public class MainWindow {
 
 	protected Shell shlCase;
+	private ViewFacade _viewFacade;
+	
+	
 
-	/**
-	 * Launch the application.
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			MainWindow window = new MainWindow();
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public MainWindow(ViewFacade _viewFacade) {
+		super();
+		this._viewFacade = _viewFacade;
 	}
 
 	/**
@@ -135,6 +120,8 @@ public class MainWindow {
 		
 		MenuItem mntmNeuesProjektAnlegen = new MenuItem(menu_1, SWT.NONE);
 		mntmNeuesProjektAnlegen.setText("Neues Projekt anlegen");
+		
+		mntmNeuesProjektAnlegen.addListener(SWT., listener)
 		
 		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
 		mntmProjektffnen.setText("Projekt \u00F6ffnen");
