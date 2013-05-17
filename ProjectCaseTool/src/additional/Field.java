@@ -1,4 +1,4 @@
-package model;
+package additional;
 
 public class Field {
 	private String _name;
@@ -30,9 +30,9 @@ public class Field {
 	 * Allows the value of the field to be changed, if it is editable.
 	 * @param _value New value, the value field of the Field is to be set to.
 	 */
-	public void setValue(Object _value) {
+	public void setValue(Object value) {
 		if(_editable == true){
-			this._value = _value;
+			this._value = value;
 		}
 	}
 

@@ -1,5 +1,7 @@
 package model;
 
+import additional.CalculationEnum;
+
 public class CalculationFactory {
 	public AbstractCalculationMethod createCalculationMethod(CalculationEnum method) {
 		AbstractCalculationMethod returnMethod;

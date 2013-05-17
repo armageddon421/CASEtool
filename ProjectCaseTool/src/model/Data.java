@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import additional.Field;
+
 //Singleton
 public class Data {
 	private static Data _dataInstance;
@@ -26,9 +28,9 @@ public class Data {
 	 */
 	public ArrayList<ArrayList<Field>> getAllProjectFields() {
 		ArrayList<ArrayList<Field>> _allProjectFields = new ArrayList<>();
-		for(Project _project : _allProjects){
-			ArrayList<Field> _projectFields = _project.getFields();
-			_allProjectFields.add(_projectFields);
+		for(Project project : _allProjects){
+			ArrayList<Field> projectFields = project.getFields();
+			_allProjectFields.add(projectFields);
 		}
 		return _allProjectFields;
 	}
@@ -36,10 +38,11 @@ public class Data {
 	
 	/**
 	 * Creates a new empty Project and adds it to the list of all projects held by Data.
-	 * @param _projectName Name of the new Project.h
+	 * @param _projectName Name of the new Project.
 	 */
-	public void addProject(String _projectName){
-		Project _additionalProject = new Project(_projectName);
-		_allProjects.add(_additionalProject);
+	public Project addProject(String projectName){
+		Project additionalProject = new Project(projectName);
+		_allProjects.add(additionalProject);
+		return additionalProject;
 	}
 }
