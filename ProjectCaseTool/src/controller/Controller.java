@@ -10,7 +10,9 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
-import model.Field;
+import additional.Field;
+
+
 import model.IModelFacade;
 import model.ModelFacade;
 import view.ViewFacade;
@@ -23,7 +25,7 @@ public class Controller {
 	
 	public Controller() {
 		this._view = new ViewFacade(this);
-		this._model = new ModelFacade() ;
+		this._model = ModelFacade.getInstance() ;
 	}
 	
 	
