@@ -9,7 +9,7 @@ import additional.Field;
 public class ModelFacade implements IModelFacade {
 
 	private static ModelFacade _modelFacadeInstance;
-	private Data _dataContainer = Data.getData();
+	private Data _dataContainer = Data.getInstance();
 	private Project _currentProject;
 	private CalculationEnum _activeCalculationMethod;
 	private CalculationFactory _calcFactory;
@@ -19,7 +19,7 @@ public class ModelFacade implements IModelFacade {
 		_calcFactory = new CalculationFactory();
 	}
 	
-	public static ModelFacade getModelFacade(){
+	public static ModelFacade getInstanc(){
 		if(_modelFacadeInstance == null){
 			_modelFacadeInstance = new ModelFacade();
 		}
