@@ -19,7 +19,7 @@ public class ModelFacade implements IModelFacade {
 		_calcFactory = new CalculationFactory();
 	}
 	
-	public static ModelFacade getInstanc(){
+	public static ModelFacade getInstance(){
 		if(_modelFacadeInstance == null){
 			_modelFacadeInstance = new ModelFacade();
 		}
