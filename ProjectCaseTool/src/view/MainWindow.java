@@ -11,16 +11,33 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Composite;
 
-public class MainWindow {
+import controller.Controller;
+import org.eclipse.swt.widgets.List;
+import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.swt.widgets.Label;
 
+public class MainWindow {
+	
+	public static void main(String[] args) {
+		try {
+			MainWindow window = new MainWindow(new ViewFacade(new Controller()));
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	protected Shell shlCase;
 	private ViewFacade _viewFacade;
 	
 	
+	/*Gui Objects, defined here for easier access */
 
-	public MainWindow(ViewFacade _viewFacade) {
+	public List _projectList;
+	
+
+	public MainWindow(ViewFacade viewFacade) {
 		super();
-		this._viewFacade = _viewFacade;
+		this._viewFacade =viewFacade;
 	}
 
 	/**
@@ -45,13 +62,16 @@ public class MainWindow {
 		shlCase = new Shell();
 		shlCase.setSize(1000, 600);
 		shlCase.setText("CASETOOL");
-		shlCase.setLayout(new GridLayout(1, false));
+		shlCase.setLayout(new GridLayout(2, false));
+		
+		_projectList = new List(shlCase, SWT.BORDER);
+		_projectList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
 		
 		TabFolder tabFolder = new TabFolder(shlCase, SWT.NONE);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		TabItem tbtmProjektliste = new TabItem(tabFolder, SWT.NONE);
-		tbtmProjektliste.setText("Projektliste");
+
 		
 		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
 		tbtmNewItem.setText("Zielbestimmung");
@@ -121,7 +141,7 @@ public class MainWindow {
 		MenuItem mntmNeuesProjektAnlegen = new MenuItem(menu_1, SWT.NONE);
 		mntmNeuesProjektAnlegen.setText("Neues Projekt anlegen");
 		
-		mntmNeuesProjektAnlegen.addListener(SWT., listener)
+	    mntmNeuesProjektAnlegen.addListener(SWT.Selection, _viewFacade.getController().getcreateProjectListener());
 		
 		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
 		mntmProjektffnen.setText("Projekt \u00F6ffnen");
@@ -145,6 +165,7 @@ public class MainWindow {
 		
 		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
 		mntmBeenden.setText("Beenden");
-
+		
+		
 	}
 }
