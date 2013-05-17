@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import additional.Field;
+
 public class FunctionPointMethod extends AbstractCalculationMethod {
 
 	@Override

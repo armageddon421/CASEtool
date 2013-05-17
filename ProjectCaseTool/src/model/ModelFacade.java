@@ -2,48 +2,59 @@ package model;
 
 import java.util.ArrayList;
 
+import additional.CalculationEnum;
+import additional.Field;
+
 
 public class ModelFacade implements IModelFacade {
 
+	private static ModelFacade _modelFacadeInstance;
 	private Data _dataContainer = Data.getData();
 	private Project _currentProject;
 	private CalculationEnum _activeCalculationMethod;
 	private CalculationFactory _calcFactory;
 	
-	public ModelFacade () {
+	private ModelFacade () {
 		_activeCalculationMethod = CalculationEnum.FunctionPoint;
 		_calcFactory = new CalculationFactory();
 	}
+	
+	public static ModelFacade getModelFacade(){
+		if(_modelFacadeInstance == null){
+			_modelFacadeInstance = new ModelFacade();
+		}
+		return _modelFacadeInstance;
+	}
 
 	@Override
-	public void loadProject(String _filepath) {
+	public void loadProject(String filepath) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void saveProject(String _filepath) {
+	public void saveProject(String filepath) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setCurrentProject(Field _fieldOfProject) {
-		if(_fieldOfProject.getOwner() instanceof Project){
-			_currentProject = (Project) _fieldOfProject.getOwner();
+	public void setCurrentProject(Field fieldOfProject) {
+		if(fieldOfProject.getOwner() instanceof Project){
+			_currentProject = (Project) fieldOfProject.getOwner();
 		}
 	}
 
 	@Override
 	public ArrayList<Field> getCurrentProjectFields() {
-		ArrayList<Field> _returnList = new ArrayList<>();
+		ArrayList<Field> returnList = new ArrayList<>();
 		if(_currentProject != null) {
-			_returnList = _currentProject.getFields();
+			returnList = _currentProject.getFields();
 		} 
 		else {
 			
 		}
-		return _returnList;
+		return returnList;
 	}
 
 	@Override
@@ -69,8 +80,8 @@ public class ModelFacade implements IModelFacade {
 	}
 
 	@Override
-	public void setCalculationMethod(CalculationEnum _calcMethod) {
-		_activeCalculationMethod = _calcMethod;
+	public void setCalculationMethod(CalculationEnum calcMethod) {
+		_activeCalculationMethod = calcMethod;
 	}
 
 	@Override
@@ -82,6 +93,12 @@ public class ModelFacade implements IModelFacade {
 	@Override
 	public CalculationEnum getCalculationMethod() {
 		return _activeCalculationMethod;
+	}
+
+	@Override
+	public void createProject(String projectName) {
+		Project createdProject = _dataContainer.createProject(projectName);
+		 _currentProject = createdProject;
 	}
 	
 	

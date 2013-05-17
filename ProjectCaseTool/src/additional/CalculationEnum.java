@@ -1,4 +1,4 @@
-package model;
+package additional;
 
 public enum CalculationEnum {
 	FunctionPoint, COCOMO;
