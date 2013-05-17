@@ -3,6 +3,9 @@ package view;
 import controller.Controller;
 
 public class ViewFacade {
+
+	private Controller _controller;
+	
 	
 	private MainWindow _mainView;
 	/**
@@ -10,21 +13,18 @@ public class ViewFacade {
 	 */
 	public MainWindow get_mainView() {
 		return _mainView;
-	}
-
-
-	private Controller _controller;
-	
+	}	
 	
 	public ViewFacade(Controller controller) {
-		
+		this._controller = controller;		
+	}
+	public void init(){
 		try {
 			this._mainView = new MainWindow(this);
-			_mainView.open();
-		} catch (Exception e) {
+			} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this._controller = controller;
+		_mainView.open();
 	}
 	
 	public Controller getController(){

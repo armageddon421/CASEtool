@@ -18,14 +18,14 @@ import org.eclipse.swt.widgets.Label;
 
 public class MainWindow {
 	
-	public static void main(String[] args) {
-		try {
-			MainWindow window = new MainWindow(new ViewFacade(new Controller()));
-			window.open();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) {
+//		try {
+//			MainWindow window = new MainWindow(new ViewFacade(new Controller()));
+//			window.open();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	protected Shell shlCase;
 	private ViewFacade _viewFacade;
 	
