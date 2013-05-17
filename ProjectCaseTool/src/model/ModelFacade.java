@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
 
 public class ModelFacade implements IModelFacade {
 
@@ -49,8 +48,7 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public ArrayList<ArrayList<Field>> getAllProjectFields() {
-		// TODO Auto-generated method stub
-		return null;
+		return _dataContainer.getAllProjectFields();
 	}
 
 	@Override
@@ -78,9 +76,12 @@ public class ModelFacade implements IModelFacade {
 	@Override
 	public ArrayList<Field> calculate() {
 		AbstractCalculationMethod _calculationMethod = _calcFactory.createCalculationMethod(_activeCalculationMethod);
-		_currentProject.
-		
-		return null ;
+		return _currentProject.calculate(_calculationMethod) ;
+	}
+
+	@Override
+	public CalculationEnum getCalculationMethod() {
+		return _activeCalculationMethod;
 	}
 	
 	

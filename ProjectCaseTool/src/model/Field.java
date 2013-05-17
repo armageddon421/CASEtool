@@ -26,9 +26,13 @@ public class Field {
 		return _value;
 	}
 
-	public void setValue(Object value) {
+	/**
+	 * Allows the value of the field to be changed, if it is editable.
+	 * @param _value New value, the value field of the Field is to be set to.
+	 */
+	public void setValue(Object _value) {
 		if(_editable == true){
-			this._value = value;
+			this._value = _value;
 		}
 	}
 
