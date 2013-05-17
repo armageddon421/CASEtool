@@ -16,7 +16,7 @@ public class Data {
 	/**
 	 * @return Instance of singleton Data.
 	 */
-	public static Data getData(){
+	public static Data getInstance(){
 		if (_dataInstance == null){
 			_dataInstance = new Data();
 		}
@@ -50,7 +50,7 @@ public class Data {
 	/**
 	 * Adds the given Project to the project list held by Data. 
 	 * Does nothing, if project already exists in the list.
-	 * @param additionalProject Project to be added. 
+	 * @param additionalProject Project to be added.
 	 */
 	public void addProject(Project additionalProject){
 		if(!_allProjects.contains(additionalProject)){
