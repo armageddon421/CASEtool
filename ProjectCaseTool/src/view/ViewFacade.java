@@ -27,5 +27,9 @@ public class ViewFacade {
 		this._controller = controller;
 	}
 	
+	public Controller getController(){
+		return _controller;
+	}
+	
 
 }

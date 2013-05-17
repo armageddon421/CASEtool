@@ -2,20 +2,27 @@ package model;
 
 import java.util.ArrayList;
 
+import additional.CalculationEnum;
 import additional.Field;
 import additional.IFieldable;
 import additional.Type;
 
+/**
+ * @author Patrick
+ *
+ */
 public class Project implements IFieldable {
 	private ArrayList<Field> _projectFields = new ArrayList<>();
 	private ArrayList<FunctionRequirement> _projectFunctionRequirements = new ArrayList<>();
+	private CalculationEnum _calcMethod;
 	
 	public Project(String projectName){
 		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
 		_projectFields.add(new Field("Project Additions", Type.Text, true, this, ""));
 		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, ""));
 		_projectFields.add(new Field("Project Use", Type.Text, true, this, ""));
-		_projectFields.add(new Field("Summary", Type.Text, true, this, ""));		
+		_projectFields.add(new Field("Summary", Type.Text, true, this, ""));	
+		_calcMethod = CalculationEnum.FunctionPoint;
 	}
 
 	@Override
@@ -23,14 +30,26 @@ public class Project implements IFieldable {
 		return _projectFields;
 	}
 	
+	public CalculationEnum getcalcMethod() {
+		return _calcMethod;
+	}
+
+	public void setcalcMethod(CalculationEnum calcMethod) {
+		this._calcMethod = calcMethod;
+	}
+	
+	/**
+	 * @param RequirementName
+	 */
 	public void addFunctionRequirement(String RequirementName){
 		_projectFunctionRequirements.add(new FunctionRequirement(RequirementName));
 	}
 	
-	//TODO Muss überprüft werden, ob die ANforderung noch in der Liste ist????
 	public void deleteFunctionRequirement(Field field){
 		if(field.getOwner() instanceof FunctionRequirement){
-			 _projectFunctionRequirements.remove(field.getOwner());
+			if(_projectFunctionRequirements.contains(field.getOwner())){
+				 _projectFunctionRequirements.remove(field.getOwner());
+			}
 		}
 	}
 	

@@ -35,14 +35,26 @@ public class Data {
 		return _allProjectFields;
 	}
 	
+	/**
+	 * Creates a new project and add it to the project list held by Data.
+	 * @param projectName Name of the project to be created.
+	 * @return Created Project.
+	 */
+	public Project createProject(String projectName){
+		Project additionalProject = new Project(projectName);
+		addProject(additionalProject);
+		return additionalProject;
+	}
+	
 	
 	/**
-	 * Creates a new empty Project and adds it to the list of all projects held by Data.
-	 * @param _projectName Name of the new Project.
+	 * Adds the given Project to the project list held by Data. 
+	 * Does nothing, if project already exists in the list.
+	 * @param additionalProject Project to be added. 
 	 */
-	public Project addProject(String projectName){
-		Project additionalProject = new Project(projectName);
-		_allProjects.add(additionalProject);
-		return additionalProject;
+	public void addProject(Project additionalProject){
+		if(!_allProjects.contains(additionalProject)){
+			_allProjects.add(additionalProject);
+		}
 	}
 }

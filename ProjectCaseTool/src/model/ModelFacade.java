@@ -8,14 +8,22 @@ import additional.Field;
 
 public class ModelFacade implements IModelFacade {
 
+	private static ModelFacade _modelFacadeInstance;
 	private Data _dataContainer = Data.getData();
 	private Project _currentProject;
 	private CalculationEnum _activeCalculationMethod;
 	private CalculationFactory _calcFactory;
 	
-	public ModelFacade () {
+	private ModelFacade () {
 		_activeCalculationMethod = CalculationEnum.FunctionPoint;
 		_calcFactory = new CalculationFactory();
+	}
+	
+	public static ModelFacade getModelFacade(){
+		if(_modelFacadeInstance == null){
+			_modelFacadeInstance = new ModelFacade();
+		}
+		return _modelFacadeInstance;
 	}
 
 	@Override
@@ -89,8 +97,8 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public void createProject(String projectName) {
-		Project createdProject = _dataContainer.addProject(projectName);	
-		_currentProject = createdProject;
+		Project createdProject = _dataContainer.createProject(projectName);
+		 _currentProject = createdProject;
 	}
 	
 	
