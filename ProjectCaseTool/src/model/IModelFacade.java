@@ -44,21 +44,21 @@ public interface IModelFacade {
 	public ArrayList<ArrayList<Field>> getAllProjectFields();
 	
 	/**
-	 * @return All fields of all function requirements. 
+	 * @return All fields of all function requirements of the current project. 
 	 * Every requirement with all its fields is one entry in the outer array list. 
 	 * The inner array list consists of the fields each requirement holds.
 	 */
 	public ArrayList<ArrayList<Field>> getFunctionRequirementFields();
 	
 	/**
-	 * @return All fields of all data requirements. 
+	 * @return All fields of all data requirements of the current project. 
 	 * Every requirement with all its fields is one entry in the outer array list. 
 	 * The inner array list consists of the fields each requirement holds.
 	 */
 	public ArrayList<ArrayList<Field>> getDataRequirementFields();
 	
 	/**
-	 * @return All fields of all performance requirements. 
+	 * @return All fields of all performance requirements of the current project. 
 	 * Every requirement with all its fields is one entry in the outer array list. 
 	 * The inner array list consists of the fields each requirement holds.
 	 */

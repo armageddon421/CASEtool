@@ -10,7 +10,6 @@ public class ModelFacade implements IModelFacade {
 
 	private static ModelFacade _modelFacadeInstance;
 	private Data _dataContainer = Data.getInstance();
-	private Project _currentProject;
 	private CalculationEnum _activeCalculationMethod;
 	private CalculationFactory _calcFactory;
 	
@@ -40,21 +39,12 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public void setCurrentProject(Field fieldOfProject) {
-		if(fieldOfProject.getOwner() instanceof Project){
-			_currentProject = (Project) fieldOfProject.getOwner();
-		}
+		_dataContainer.setCurrentProject(fieldOfProject);
 	}
 
 	@Override
 	public ArrayList<Field> getCurrentProjectFields() {
-		ArrayList<Field> returnList = new ArrayList<>();
-		if(_currentProject != null) {
-			returnList = _currentProject.getFields();
-		} 
-		else {
-			
-		}
-		return returnList;
+		return _dataContainer.getCurrentProjectFields();
 	}
 
 	@Override
@@ -64,7 +54,7 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public ArrayList<ArrayList<Field>> getFunctionRequirementFields() {
-		return _currentProject.getFunctionRequirements();
+		return _dataContainer.getFunctionRequirementFields();
 	}
 
 	@Override
@@ -84,10 +74,11 @@ public class ModelFacade implements IModelFacade {
 		_activeCalculationMethod = calcMethod;
 	}
 
+	//TODO
 	@Override
 	public ArrayList<Field> calculate() {
 		AbstractCalculationMethod _calculationMethod = _calcFactory.createCalculationMethod(_activeCalculationMethod);
-		return _currentProject.calculate(_calculationMethod) ;
+		return null ;
 	}
 
 	@Override
@@ -97,8 +88,7 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public void createProject(String projectName) {
-		Project createdProject = _dataContainer.createProject(projectName);
-		 _currentProject = createdProject;
+		_dataContainer.createProject(projectName);
 	}
 	
 	

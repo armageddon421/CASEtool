@@ -34,6 +34,10 @@ public class Project implements IFieldable {
 		return _calcMethod;
 	}
 
+	/**
+	 * Sets the calculation method to be used by this project.
+	 * @param calcMethod
+	 */
 	public void setcalcMethod(CalculationEnum calcMethod) {
 		this._calcMethod = calcMethod;
 	}
