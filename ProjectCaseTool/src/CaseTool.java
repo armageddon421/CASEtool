@@ -8,7 +8,7 @@ public class CaseTool {
 	 */
 	
 	public static void main(String[] args) {
-		Controller contr = new Controller();
+		Controller contr = Controller.getInstance();
 
 	}
 

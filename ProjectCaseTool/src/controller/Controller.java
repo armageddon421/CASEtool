@@ -6,6 +6,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.TabItem;
 
 import additional.Field;
 
@@ -14,22 +15,29 @@ import model.ModelFacade;
 import view.ViewFacade;
 
 public class Controller {
-	
+	private static Controller _instance;
 	private ViewFacade _view;
 	private IModelFacade _model;
 	private Listener _projectListListener;
 	private int _numNewProject;
-	private ArrayList<Field> _availableProjectsInList;
+	private ArrayList<Field> _availableProjectsInList = new ArrayList<>();
 	private SelectionListener _projectSelectionListener;
+	private ArrayList<TabItem> _openTabs = new ArrayList<>();
 	
 	
-	public Controller() {		
+	private Controller(){
 		this._model = ModelFacade.getInstance() ;
 		this._view = new ViewFacade(this);
-		_availableProjectsInList = new ArrayList<>();
 		
 		//must be the last command, since this will trap the program in a loop
 		this._view.init();
+	}
+	
+	public static Controller getInstance() {
+		if (_instance == null){
+			_instance = new Controller();
+		}
+		return _instance;
 	}
 	
 	
@@ -75,7 +83,8 @@ public class Controller {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				_model.setCurrentProject(_availableProjectsInList.get(_view.get_mainView()._projectList.getSelectionIndex()));
-				System.out.println(_model.getCurrentProjectFields().get(0).getValue());
+				//TODO System.out.println(_model.getCurrentProjectFields().get(0).getValue());
+				loadContentCurProject();
 			}
 			
 			@Override
@@ -88,6 +97,11 @@ public class Controller {
 	}
 	
 	
+	
+private void loadContentCurProject (){
+	Object test = _model.getCurrentProjectFields();
+	return;
+}
 
 
 }
