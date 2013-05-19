@@ -9,12 +9,14 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.custom.SashForm;
+import controller.Controller;
 
 public class MainWindow {
 	
 //	public static void main(String[] args) {
 //		try {
-//			MainWindow window = new MainWindow(new ViewFacade(new Controller()));
+//			MainWindow window = new MainWindow(new ViewFacade(Controller.getInstance()));
 //			window.open();
 //		} catch (Exception e) {
 //			e.printStackTrace();
@@ -57,17 +59,7 @@ public class MainWindow {
 		shlCase = new Shell();
 		shlCase.setSize(1000, 600);
 		shlCase.setText("CASETOOL");
-		shlCase.setLayout(new GridLayout(2, false));
-		
-		_projectList = new List(shlCase, SWT.BORDER);
-		GridData gd__projectList = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd__projectList.widthHint = 207;
-		_projectList.setLayoutData(gd__projectList);
-		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());
-
-		
-		tabFolder = new TabFolder(shlCase, SWT.NONE);
-		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		shlCase.setLayout(new GridLayout(1, false));
 		
 		Menu menu = new Menu(shlCase, SWT.BAR);
 		shlCase.setMenuBar(menu);
@@ -105,6 +97,17 @@ public class MainWindow {
 		
 		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
 		mntmBeenden.setText("Beenden");
+				
+		SashForm sashForm = new SashForm(shlCase, SWT.BORDER);
+		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+
+				
+		_projectList = new List(sashForm, SWT.BORDER);
+				
+						
+		tabFolder = new TabFolder(sashForm, SWT.NONE);
+		sashForm.setWeights(new int[] {154, 809});
+		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());
 		
 		
 	}
