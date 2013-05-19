@@ -1,11 +1,15 @@
 package additional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Field {
 	private final String	_name;
 	private final Type		_type;
 	private final Boolean	_editable;
 	private final Object	_owner;
 	private Object			_value;
+	private ArrayList<Field>_Children;
 	
 	/**
 	 * @param name
@@ -58,6 +62,26 @@ public class Field {
 	
 	public Object getOwner() {
 		return _owner;
+	}
+
+	public ArrayList<Field> getChildren() {
+		return _Children;
+	}
+
+	public void setChildren(ArrayList<Field> _Children) {
+		this._Children = _Children;
+	}
+	
+	public void addChild(Field child){
+		this._Children.add(child);
+	}
+	
+	public void removeChild(int index){
+		this._Children.remove(index);
+	}
+	
+	public void removeAllChildren(){
+		this._Children.clear();
 	}
 	
 	
