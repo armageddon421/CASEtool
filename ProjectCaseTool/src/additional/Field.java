@@ -84,6 +84,8 @@ public class Field {
 		this._Children.clear();
 	}
 	
-
+	public int getNumberOfChildren(){
+		return this._Children.size();
+	}
 	
 }
