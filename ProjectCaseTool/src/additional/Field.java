@@ -30,6 +30,7 @@ public class Field {
 		this._editable = editable;
 		this._owner = owner;
 		this._value = value;
+		this._Children = new ArrayList<>();
 	}
 	
 	public Object getValue() {

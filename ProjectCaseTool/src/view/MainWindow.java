@@ -11,17 +11,22 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.custom.SashForm;
 import controller.Controller;
+import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
 
 public class MainWindow {
 	
-//	public static void main(String[] args) {
-//		try {
-//			MainWindow window = new MainWindow(new ViewFacade(Controller.getInstance()));
-//			window.open();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String[] args) {
+		try {
+			MainWindow window = new MainWindow(new ViewFacade(Controller.getInstance()));
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	protected Shell shlCase;
 	private ViewFacade _viewFacade;
 	
@@ -32,6 +37,7 @@ public class MainWindow {
 	public TabFolder tabFolder;
 
 	
+
 	public MainWindow(ViewFacade viewFacade) {
 		super();
 		this._viewFacade =viewFacade;
@@ -106,6 +112,7 @@ public class MainWindow {
 				
 						
 		tabFolder = new TabFolder(sashForm, SWT.NONE);
+
 		sashForm.setWeights(new int[] {154, 809});
 		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());
 		
