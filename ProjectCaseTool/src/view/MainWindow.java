@@ -35,6 +35,7 @@ public class MainWindow {
 	public List _projectList;
 	
 
+	
 	public MainWindow(ViewFacade viewFacade) {
 		super();
 		this._viewFacade =viewFacade;
@@ -65,7 +66,10 @@ public class MainWindow {
 		shlCase.setLayout(new GridLayout(2, false));
 		
 		_projectList = new List(shlCase, SWT.BORDER);
-		_projectList.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		GridData gd__projectList = new GridData(SWT.LEFT, SWT.FILL, true, true, 1, 1);
+		gd__projectList.widthHint = 207;
+		_projectList.setLayoutData(gd__projectList);
+		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());
 
 		
 		TabFolder tabFolder = new TabFolder(shlCase, SWT.NONE);
@@ -79,13 +83,6 @@ public class MainWindow {
 		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
 		tbtmNewItem.setControl(composite_1);
 		composite_1.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmProdukteinsatz = new TabItem(tabFolder, SWT.NONE);
-		tbtmProdukteinsatz.setText("Produkteinsatz");
-		
-		Composite composite_2 = new Composite(tabFolder, SWT.NONE);
-		tbtmProdukteinsatz.setControl(composite_2);
-		composite_2.setLayout(new GridLayout(1, false));
 		
 		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
 		tbtmNewItem_1.setText("Produktanforderungen");
@@ -107,27 +104,6 @@ public class MainWindow {
 		Composite composite_5 = new Composite(tabFolder, SWT.NONE);
 		tbtmProduktleistungen.setControl(composite_5);
 		composite_5.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmNewItem_2 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_2.setText("Glossareintrag");
-		
-		Composite composite_6 = new Composite(tabFolder, SWT.NONE);
-		tbtmNewItem_2.setControl(composite_6);
-		composite_6.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmQualittsanforderung = new TabItem(tabFolder, SWT.NONE);
-		tbtmQualittsanforderung.setText("Qualit\u00E4tsanforderung");
-		
-		Composite composite_7 = new Composite(tabFolder, SWT.NONE);
-		tbtmQualittsanforderung.setControl(composite_7);
-		composite_7.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmAufwandsschtzung = new TabItem(tabFolder, SWT.NONE);
-		tbtmAufwandsschtzung.setText("Aufwandssch\u00E4tzung");
-		
-		Composite composite_8 = new Composite(tabFolder, SWT.NONE);
-		tbtmAufwandsschtzung.setControl(composite_8);
-		composite_8.setLayout(new GridLayout(1, false));
 		
 		Menu menu = new Menu(shlCase, SWT.BAR);
 		shlCase.setMenuBar(menu);

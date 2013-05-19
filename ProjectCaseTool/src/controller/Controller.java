@@ -2,6 +2,8 @@ package controller;
 
 import java.util.ArrayList;
 
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -16,11 +18,17 @@ public class Controller {
 	private ViewFacade _view;
 	private IModelFacade _model;
 	private Listener _projectListListener;
+	private int _numNewProject;
+	private ArrayList<Field> _availableProjectsInList;
+	private SelectionListener _projectSelectionListener;
 	
 	
 	public Controller() {		
 		this._model = ModelFacade.getInstance() ;
 		this._view = new ViewFacade(this);
+		_availableProjectsInList = new ArrayList<>();
+		
+		//must be the last command, since this will trap the program in a loop
 		this._view.init();
 	}
 	
@@ -30,7 +38,8 @@ public class Controller {
 
 			@Override
 			public void handleEvent(Event arg0) {
-				_model.createProject("Hallo Welt");
+				_numNewProject = _numNewProject +1;
+				_model.createProject("Unbenanntes Projekt " + _numNewProject);
 				
 				listProjects();
 				
@@ -40,19 +49,42 @@ public class Controller {
 		};
 		return _projectListListener;
 	}
+	
+	
 
 
 	private void listProjects() {
 		ArrayList<ArrayList<Field>> _projectList = _model.getAllProjectFields();
+		_view.get_mainView()._projectList.removeAll();
+		_availableProjectsInList.clear();
 		if (_projectList.isEmpty()){
 			
 		}
 		else{
 			for (ArrayList<Field>curProject : _projectList){
 					_view.get_mainView()._projectList.add((curProject.get(0).getValue()).toString());
+					_availableProjectsInList.add(curProject.get(0));
 			}
 
 		}
+	}
+	public SelectionListener getProjectSelectionListener (){
+		_projectSelectionListener = new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				_model.setCurrentProject(_availableProjectsInList.get(_view.get_mainView()._projectList.getSelectionIndex()));
+				System.out.println(_model.getCurrentProjectFields().get(0).getValue());
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		return _projectSelectionListener;
 	}
 	
 	
