@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Event;
@@ -99,8 +100,20 @@ public class Controller {
 	
 	
 private void loadContentCurProject (){
-	Object test = _model.getCurrentProjectFields();
+	deleteTabs();
+	for(Field eachChapter :_model.getCurrentProjectFields()){
+		TabItem chapterTab = new TabItem(_view.get_mainView().tabFolder, SWT.NONE);
+		_openTabs.add(chapterTab);
+		chapterTab.setText(eachChapter.getName().toString());
+	}
 	return;
+}
+
+private void deleteTabs(){
+	for (TabItem eachTab : _openTabs){
+		eachTab.dispose();
+	}
+	_openTabs.clear();
 }
 
 

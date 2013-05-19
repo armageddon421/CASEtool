@@ -8,13 +8,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Composite;
-
-import controller.Controller;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.jface.viewers.ListViewer;
-import org.eclipse.swt.widgets.Label;
 
 public class MainWindow {
 	
@@ -33,7 +27,7 @@ public class MainWindow {
 	/*Gui Objects, defined here for easier access */
 
 	public List _projectList;
-	
+	public TabFolder tabFolder;
 
 	
 	public MainWindow(ViewFacade viewFacade) {
@@ -66,44 +60,14 @@ public class MainWindow {
 		shlCase.setLayout(new GridLayout(2, false));
 		
 		_projectList = new List(shlCase, SWT.BORDER);
-		GridData gd__projectList = new GridData(SWT.LEFT, SWT.FILL, true, true, 1, 1);
+		GridData gd__projectList = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd__projectList.widthHint = 207;
 		_projectList.setLayoutData(gd__projectList);
 		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());
 
 		
-		TabFolder tabFolder = new TabFolder(shlCase, SWT.NONE);
+		tabFolder = new TabFolder(shlCase, SWT.NONE);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
-
-		
-		TabItem tbtmNewItem = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem.setText("Zielbestimmung");
-		
-		Composite composite_1 = new Composite(tabFolder, SWT.NONE);
-		tbtmNewItem.setControl(composite_1);
-		composite_1.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmNewItem_1 = new TabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setText("Produktanforderungen");
-		
-		Composite composite_3 = new Composite(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setControl(composite_3);
-		composite_3.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmProduktdaten = new TabItem(tabFolder, SWT.NONE);
-		tbtmProduktdaten.setText("ProduktDaten");
-		
-		Composite composite_4 = new Composite(tabFolder, SWT.NONE);
-		tbtmProduktdaten.setControl(composite_4);
-		composite_4.setLayout(new GridLayout(1, false));
-		
-		TabItem tbtmProduktleistungen = new TabItem(tabFolder, SWT.NONE);
-		tbtmProduktleistungen.setText("Produktleistungen");
-		
-		Composite composite_5 = new Composite(tabFolder, SWT.NONE);
-		tbtmProduktleistungen.setControl(composite_5);
-		composite_5.setLayout(new GridLayout(1, false));
 		
 		Menu menu = new Menu(shlCase, SWT.BAR);
 		shlCase.setMenuBar(menu);
