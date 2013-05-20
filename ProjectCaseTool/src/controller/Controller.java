@@ -112,7 +112,6 @@ private void loadContentCurProject (){
 		chapterTab.setText(eachChapter.getName().toString());
 		loadChapterContents(eachChapter, chapterTab);
 	}
-	return;
 }
 
 private void deleteTabs(){
@@ -132,14 +131,16 @@ private void loadChapterContents(Field field, TabItem tab){
 		description.setText(field.getName());
 		description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true, 1, 1));
 		Text value = new Text(tabComposite, SWT.MULTI|SWT.BORDER);
-		value.setSize(300, 40);
-		value.setText("Die Forschung beurteilt die Relevanz dieser seltenen Notizen für die Existenz und Bedeutung Jesu jedoch verschieden.");
-		value.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, true));
+		value.setSize(300, 100);
+		value.setText(field.getValue().toString());
+		value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		value.addListener(SWT.CHANGED, new FieldListener(field, value));
 		
 	}
 	else{
-		return;
+		
 	}
 }
+
 
 }
