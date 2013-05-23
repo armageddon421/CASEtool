@@ -87,10 +87,12 @@ public class Controller {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				_model.setCurrentProject(_availableProjectsInList.get(_view.get_mainView()._projectList.getSelectionIndex()));
-				//TODO System.out.println(_model.getCurrentProjectFields().get(0).getValue());
-				loadContentCurProject();
+				int selection = _view.get_mainView()._projectList.getSelectionIndex();
+				if(selection != -1){
+					_model.setCurrentProject(_availableProjectsInList.get(selection));
+					loadContentCurProject();
+				}
+				
 			}
 			
 			@Override
@@ -135,6 +137,7 @@ private void loadChapterContents(Field field, TabItem tab){
 		value.setText(field.getValue().toString());
 		value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		value.addListener(SWT.CHANGED, new FieldListener(field, value));
+		value.addKeyListener(new FilterListener(FilterListener.STRING));
 		
 	}
 	else{
