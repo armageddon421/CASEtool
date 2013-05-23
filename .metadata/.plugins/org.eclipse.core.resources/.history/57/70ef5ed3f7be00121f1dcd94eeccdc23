@@ -1,0 +1,64 @@
+package controller;
+
+import java.util.ArrayList;
+
+import javax.swing.text.View;
+
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
+import additional.Field;
+
+
+import model.IModelFacade;
+import model.ModelFacade;
+import view.ViewFacade;
+
+public class Controller {
+	
+	public ViewFacade _view;
+	private IModelFacade _model;
+	
+	
+	public Controller() {		
+		this._model = ModelFacade.getInstance() ;
+		this._view = new ViewFacade(this);
+	}
+	
+	
+	public Listener getcreateProjectListener(){
+		Listener  _projectListListener = new Listener() {
+
+			@Override
+			public void handleEvent(Event arg0) {
+				_model.createProject("Hallo Welt");
+				listProjects(_view);
+				
+			}
+
+			
+		};
+		return _projectListListener;
+	}
+
+
+	private void listProjects(ViewFacade view) {
+		ArrayList<ArrayList<Field>> _projectList = _model.getAllProjectFields();
+		if (_projectList.isEmpty()){
+			
+		}
+		else{
+			for (ArrayList<Field>curProject : _projectList){
+					view.get_mainView()._projectList.add(curProject.get(0).toString());
+			}
+
+		}
+	}
+	
+	
+
+
+}

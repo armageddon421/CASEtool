@@ -1,0 +1,39 @@
+/**
+ * 
+ */
+package controller;
+
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
+/**
+ * @author Raphael
+ *
+ */
+
+//Constants for determining which Characters should be not accepted
+public static final int a = 1;
+
+
+
+
+
+public class FilterListener implements Listener {
+
+	/**
+	 * 
+	 */
+	public FilterListener() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.swt.widgets.Listener#handleEvent(org.eclipse.swt.widgets.Event)
+	 */
+	@Override
+	public void handleEvent(Event arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

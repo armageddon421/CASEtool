@@ -1,0 +1,20 @@
+package controller;
+
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+
+import additional.Field;
+
+public class FieldListener implements Listener {
+
+	private Field _attachedField;
+	private Object _observedValue;
+	
+	
+	@Override
+	public void handleEvent(Event arg0) {
+		_attachedField.setValue(_observedValue);
+
+	}
+
+}

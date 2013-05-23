@@ -1,7 +1,0 @@
-package model.daten;
-
-import java.util.ArrayList;
-
-public class QualitiyRequirement {
-	ArrayList<E>
-}
