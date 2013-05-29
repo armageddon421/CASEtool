@@ -9,7 +9,8 @@ public class Field {
 	private final Boolean	_editable;
 	private final Object	_owner;
 	private Object			_value;
-	private ArrayList<Field>_Children;
+	private ArrayList<Field>_children;
+	
 	
 	/**
 	 * @param name
@@ -30,7 +31,7 @@ public class Field {
 		this._editable = editable;
 		this._owner = owner;
 		this._value = value;
-		this._Children = new ArrayList<>();
+		this._children = new ArrayList<>();
 	}
 	
 	public Object getValue() {
@@ -66,27 +67,29 @@ public class Field {
 	}
 
 	public ArrayList<Field> getChildren() {
-		return _Children;
+		return _children;
 	}
 
-	public void setChildren(ArrayList<Field> _Children) {
-		this._Children = _Children;
+	public void setChildren(ArrayList<Field> children) {
+		this._children = children;
 	}
 	
 	public void addChild(Field child){
-		this._Children.add(child);
+		this._children.add(child);
 	}
 	
-	public void removeChild(int index){
-		this._Children.remove(index);
+	public void removeChild(Field fieldToRemove){
+		if(_children.contains(fieldToRemove)){
+			_children.remove(fieldToRemove);
+		}		
 	}
 	
 	public void removeAllChildren(){
-		this._Children.clear();
+		this._children.clear();
 	}
 	
 	public int getNumberOfChildren(){
-		return this._Children.size();
+		return this._children.size();
 	}
 	
 }

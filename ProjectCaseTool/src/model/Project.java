@@ -22,6 +22,8 @@ public class Project implements IFieldable {
 		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, ""));
 		_projectFields.add(new Field("Project Use", Type.Text, true, this, ""));
 		_projectFields.add(new Field("Summary", Type.Text, true, this, ""));	
+		_projectFields.add(new Field("Function Requirements", Type.Null, false, this, null));
+		//Requirements
 		_calcMethod = CalculationEnum.FunctionPoint;
 	}
 
@@ -46,7 +48,7 @@ public class Project implements IFieldable {
 	 * @param RequirementName
 	 */
 	public void addFunctionRequirement(String RequirementName){
-		_projectFunctionRequirements.add(new FunctionRequirement(RequirementName));
+//		_projectFields.get(_projectFields.indexOf(o))
 	}
 	
 	public void deleteFunctionRequirement(Field field){
