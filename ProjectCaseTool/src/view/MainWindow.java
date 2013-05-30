@@ -10,7 +10,6 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.custom.SashForm;
-import controller.Controller;
 
 public class MainWindow {
 	

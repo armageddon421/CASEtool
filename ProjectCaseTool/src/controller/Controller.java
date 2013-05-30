@@ -89,6 +89,7 @@ public class Controller {
 			public void widgetSelected(SelectionEvent arg0) {
 				int selection = _view.get_mainView()._projectList.getSelectionIndex();
 				if(selection != -1){
+					_view.get_mainView()._projectList.setItem(selection, (String) _availableProjectsInList.get(selection).getValue());
 					_model.setCurrentProject(_availableProjectsInList.get(selection));
 					loadContentCurProject();
 				}
@@ -97,8 +98,7 @@ public class Controller {
 			
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+								
 			}
 		};
 		return _projectSelectionListener;
