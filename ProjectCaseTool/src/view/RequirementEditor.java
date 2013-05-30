@@ -10,21 +10,25 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 
+import additional.Field;
+
 public class RequirementEditor extends Dialog {
 
 	protected Object result;
-	protected Shell shell;
+	protected Shell shlAnforderungBearbeiten;
 	private Button btnConfirm;
 	private Button btnCancelEdit;
+	private Field Requirement;
 
 	/**
 	 * Create the dialog.
 	 * @param parent
 	 * @param style
 	 */
-	public RequirementEditor(Shell parent, int style) {
+	public RequirementEditor(Shell parent, int style, Field requirement) {
 		super(parent, style);
-		setText("SWT Dialog");
+		setText("Requirement bearbeiten");
+		this.Requirement = requirement;
 	}
 
 	/**
@@ -33,10 +37,10 @@ public class RequirementEditor extends Dialog {
 	 */
 	public Object open() {
 		createContents();
-		shell.open();
-		shell.layout();
+		shlAnforderungBearbeiten.open();
+		shlAnforderungBearbeiten.layout();
 		Display display = getParent().getDisplay();
-		while (!shell.isDisposed()) {
+		while (!shlAnforderungBearbeiten.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -48,16 +52,16 @@ public class RequirementEditor extends Dialog {
 	 * Create contents of the dialog.
 	 */
 	private void createContents() {
-		shell = new Shell(getParent(), getStyle());
-		shell.setSize(533, 461);
-		shell.setText(getText());
-		shell.setLayout(new GridLayout(1, false));
+		shlAnforderungBearbeiten = new Shell(getParent(), getStyle());
+		shlAnforderungBearbeiten.setSize(533, 461);
+		shlAnforderungBearbeiten.setText("Anforderung bearbeiten");
+		shlAnforderungBearbeiten.setLayout(new GridLayout(1, false));
 		
-		Composite composite = new Composite(shell, SWT.NONE);
+		Composite composite = new Composite(shlAnforderungBearbeiten, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		
-		Composite composite_1 = new Composite(shell, SWT.NONE);
+		Composite composite_1 = new Composite(shlAnforderungBearbeiten, SWT.NONE);
 		composite_1.setLayout(new GridLayout(2, false));
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		

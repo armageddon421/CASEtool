@@ -111,7 +111,7 @@ private void loadContentCurProject (){
 	for(Field eachChapter :_model.getCurrentProjectFields()){
 		TabItem chapterTab = new TabItem(_view.get_mainView().tabFolder, SWT.NONE);
 		_openTabs.add(chapterTab);
-		chapterTab.setText(eachChapter.getName().toString());
+		chapterTab.setText(eachChapter.getValue().toString());
 		loadChapterContents(eachChapter, chapterTab);
 	}
 }
@@ -130,7 +130,7 @@ private void loadChapterContents(Field field, TabItem tab){
 	if(field.getNumberOfChildren()==0){
 		tabComposite.setLayout(new GridLayout(2, false));
 		Label description = new Label(tabComposite, SWT.NONE);
-		description.setText(field.getName());
+		description.setText(field.getValue().toString());
 		description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true, 1, 1));
 		Text value = new Text(tabComposite, SWT.MULTI|SWT.BORDER);
 		value.setSize(300, 100);
@@ -141,6 +141,14 @@ private void loadChapterContents(Field field, TabItem tab){
 		
 	}
 	else{
+		if(field.getNumberOfChildren() < 5){
+			
+		}
+		
+		//Tabelle 
+		else{
+			
+		}
 		
 	}
 }

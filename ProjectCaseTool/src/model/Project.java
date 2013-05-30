@@ -18,11 +18,11 @@ public class Project implements IFieldable {
 	
 	public Project(String projectName){
 		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
-		_projectFields.add(new Field("Project Additions", Type.Text, true, this, ""));
-		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, ""));
-		_projectFields.add(new Field("Project Use", Type.Text, true, this, ""));
-		_projectFields.add(new Field("Summary", Type.Text, true, this, ""));	
-		_projectFields.add(new Field("Function Requirements", Type.Null, false, this, null));
+		_projectFields.add(new Field("Project Additions", Type.Text, true, this, "Ergänzungen"));
+		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Projektziele"));
+		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Projektziele"));
+		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));	
+		_projectFields.add(new Field("Function Requirements", Type.Null, false, this, "Produktfunktionen"));
 		//Requirements
 		_calcMethod = CalculationEnum.FunctionPoint;
 	}
