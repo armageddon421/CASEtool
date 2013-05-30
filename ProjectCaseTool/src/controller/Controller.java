@@ -127,6 +127,7 @@ private void loadChapterContents(Field field, TabItem tab){
 	Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
 	tab.setControl(tabComposite);
 
+	//only for Testpurpose, normally the if-clause should never come true
 	if(field.getNumberOfChildren()==0){
 		tabComposite.setLayout(new GridLayout(2, false));
 		Label description = new Label(tabComposite, SWT.NONE);
@@ -145,7 +146,7 @@ private void loadChapterContents(Field field, TabItem tab){
 			
 		}
 		
-		//Tabelle 
+		//create a table to get a overview of everything
 		else{
 			
 		}
