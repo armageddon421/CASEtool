@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -12,6 +13,8 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import additional.Field;
@@ -148,7 +151,17 @@ private void loadChapterContents(Field field, TabItem tab){
 		
 		//create a table to get a overview of everything
 		else{
-			
+			TableViewer tableviewer = new TableViewer(tabComposite, SWT.NONE);
+			Table table = tableviewer.getTable();
+			table.setHeaderVisible(true);
+			table.setLinesVisible(true); 
+			//to find out how many columns we need and how they should be called
+			//we look into the first child, e.g. Looking at the first requirement and then determine how
+			//many children there exist and what their names are.
+			//
+			for (Field column : field.getChildren().get(0).getChildren()){
+				TableColumn tabCol = new TableColumn(table, SWT.NONE);
+			}
 		}
 		
 	}
