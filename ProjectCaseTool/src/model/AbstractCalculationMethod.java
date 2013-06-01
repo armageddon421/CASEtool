@@ -10,6 +10,6 @@ public abstract class AbstractCalculationMethod implements IFieldable {
 	@Override
 	public abstract ArrayList<Field> getFields();
 
-	public abstract ArrayList<Field> calculate(Project project);
+	public abstract Field calculate(Project project);
 
 }

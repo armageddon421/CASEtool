@@ -1,5 +1,5 @@
 package additional;
 
 public enum CalculationEnum {
-	FunctionPoint, COCOMO;
+	FunctionPoint, COCOMO, notSet;
 }

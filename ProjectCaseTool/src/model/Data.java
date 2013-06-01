@@ -34,6 +34,10 @@ public class Data {
 			_currentProject = (Project) fieldOfProject.getOwner();
 		}
 	}
+	
+	public Project getCurrentProject(){
+		return _currentProject;
+	}
 
 	/**
 	 * @return All fields of all the projects held by Data.
@@ -47,32 +51,6 @@ public class Data {
 		return _allProjectFields;
 	}
 	
-	/**
-	 * @return All fields associated with the current Project.
-	 */
-	public ArrayList<Field> getCurrentProjectFields() {
-		ArrayList<Field> returnList = new ArrayList<>();
-		if(_currentProject != null) {
-			returnList = _currentProject.getFields();
-		} 
-		else {
-			
-		}
-		return returnList;
-	}
-	
-	/**
-	 * @return All fields of all function requirements of the current project. 
-	 * Every requirement with all its fields is one entry in the outer array list. 
-	 * The inner array list consists of the fields each requirement holds.
-	 */
-	public ArrayList<ArrayList<Field>> getFunctionRequirementFields() {
-		return _currentProject.getFunctionRequirements();
-	} 
-	
-	public void setCalculationMethod(CalculationEnum calcMethod){
-		_currentProject.setcalcMethod(calcMethod);
-	}
 	
 	/**
 	 * Creates a new project, adds it to the project list held by Data and makes it the currentProject.
@@ -93,5 +71,15 @@ public class Data {
 		if(!_allProjects.contains(additionalProject)){
 			_allProjects.add(additionalProject);
 		}
+	}
+
+	public void deleteCurrentProject() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteProject(Field fieldOfProject) {
+		// TODO Auto-generated method stub
+		
 	}
 }

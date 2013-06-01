@@ -91,4 +91,12 @@ public class Field {
 		return this._children.size();
 	}
 	
+	public boolean contains(Field field){
+		if(_children.contains(field)){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
