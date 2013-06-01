@@ -46,6 +46,7 @@ public class MainWindow {
 
 	/**
 	 * Create contents of the window.
+	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
 		shlCase = new Shell();
@@ -66,6 +67,9 @@ public class MainWindow {
 		mntmNeuesProjektAnlegen.setText("Neues Projekt anlegen");
 		
 	    mntmNeuesProjektAnlegen.addListener(SWT.Selection, _viewFacade.getController().getcreateProjectListener());
+		
+		MenuItem mntmGeffnetesProjektLschen = new MenuItem(menu_1, SWT.NONE);
+		mntmGeffnetesProjektLschen.setText("ge\u00F6ffnetes Projekt l\u00F6schen");
 		
 		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
 		mntmProjektffnen.setText("Projekt \u00F6ffnen");
@@ -89,6 +93,18 @@ public class MainWindow {
 		
 		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
 		mntmBeenden.setText("Beenden");
+		
+		MenuItem mntmProjekt = new MenuItem(menu, SWT.CASCADE);
+		mntmProjekt.setText("Projekt");
+		
+		Menu menu_3 = new Menu(mntmProjekt);
+		mntmProjekt.setMenu(menu_3);
+		
+		MenuItem mntmAufwandsmethodeAuswhlen = new MenuItem(menu_3, SWT.NONE);
+		mntmAufwandsmethodeAuswhlen.setText("Aufwandsmethode ausw\u00E4hlen");
+		
+		MenuItem mntmAufwandBerechnen = new MenuItem(menu_3, SWT.NONE);
+		mntmAufwandBerechnen.setText("Aufwand berechnen");
 				
 		SashForm sashForm = new SashForm(shlCase, SWT.BORDER);
 		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));

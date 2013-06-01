@@ -3,21 +3,13 @@
  */
 package controller;
 
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
 
 /**
  * @author Raphael
  *
  */
-
-
-
-
 
 public class FilterListener implements VerifyListener {
 	
@@ -36,10 +28,11 @@ public class FilterListener implements VerifyListener {
 
 	@Override
 	public void verifyText(VerifyEvent e) {
-		// TODO Auto-generated method stub
 		switch (_filterMode){
 		case(FilterListener.INT):
 								e.doit = e.text.matches("d+");
+								break;
+		default:
 								break;
 		}
 		
