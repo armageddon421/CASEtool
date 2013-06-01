@@ -12,8 +12,6 @@
 <fullyQualifiedTypeName name="model.ModelFacade"/>
 <fullyQualifiedTypeName name="CaseTool"/>
 <fullyQualifiedTypeName name="view.ViewFacade"/>
-<fullyQualifiedTypeName name="controller.FieldListener"/>
-<fullyQualifiedTypeName name="additional.Field"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.events.SelectionListener"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.SWT"/>
@@ -25,5 +23,11 @@
 <fullyQualifiedTypeName name="controller.Controller"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.widgets.Label"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.layout.GridData"/>
+<fullyQualifiedTypeName name="additional.Field"/>
+<fullyQualifiedTypeName name="controller.FieldListener"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Widget"/>
+<fullyQualifiedTypeName name="java.lang.Class"/>
 <fullyQualifiedTypeName name="org.eclipse.swt.widgets.Text"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.events.KeyListener"/>
+<fullyQualifiedTypeName name="controller.FilterListener"/>
 </qualifiedTypeNameHistroy>

@@ -138,7 +138,7 @@ private void loadChapterContents(Field field, TabItem tab){
 		value.setText(field.getValue().toString());
 		value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		value.addListener(SWT.CHANGED, new FieldListener(field, value));
-		value.addKeyListener(new FilterListener(FilterListener.STRING));
+		value.addVerifyListener(new FilterListener(FilterListener.STRING));
 		
 	}
 	else{

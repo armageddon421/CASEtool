@@ -5,6 +5,8 @@ package controller;
 
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.VerifyEvent;
+import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 
@@ -17,32 +19,29 @@ import org.eclipse.swt.widgets.Listener;
 
 
 
-public class FilterListener implements KeyListener {
+public class FilterListener implements VerifyListener {
 	
 	
 	//Constants to determine which Characters are not valid as an Input
 	public static final int INT = 1;
-	public static final int STRING = 2;
-	
+	public static final int STRING = 2;	
 	
 	private int _filterMode;
-	/**
-	 * 
-	 */
-	public FilterListener(int filter) {
-		this._filterMode = filter;
+	
+	public FilterListener(int type){
+		this._filterMode = type;
 	}
 
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		
-		
-	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void verifyText(VerifyEvent e) {
 		// TODO Auto-generated method stub
+		switch (_filterMode){
+		case(FilterListener.INT):
+								e.doit = e.text.matches("d+");
+								break;
+		}
 		
 	}
 
