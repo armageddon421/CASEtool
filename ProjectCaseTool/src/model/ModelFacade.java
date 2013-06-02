@@ -10,11 +10,9 @@ public class ModelFacade implements IModelFacade {
 
 	private static ModelFacade _modelFacadeInstance;
 	private Data _dataContainer = Data.getInstance();
-	private CalculationEnum _activeCalculationMethod;
 	private CalculationFactory _calcFactory;
 	
 	private ModelFacade () {
-		_activeCalculationMethod = CalculationEnum.FunctionPoint;
 		_calcFactory = new CalculationFactory();
 	}
 	
@@ -43,8 +41,13 @@ public class ModelFacade implements IModelFacade {
 	}
 
 	@Override
-	public ArrayList<Field> getCurrentProjectFields() {
-		return _dataContainer.getCurrentProjectFields();
+	public ArrayList<Field> getCurrentProjectFields() {		
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().getFields();
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
@@ -53,42 +56,104 @@ public class ModelFacade implements IModelFacade {
 	}
 
 	@Override
-	public ArrayList<ArrayList<Field>> getFunctionRequirementFields() {
-		return _dataContainer.getFunctionRequirementFields();
-	}
-
-	@Override
-	public ArrayList<ArrayList<Field>> getDataRequirementFields() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<ArrayList<Field>> getPerformanceRequirementFields() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void setCalculationMethod(CalculationEnum calcMethod) {
-		_activeCalculationMethod = calcMethod;
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().setCalcMethod(calcMethod, _calcFactory.createCalculationMethod(calcMethod));
+		}
 	}
 
-	//TODO
 	@Override
-	public ArrayList<Field> calculate() {
-		AbstractCalculationMethod _calculationMethod = _calcFactory.createCalculationMethod(_activeCalculationMethod);
-		return null ;
+	public Field calculate() {
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().calculate();
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
 	public CalculationEnum getCalculationMethod() {
-		return _activeCalculationMethod;
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().getCalcMethod();
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
 	public void createProject(String projectName) {
 		_dataContainer.createProject(projectName);
+	}
+
+	@Override
+	public void deleteCurrentProject() {
+		_dataContainer.deleteCurrentProject();
+	}
+	
+	@Override
+	public void deleteProject(Field fieldOfProject){
+		_dataContainer.deleteProject(fieldOfProject);
+	}
+
+	@Override
+	public Field getFunctionRequirements() {
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().getFunctionRequirements();
+		}
+		else{
+			return null;
+		}
+	}
+
+	@Override
+	public Field getDataRequirements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Field getPerformanceRequirements() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	@Override
+	public void addFunctionRequirement(String id){
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().addFunctionRequirement(id);
+		}
+	}
+	
+	@Override
+	public void addDataRequirement(String id){
+		
+	}
+	
+	@Override
+	public void addPerformanceRequirement(String id){
+		
+	}
+	
+	@Override
+	public void deleteFunctionRequirement(Field fReqToDelete) {
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().deleteFunctionRequirement(fReqToDelete);
+		}
+	}
+
+	@Override
+	public void deleteDataRequirement(Field dReqToDelete) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePerformanceRequirement(Field pReqToDelete) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
