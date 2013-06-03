@@ -1,6 +1,7 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -15,6 +16,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 import additional.Field;
 
@@ -92,7 +94,17 @@ public class XML implements IImport, IExport {
 	
 	@Override
 	public Project importProject(final String filename) {
-		// TODO Auto-generated method stub
+		File fXmlFile = new File(filename);
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder dBuilder;
+		try {
+			dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(fXmlFile);
+		} catch (ParserConfigurationException | SAXException | IOException e) {
+			System.out.println("XML Import failed.");
+			return null;
+		}
+		
 		return null;
 	}
 	
