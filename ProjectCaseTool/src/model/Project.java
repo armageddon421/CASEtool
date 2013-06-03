@@ -34,7 +34,7 @@ public class Project implements IFieldable {
 		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Projektziele"));
 		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));	
 		
-		_pFunctionReq = new Field("Function Requirements", Type.Null, false, this, null);
+		_pFunctionReq = new Field("Function Requirements", Type.Null, false, this, "Produktfunktionen");
 		_projectFields.add(_pFunctionReq);
 		
 		_calcMethodEnum = CalculationEnum.notSet;
