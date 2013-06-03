@@ -10,6 +10,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class MainWindow {
 	
@@ -105,6 +107,21 @@ public class MainWindow {
 		
 		MenuItem mntmAufwandBerechnen = new MenuItem(menu_3, SWT.NONE);
 		mntmAufwandBerechnen.setText("Aufwand berechnen");
+		
+		MenuItem mntmDummy = new MenuItem(menu, SWT.CASCADE);
+		mntmDummy.setText("Dummy");
+		
+		Menu menu_4 = new Menu(mntmDummy);
+		mntmDummy.setMenu(menu_4);
+		
+		MenuItem mntmNeuReq = new MenuItem(menu_4, SWT.NONE);
+		mntmNeuReq.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				_viewFacade.getController().addRequirement();
+			}
+		});
+		mntmNeuReq.setText("Neu Req");
 				
 		SashForm sashForm = new SashForm(shlCase, SWT.BORDER);
 		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -120,4 +137,5 @@ public class MainWindow {
 		
 		
 	}
+	
 }

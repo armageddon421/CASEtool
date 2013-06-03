@@ -2,14 +2,18 @@ package controller;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -148,7 +152,7 @@ private void loadChapterContents(Field field, TabItem tab){
 		
 	}
 	else{
-		if(field.getNumberOfChildren() < 5){
+		if(field.getNumberOfChildren() < 1){
 			
 		}
 		
@@ -158,18 +162,36 @@ private void loadChapterContents(Field field, TabItem tab){
 			Table table = tableviewer.getTable();
 			table.setHeaderVisible(true);
 			table.setLinesVisible(true); 
+			tableviewer.setContentProvider(new ArrayContentProvider());
+			tableviewer.setInput(field.getChildren());
 			//to find out how many columns we need and how they should be called
 			//we look into the first child, e.g. Looking at the first requirement and then determine how
 			//many children there exist and what their names are.
 			//
-			for (Field column : field.getChildren().get(0).getChildren()){
-				//TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
-				//tabCol.setLabelProvider(new ColumnLabelProvider());
+			for (Field column : field.getChildren().get(0).getChildren()){;
+				new Button(tabComposite, SWT.RADIO);
+				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
+				tabCol.getColumn().setText(column.getType().toString());	
+				tabCol.setLabelProvider(new ColumnLabelProvider());
 			}
 		}
 	}
 		
 	}
+
+
+
+
+///////////////////////DUMMY
+private Integer idzaehler = 0;
+public void addRequirement(){
+	this._model.addFunctionRequirement(Integer.toString(idzaehler++*10));
+	this.loadContentCurProject();
+}
+
+
+
+
 }
 
 
