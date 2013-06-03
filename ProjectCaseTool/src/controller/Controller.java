@@ -2,7 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -114,7 +116,8 @@ private void loadContentCurProject (){
 	for(Field eachChapter :_model.getCurrentProjectFields()){
 		TabItem chapterTab = new TabItem(_view.get_mainView().tabFolder, SWT.NONE);
 		_openTabs.add(chapterTab);
-		chapterTab.setText(eachChapter.getValue().toString());
+		String value = eachChapter.getValue().toString();
+		chapterTab.setText(value);
 		loadChapterContents(eachChapter, chapterTab);
 	}
 }
@@ -160,12 +163,14 @@ private void loadChapterContents(Field field, TabItem tab){
 			//many children there exist and what their names are.
 			//
 			for (Field column : field.getChildren().get(0).getChildren()){
-				TableColumn tabCol = new TableColumn(table, SWT.NONE);
+				//TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
+				//tabCol.setLabelProvider(new ColumnLabelProvider());
 			}
 		}
+	}
 		
 	}
 }
 
 
-}
+
