@@ -81,6 +81,8 @@ public class XML implements IImport, IExport {
 			
 			// Attributes
 			e.setAttribute("Type", f.getType().toString());
+			e.setAttribute("Editable", f.getEditable().toString());
+			
 			
 			// Content
 			e.setTextContent(f.getValue().toString());
@@ -100,6 +102,16 @@ public class XML implements IImport, IExport {
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
+			
+			
+			for (int i = 0; i < doc.getChildNodes().getLength(); i++) {
+				Element n = (Element) doc.getChildNodes().item(i);
+				// Field
+				
+				
+			}
+			
+			
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			System.out.println("XML Import failed.");
 			return null;
