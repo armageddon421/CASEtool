@@ -166,12 +166,16 @@ private void loadChapterContents(Field field, TabItem tab){
 			//we look into the first child, e.g. Looking at the first requirement and then determine how
 			//many children there exist and what their names are.
 			
-			for (Field column : (field.getChildren().get(0)).getChildren()){
+			for (final Field column : (field.getChildren().get(0)).getChildren()){
 				
 				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
 				tabCol.getColumn().setWidth(200);
 				tabCol.getColumn().setText(column.getType().toString());
-				tabCol.setLabelProvider(new ColumnLabelProvider());
+				tabCol.setLabelProvider(new ColumnLabelProvider(){
+					public String getText (Object object){
+						return  column.getValue().toString();
+					}
+				});
 			}
 			Table table = tableviewer.getTable();
 			table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
