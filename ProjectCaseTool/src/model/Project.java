@@ -19,10 +19,11 @@ public class Project implements IFieldable {
 	 */
 	private ArrayList<Field> _projectFields = new ArrayList<>();
 	//Requirement Fields of the project
-	private Field _pFunctionReq;
-	private Field _pDataReq;
-	private Field _pPerformanceReq;
-	private Field _pGlossary;
+	private Field _functionReq;
+	private Field _dataReq;
+	private Field _performanceReq;
+	private Field _glossary;
+	private Field _fpParameters;
 	
 	
 	
@@ -38,16 +39,56 @@ public class Project implements IFieldable {
 		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));	
 		
 		//Requirement Fields
-		_pFunctionReq = new Field("Function Requirements", Type.String, false, this, "Produktfunktionen");
-		_projectFields.add(_pFunctionReq);
-		_pDataReq = new Field("Data Requirements", Type.String, false, this, "Produktdaten");
-		_projectFields.add(_pDataReq);
-		_pPerformanceReq = new Field("Performance Requirements", Type.String, false, this, "Produktleistungen");
-		_projectFields.add(_pPerformanceReq);
+		_functionReq = new Field("Function Requirements", Type.String, false, this, "Produktfunktionen");
+		_projectFields.add(_functionReq);
+		_dataReq = new Field("Data Requirements", Type.String, false, this, "Produktdaten");
+		_projectFields.add(_dataReq);
+		_performanceReq = new Field("Performance Requirements", Type.String, false, this, "Produktleistungen");
+		_projectFields.add(_performanceReq);
 		
 		//Glossary
-		_pGlossary = new Field("Glossary", Type.String, false, this, "Glossar");
-		_projectFields.add(_pGlossary);
+		_glossary = new Field("Glossary", Type.String, false, this, "Glossar");
+		_projectFields.add(_glossary);
+		
+		//FP Parameters
+		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
+		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
+		input.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		input.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		input.addChild(new Field("Complex", Type.Integer, true, this, 6));
+		Field query = new Field("Query", Type.String, false, this, "Abfragen");
+		query.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		query.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		query.addChild(new Field("Complex", Type.Integer, true, this, 6));
+		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
+		output.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		output.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		output.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		Field data = new Field("Data", Type.String, false, this, "Datenbestände");
+		data.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		data.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		data.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		Field reference = new Field("Reference Data", Type.String, false, this, "Referenzdaten");
+		reference.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		reference.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		reference.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		
+		_fpParameters.addChild(input);
+		_fpParameters.addChild(query);
+		_fpParameters.addChild(output);
+		_fpParameters.addChild(data);
+		_fpParameters.addChild(reference);
+		
+		_fpParameters.addChild(new Field("Verflechtungen", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Dezentrale Daten", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Transaktionsrate", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Rechenoperationen", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Kontrollverfahren", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Ausnahmeregelungen", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Logik", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Wiederverwendbarkeit", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Datenbestandskonvertierung", Type.Integer, true, this, 0));
+		_fpParameters.addChild(new Field("Anpassbarkeit", Type.Integer, true, this, 0));
 		
 		//Calculation
 		_calcMethodEnum = CalculationEnum.notSet;
@@ -69,17 +110,17 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("FR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("FR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
 		tempField.addChild(new Field("FR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
-		_pFunctionReq.addChild(tempField);
+		_functionReq.addChild(tempField);
 	}
 	
 	public void deleteFunctionRequirement(Field fReqToDelete){
-		if(_pFunctionReq.contains(fReqToDelete)){
-			_pFunctionReq.removeChild(fReqToDelete);
+		if(_functionReq.contains(fReqToDelete)){
+			_functionReq.removeChild(fReqToDelete);
 		}
 	}
 	
 	public Field getFunctionRequirements(){
-		return _pFunctionReq;
+		return _functionReq;
 	}
 	
 	public void addDataRequirement(String requirementID){
@@ -88,17 +129,17 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("DR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("DR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
 		tempField.addChild(new Field("DR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
-		_pDataReq.addChild(tempField);		
+		_dataReq.addChild(tempField);		
 	}
 	
 	public void deleteDataRequirement(Field dReqToDelete){
-		if(_pDataReq.contains(dReqToDelete)){
-			_pDataReq.removeChild(dReqToDelete);
+		if(_dataReq.contains(dReqToDelete)){
+			_dataReq.removeChild(dReqToDelete);
 		}
 	}
 	
 	public Field getDataRequirements(){
-		return _pDataReq;
+		return _dataReq;
 	}	
 	
 	public void addPerformanceRequirement(String requirementID){
@@ -107,29 +148,33 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("PR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
 		tempField.addChild(new Field("PR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
-		_pPerformanceReq.addChild(tempField);		
+		_performanceReq.addChild(tempField);		
 	}
 	
 	public void deletePerformanceRequirement(Field dReqToDelete){
-		if(_pPerformanceReq.contains(dReqToDelete)){
-			_pPerformanceReq.removeChild(dReqToDelete);
+		if(_performanceReq.contains(dReqToDelete)){
+			_performanceReq.removeChild(dReqToDelete);
 		}
 	}
 	
 	public Field getPerformanceRequirements(){
-		return _pPerformanceReq;
+		return _performanceReq;
 	}
 	
 	public void addGlossaryEntry(String keyword, String description){
 		Field tempField = new Field("Glossary Entry", Type.String, true, this, keyword);
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
-		_pGlossary.addChild(tempField);
+		_glossary.addChild(tempField);
 	}
 	
 	public void deleteGlossaryEntry(Field entryToDelete){
-		if(_pGlossary.contains(entryToDelete)) {
-			_pGlossary.removeChild(entryToDelete);
+		if(_glossary.contains(entryToDelete)) {
+			_glossary.removeChild(entryToDelete);
 		}
+	}
+	
+	public Field getFPParameters(){
+		return _fpParameters;
 	}
 	
 	public void setCalcMethod(CalculationEnum calcMethodEnum, AbstractCalculationMethod calcMethodInstance ) {

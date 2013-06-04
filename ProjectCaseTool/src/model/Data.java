@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import additional.CalculationEnum;
 import additional.Field;
 
 //Singleton
