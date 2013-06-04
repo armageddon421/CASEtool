@@ -71,11 +71,15 @@ public interface IModelFacade {
 	
 	public void addPerformanceRequirement(String id);
 	
+	public void addGlossaryEntry(String keyword, String description);
+	
 	public void deleteFunctionRequirement(Field fReqToDelete);
 	
 	public void deleteDataRequirement(Field dReqToDelete);
 	
 	public void deletePerformanceRequirement(Field pReqToDelete);
+	
+	public void deleteGlossaryEntry(Field entryToDelete);
 	
 	/**
 	 * Sets the calculation method of the current project. There must be a current project.
