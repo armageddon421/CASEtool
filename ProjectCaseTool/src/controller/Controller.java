@@ -136,7 +136,7 @@ private void deleteTabs(){
 private void loadChapterContents(Field field, TabItem tab){
 	Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
 	tab.setControl(tabComposite);
-
+	
 	//only for Testpurpose, normally the if-clause should never come true
 	if(field.getNumberOfChildren()==0){
 		tabComposite.setLayout(new GridLayout(2, false));
@@ -158,22 +158,27 @@ private void loadChapterContents(Field field, TabItem tab){
 		
 		//create a table to get a overview of everything
 		else{
+			tabComposite.setLayout(new GridLayout(1, false));
 			TableViewer tableviewer = new TableViewer(tabComposite, SWT.NONE);
+			
+			
+			//to find out how many columns we need and how they should be called
+			//we look into the first child, e.g. Looking at the first requirement and then determine how
+			//many children there exist and what their names are.
+			
+			for (Field column : (field.getChildren().get(0)).getChildren()){
+				
+				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
+				tabCol.getColumn().setWidth(200);
+				tabCol.getColumn().setText(column.getType().toString());
+				tabCol.setLabelProvider(new ColumnLabelProvider());
+			}
 			Table table = tableviewer.getTable();
+			table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			table.setHeaderVisible(true);
 			table.setLinesVisible(true); 
 			tableviewer.setContentProvider(new ArrayContentProvider());
 			tableviewer.setInput(field.getChildren());
-			//to find out how many columns we need and how they should be called
-			//we look into the first child, e.g. Looking at the first requirement and then determine how
-			//many children there exist and what their names are.
-			//
-			for (Field column : field.getChildren().get(0).getChildren()){;
-				new Button(tabComposite, SWT.RADIO);
-				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
-				tabCol.getColumn().setText(column.getType().toString());	
-				tabCol.setLabelProvider(new ColumnLabelProvider());
-			}
 		}
 	}
 		
