@@ -126,6 +126,12 @@ public class Project implements IFieldable {
 		_pGlossary.addChild(tempField);
 	}
 	
+	public void deleteGlossaryEntry(Field entryToDelete){
+		if(_pGlossary.contains(entryToDelete)) {
+			_pGlossary.removeChild(entryToDelete);
+		}
+	}
+	
 	public void setCalcMethod(CalculationEnum calcMethodEnum, AbstractCalculationMethod calcMethodInstance ) {
 		this._calcMethodEnum = calcMethodEnum;
 		this._calcMethodInstance = calcMethodInstance;

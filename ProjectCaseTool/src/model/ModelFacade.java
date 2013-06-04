@@ -109,14 +109,22 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public Field getDataRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().getDataRequirements();
+		}
+		else{
+			return null;
+		}
 	}
 
 	@Override
 	public Field getPerformanceRequirements() {
-		// TODO Auto-generated method stub
-		return null;
+		if(_dataContainer.getCurrentProject() != null){
+			return _dataContainer.getCurrentProject().getPerformanceRequirements();
+		}
+		else{
+			return null;
+		}
 	}
 
 	
@@ -129,12 +137,23 @@ public class ModelFacade implements IModelFacade {
 	
 	@Override
 	public void addDataRequirement(String id){
-		
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().addDataRequirement(id);
+		}
 	}
 	
 	@Override
 	public void addPerformanceRequirement(String id){
-		
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().addPerformanceRequirement(id);
+		}
+	}
+	
+	@Override
+	public void addGlossaryEntry(String keyword, String description){
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().addGlossaryEntry(keyword, description);
+		}
 	}
 	
 	@Override
@@ -146,14 +165,23 @@ public class ModelFacade implements IModelFacade {
 
 	@Override
 	public void deleteDataRequirement(Field dReqToDelete) {
-		// TODO Auto-generated method stub
-		
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().deleteDataRequirement(dReqToDelete);
+		}
 	}
 
 	@Override
 	public void deletePerformanceRequirement(Field pReqToDelete) {
-		// TODO Auto-generated method stub
-		
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().deletePerformanceRequirement(pReqToDelete);
+		}
+	}
+	
+	@Override
+	public void deleteGlossaryEntry(Field entryToDelete){
+		if(_dataContainer.getCurrentProject() != null){
+			_dataContainer.getCurrentProject().deleteGlossaryEntry(entryToDelete);
+		}
 	}
 	
 	
