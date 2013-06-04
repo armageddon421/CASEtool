@@ -22,7 +22,7 @@ public class MainWindow {
 	/*Gui Objects, defined here for easier access */
 
 	public List _projectList;
-	public TabFolder tabFolder;
+	public TabFolder _tabFolder;
 
 	
 
@@ -130,7 +130,7 @@ public class MainWindow {
 		_projectList = new List(sashForm, SWT.BORDER);
 				
 						
-		tabFolder = new TabFolder(sashForm, SWT.NONE);
+		_tabFolder = new TabFolder(sashForm, SWT.NONE);
 
 		sashForm.setWeights(new int[] {154, 809});
 		_projectList.addSelectionListener(_viewFacade.getController().getProjectSelectionListener());

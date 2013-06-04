@@ -118,7 +118,7 @@ public class Controller {
 private void loadContentCurProject (){
 	deleteTabs();
 	for(Field eachChapter :_model.getCurrentProjectFields()){
-		TabItem chapterTab = new TabItem(_view.get_mainView().tabFolder, SWT.NONE);
+		TabItem chapterTab = new TabItem(_view.get_mainView()._tabFolder, SWT.NONE);
 		_openTabs.add(chapterTab);
 		String value = eachChapter.getValue().toString();
 		chapterTab.setText(value);
@@ -168,7 +168,7 @@ private void loadChapterContents(Field field, TabItem tab){
 			
 			for (final Field column : (field.getChildren().get(0)).getChildren()){
 				
-				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.NONE);
+				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.MULTI|SWT.FULL_SELECTION);
 				tabCol.getColumn().setWidth(200);
 				tabCol.getColumn().setText(column.getType().toString());
 				tabCol.setLabelProvider(new ColumnLabelProvider(){
