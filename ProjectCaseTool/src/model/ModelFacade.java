@@ -37,8 +37,9 @@ public class ModelFacade implements IModelFacade {
 	@Override
 	public void saveProject(final String filepath) {
 		Project exportProject = this._dataContainer.getCurrentProject();
-		this._exporter.exportProject(filepath, exportProject);
-		
+		if (exportProject != null) {
+			this._exporter.exportProject(filepath, exportProject);
+		}
 	}
 	
 	@Override
