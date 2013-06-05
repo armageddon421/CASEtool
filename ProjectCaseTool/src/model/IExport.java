@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * Interface for Classes that can Export Projects
+ * 
+ * @author Robert
+ * 
+ */
 public interface IExport {
 	/**
 	 * Export a project

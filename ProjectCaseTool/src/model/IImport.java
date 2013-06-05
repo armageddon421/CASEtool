@@ -1,6 +1,12 @@
 package model;
 
 
+/**
+ * Interface for Classes that can Import Projects
+ * 
+ * @author Robert
+ * 
+ */
 public interface IImport {
 	/**
 	 * Import a project
