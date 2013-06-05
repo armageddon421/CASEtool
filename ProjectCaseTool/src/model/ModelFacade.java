@@ -14,10 +14,29 @@ import additional.Field;
  */
 public class ModelFacade implements IModelFacade {
 	
+	/**
+	 * Instance of this singleton class
+	 */
 	private static ModelFacade			_modelFacadeInstance;
+	
+	/**
+	 * Holds the singleton instane of the Data class for easier access
+	 */
 	private final Data					_dataContainer	= Data.getInstance();
+	
+	/**
+	 * Holds the created CalculationFactory for later use
+	 */
 	private final CalculationFactory	_calcFactory;
+	
+	/**
+	 * Holds the class that should be used for Export
+	 */
 	private final IExport				_exporter;
+	
+	/**
+	 * Holds the class that should be used for Import
+	 */
 	private final IImport				_importer;
 	
 	/**

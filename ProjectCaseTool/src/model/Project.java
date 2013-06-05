@@ -18,21 +18,54 @@ public class Project implements IFieldable {
 	 * Contains all fields associated with the project
 	 */
 	private ArrayList<Field>			_projectFields	= new ArrayList<>();
+	
 	// Requirement Fields of the project
+	/**
+	 * Holds the Field containing all Function Requirements
+	 */
 	private Field						_functionReq;
+	/**
+	 * Holds the Field containing all Data Requirements
+	 */
 	private Field						_dataReq;
+	/**
+	 * Holds the Field containing all Performance Requirements
+	 */
 	private Field						_performanceReq;
+	/**
+	 * Holds the Field containing all Glossary Entries
+	 */
 	private Field						_glossary;
+	/**
+	 * Holds the Field containing all FunctionPoint Calculation Parameters
+	 */
 	private Field						_fpParameters;
 	
 	
+	/**
+	 * Enumerates the currently selected Calculation Method
+	 */
 	private CalculationEnum				_calcMethodEnum;
+	
+	/**
+	 * Holds the object that should do the calculation
+	 */
 	private AbstractCalculationMethod	_calcMethodInstance;
 	
+	/**
+	 * Empty constructor to be used with Import only
+	 */
 	public Project() {
 		
 	}
 	
+	/**
+	 * Constructor that creates a regular new Project and fills it with the
+	 * necessary Fields
+	 * 
+	 * @param projectName
+	 *            Name the project should be given
+	 */
 	public Project(final String projectName) {
 		// Standard project fields
 		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
@@ -104,10 +137,21 @@ public class Project implements IFieldable {
 		return _projectFields;
 	}
 	
+	/**
+	 * Returns the Enum of the currently selected Calculation Method
+	 * 
+	 * @return CalculationEnum
+	 */
 	public CalculationEnum getCalcMethod() {
 		return _calcMethodEnum;
 	}
 	
+	/**
+	 * add a Function Requirement to the Project
+	 * 
+	 * @param requirementID
+	 *            ID for the Requirement
+	 */
 	public void addFunctionRequirement(final String requirementID) {
 		Field tempField = new Field("FunctionReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("FR Name", Type.String, true, this, "new Function Requirement"));
@@ -117,16 +161,33 @@ public class Project implements IFieldable {
 		_functionReq.addChild(tempField);
 	}
 	
+	/**
+	 * Delete a Function Requirement from the Project
+	 * 
+	 * @param fReqToDelete
+	 *            Field of the Requirement to delete
+	 */
 	public void deleteFunctionRequirement(final Field fReqToDelete) {
 		if (_functionReq.contains(fReqToDelete)) {
 			_functionReq.removeChild(fReqToDelete);
 		}
 	}
 	
+	/**
+	 * Returns the field containing all Function Requirements as Children
+	 * 
+	 * @return Field
+	 */
 	public Field getFunctionRequirements() {
 		return _functionReq;
 	}
 	
+	/**
+	 * add a Data Requirement to the Project
+	 * 
+	 * @param requirementID
+	 *            ID for the Requirement
+	 */
 	public void addDataRequirement(final String requirementID) {
 		Field tempField = new Field("DataReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("DR Name", Type.String, true, this, "new Data Requirement"));
@@ -136,16 +197,33 @@ public class Project implements IFieldable {
 		_dataReq.addChild(tempField);
 	}
 	
+	/**
+	 * Delete a Data Requirement from the Project
+	 * 
+	 * @param fReqToDelete
+	 *            Field of the Requirement to delete
+	 */
 	public void deleteDataRequirement(final Field dReqToDelete) {
 		if (_dataReq.contains(dReqToDelete)) {
 			_dataReq.removeChild(dReqToDelete);
 		}
 	}
 	
+	/**
+	 * Returns the field containing all Data Requirements as Children
+	 * 
+	 * @return Field
+	 */
 	public Field getDataRequirements() {
 		return _dataReq;
 	}
 	
+	/**
+	 * add a Performance Requirement to the Project
+	 * 
+	 * @param requirementID
+	 *            ID for the Requirement
+	 */
 	public void addPerformanceRequirement(final String requirementID) {
 		Field tempField = new Field("PerformanceReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
@@ -155,37 +233,82 @@ public class Project implements IFieldable {
 		_performanceReq.addChild(tempField);
 	}
 	
+	/**
+	 * Delete a Performance Requirement from the Project
+	 * 
+	 * @param fReqToDelete
+	 *            Field of the Requirement to delete
+	 */
 	public void deletePerformanceRequirement(final Field dReqToDelete) {
 		if (_performanceReq.contains(dReqToDelete)) {
 			_performanceReq.removeChild(dReqToDelete);
 		}
 	}
 	
+	/**
+	 * Returns the field containing all Performance Requirements as Children
+	 * 
+	 * @return Field
+	 */
 	public Field getPerformanceRequirements() {
 		return _performanceReq;
 	}
 	
+	/**
+	 * Add a Glossary entry with the given Keyword and Description.
+	 * 
+	 * @param keyword
+	 *            Keyword for the Entry
+	 * @param description
+	 *            Description to assign to this Entry
+	 */
 	public void addGlossaryEntry(final String keyword, final String description) {
 		Field tempField = new Field("Glossary Entry", Type.String, true, this, keyword);
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
 		_glossary.addChild(tempField);
 	}
 	
+	/**
+	 * Delete a glossary Entry
+	 * 
+	 * @param entryToDelete
+	 *            Field corresponding to the entry to be deleted
+	 */
 	public void deleteGlossaryEntry(final Field entryToDelete) {
 		if (_glossary.contains(entryToDelete)) {
 			_glossary.removeChild(entryToDelete);
 		}
 	}
 	
+	/**
+	 * Returns the field containing all FunctionPoint Calculation Parameters as
+	 * Children
+	 * 
+	 * @return Field
+	 */
 	public Field getFPParameters() {
 		return _fpParameters;
 	}
 	
+	/**
+	 * Set the Calculation Method to be used.
+	 * 
+	 * @param calcMethodEnum
+	 *            Enum of the Calculation Type
+	 * @param calcMethodInstance
+	 *            Instance to be used
+	 */
 	public void setCalcMethod(final CalculationEnum calcMethodEnum, final AbstractCalculationMethod calcMethodInstance) {
 		this._calcMethodEnum = calcMethodEnum;
 		this._calcMethodInstance = calcMethodInstance;
 	}
 	
+	
+	/**
+	 * Execute the calculation.
+	 * 
+	 * @return Field containing the calculation results
+	 */
 	public Field calculate() {
 		if (_calcMethodInstance != null) {
 			return _calcMethodInstance.calculate(this);
@@ -195,6 +318,15 @@ public class Project implements IFieldable {
 		}
 	}
 	
+	
+	/**
+	 * Set the fields for an Empty Project. This is to be used with Import only.
+	 * It filters the necessary fields from the list and assigns them to the
+	 * correct variables.
+	 * 
+	 * @param fields
+	 *            ArrayList of all Fields that were imported.
+	 */
 	protected void setProjectFields(final ArrayList<Field> fields) {
 		this._projectFields = fields;
 		
