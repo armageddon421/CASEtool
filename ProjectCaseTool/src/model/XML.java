@@ -17,9 +17,13 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
+import additional.ComplexityEnum;
 import additional.Field;
+import additional.FunctionPointEnum;
+import additional.Type;
 
 public class XML implements IImport, IExport {
 	
@@ -84,7 +88,9 @@ public class XML implements IImport, IExport {
 			
 			
 			// Content
-			e.setTextContent(f.getValue().toString());
+			Element valueElement = doc.createElement("NodeValue");
+			valueElement.setTextContent(f.getValue().toString());
+			e.appendChild(valueElement);
 			
 			addToXML(doc, e, f.getChildren());
 			
@@ -95,30 +101,87 @@ public class XML implements IImport, IExport {
 		
 	}
 	
+	private Field createField(final Element node, final Field parent, final Project proj) {
+		
+		Type type = Type.valueOf(node.getAttribute("Type"));
+		
+		Field field = new Field(node.getNodeName().replace("_", " "), type,
+				Boolean.parseBoolean(node.getAttribute("Editable")), proj, null);
+		
+		
+		// First node is always The Content/Value of the field
+		Element valueNode = (Element) node.getElementsByTagName("NodeValue").item(0);
+		if (valueNode != null) {
+			String value = valueNode.getTextContent();
+			if (type == Type.String || type == Type.Text) {
+				field.setValue(value);
+			}
+			else if (type == Type.Float) {
+				field.setValue(Float.parseFloat(value));
+			}
+			else if (type == Type.Integer) {
+				field.setValue(Integer.parseInt(value));
+			}
+			else if (type == Type.Null) {
+				field.setValue(null);
+			}
+			else if (type == Type.ComplexityEnum) {
+				field.setValue(ComplexityEnum.valueOf(value));
+			}
+			else if (type == Type.FunctionPointEnum) {
+				field.setValue(FunctionPointEnum.valueOf(value));
+			}
+		}
+		else {
+			System.out.println("XML Element has no nodeValue. This should never happen. Check input file.");
+		}
+		
+		// add everything as child Fields, except the ValueNodes
+		for (int i = 0; i < node.getChildNodes().getLength(); i++) {
+			
+			Node n = node.getChildNodes().item(i);
+			if (n.getNodeType() == Node.ELEMENT_NODE && !n.getNodeName().equals("NodeValue")) {
+				field.addChild(createField((Element) n, field, proj));
+			}
+			
+		}
+		
+		return field;
+	}
+	
 	@Override
-	public ArrayList<Field> importProject(final String filename) {
+	public void importProject(final String filename, final Project emptyProject) {
+		ArrayList<Field> fields = new ArrayList<Field>();
 		File fXmlFile = new File(filename);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		try {
 			dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fXmlFile);
+			Element projectNode = (Element) doc.getElementsByTagName("Project").item(0);
 			
+			if (projectNode == null) {
+				System.out.println("Import failed. XML does not contaion Project node.");
+				return;
+			}
 			
-			for (int i = 0; i < doc.getChildNodes().getLength(); i++) {
-				Element n = (Element) doc.getChildNodes().item(i);
-				Field f = new Field(name, type, editable, owner, value);
+			for (int i = 0; i < projectNode.getChildNodes().getLength(); i++) {
 				
+				Node node = projectNode.getChildNodes().item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					fields.add(createField((Element) node, null, emptyProject));
+				}
 				
 			}
 			
 			
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			System.out.println("XML Import failed.");
-			return null;
+			return;
 		}
 		
-		return null;
+		emptyProject.setProjectFields(fields);
+		
+		return;
 	}
-	
 }

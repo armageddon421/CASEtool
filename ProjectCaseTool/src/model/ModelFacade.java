@@ -31,8 +31,7 @@ public class ModelFacade implements IModelFacade {
 	
 	@Override
 	public void loadProject(final String filepath) {
-		// TODO Auto-generated method stub
-		
+		this._importer.importProject(filepath, this._dataContainer.createProjectForImport());
 	}
 	
 	@Override
