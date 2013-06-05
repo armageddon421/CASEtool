@@ -227,19 +227,19 @@ public class Controller {
 	 * entries...
 	 */
 
-	private Integer idFuncRec = 0;
-	private Integer idPerformance = 0;
-	private Integer idData = 0;
+	private Integer _idFuncRec = 0;
+	private Integer _idPerformance = 0;
+	private Integer _idData = 0;
 
 	public void addRequirement() {
 		this._model.addFunctionRequirement(Integer
-				.toString(this.idFuncRec++ * 10));
+				.toString(this._idFuncRec++ * 10));
 		this.loadContentCurProject();
 	}
 
 	public void deleteCurProject() {
 		this._model.deleteCurrentProject();
-		this.listProjects();
+		this.loadContentCurProject();
 	}
 
 	public void openProject(String path) {
@@ -253,12 +253,12 @@ public class Controller {
 
 	public void addPerformanceReq() {
 		this._model.addPerformanceRequirement(Integer
-				.toString(this.idPerformance++ * 10));
+				.toString(this._idPerformance++ * 10));
 		this.loadContentCurProject();
 	}
 
 	public void addDataReq() {
-		this._model.addDataRequirement(Integer.toString(this.idData++ * 10));
+		this._model.addDataRequirement(Integer.toString(this._idData++ * 10));
 		this.loadContentCurProject();
 	}
 
