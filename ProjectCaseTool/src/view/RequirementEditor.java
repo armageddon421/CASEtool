@@ -61,7 +61,7 @@ public class RequirementEditor extends Dialog {
 		
 		
 		Composite composite = new Composite(shlAnforderungBearbeiten, SWT.NONE);
-		composite.setLayout(new GridLayout(1, false));
+		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		for (Field property : this.Requirement.getChildren()){
 			Label label = new Label(composite, SWT.NONE);
@@ -75,7 +75,9 @@ public class RequirementEditor extends Dialog {
 		composite_1.setLayout(new GridLayout(2, false));
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		
+		btnCancelEdit= new Button(composite_1, SWT.NONE);
+		btnCancelEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		btnCancelEdit.setText("\u00C4nderung best\u00E4tigen");
 		
 		btnConfirm = new Button(composite_1, SWT.NONE);
 		btnConfirm.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));

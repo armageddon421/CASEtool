@@ -213,13 +213,16 @@ private void loadChapterContents(Field field, TabItem tab){
 
 
 
-///////////////////////DUMMY//////////////////////
-private Integer idzaehler = 0;
+
+private Integer idFuncRec = 0;
+private Integer idPerformance = 0;
+private Integer idData = 0;
+
+
 public void addRequirement(){
-	this._model.addFunctionRequirement(Integer.toString(idzaehler++*10));
+	this._model.addFunctionRequirement(Integer.toString(idFuncRec++*10));
 	this.loadContentCurProject();
 }
-////////////////////////////////////////////////////////
 public void deleteCurProject() {
 	this._model.deleteCurrentProject();
 	listProjects();
@@ -233,6 +236,16 @@ public void openProject(String path) {
 public void saveToXML(String path) {
 	this._model.saveProject(path);
 }
+
+public void addPerformanceReq() {
+	this._model.addPerformanceRequirement(Integer.toString(idPerformance++*10));
+	this.loadContentCurProject();
+}
+public void addDataReq() {
+	this._model.addDataRequirement(Integer.toString(idData++*10));
+	this.loadContentCurProject();
+}
+
 
 
 
