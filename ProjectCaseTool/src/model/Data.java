@@ -6,8 +6,17 @@ import additional.Field;
 
 //Singleton
 public class Data {
+	/**
+	 * Holds the instance of this singleton class
+	 */
 	private static Data					_dataInstance;
+	/**
+	 * ArrayList that holds all Projects
+	 */
 	private final ArrayList<Project>	_allProjects;
+	/**
+	 * Currently active Project
+	 */
 	private Project						_currentProject;
 	
 	private Data() {
@@ -90,16 +99,25 @@ public class Data {
 		}
 	}
 	
+	/**
+	 * Delete the currently active project
+	 */
 	public void deleteCurrentProject() {
-		if(_currentProject != null){
+		if (_currentProject != null) {
 			_allProjects.remove(_currentProject);
 			_currentProject = null;
-		}		
+		}
 	}
-
-	public void deleteProject(Field fieldOfProject) {
+	
+	/**
+	 * Delete a specific Project
+	 * 
+	 * @param fieldOfProject
+	 *            Any Field that belongs to the Project to be deleted
+	 */
+	public void deleteProject(final Field fieldOfProject) {
 		_allProjects.remove(fieldOfProject.getOwner());
-		if(_currentProject == fieldOfProject.getOwner()){
+		if (_currentProject == fieldOfProject.getOwner()) {
 			_currentProject = null;
 		}
 	}

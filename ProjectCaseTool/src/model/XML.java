@@ -25,6 +25,11 @@ import additional.Field;
 import additional.FunctionPointEnum;
 import additional.Type;
 
+/**
+ * XML Export/Import class
+ * 
+ * @auhor Robert
+ */
 public class XML implements IImport, IExport {
 	
 	@Override
@@ -76,6 +81,16 @@ public class XML implements IImport, IExport {
 		
 	}
 	
+	/**
+	 * Recursive function to import all the Fields hierarchically
+	 * 
+	 * @param doc
+	 *            Document, where the Elements will be created
+	 * @param parent
+	 *            Parent element to attach the newly generated elements to
+	 * @param fields
+	 *            Fields to parse
+	 */
 	private void addToXML(final Document doc, final Element parent, final ArrayList<Field> fields) {
 		
 		for (Field f : fields) {
@@ -101,40 +116,58 @@ public class XML implements IImport, IExport {
 		
 	}
 	
+	/**
+	 * Recursive function to import all the Fields hierarchically
+	 * 
+	 * @param node
+	 *            node to get the values from / To import
+	 * @param parent
+	 *            parent Field, currently not used
+	 * @param proj
+	 *            Project to set the Fields' parent to
+	 * @return
+	 */
 	private Field createField(final Element node, final Field parent, final Project proj) {
 		
 		Type type = Type.valueOf(node.getAttribute("Type"));
 		
-		Field field = new Field(node.getNodeName().replace("_", " "), type,
-				Boolean.parseBoolean(node.getAttribute("Editable")), proj, null);
-		
+		Object fieldValue = null;
 		
 		// First node is always The Content/Value of the field
 		Element valueNode = (Element) node.getElementsByTagName("NodeValue").item(0);
 		if (valueNode != null) {
 			String value = valueNode.getTextContent();
+			if (value == null) {
+				value = " ";
+			}
 			if (type == Type.String || type == Type.Text) {
-				field.setValue(value);
+				
+				fieldValue = value;
 			}
 			else if (type == Type.Float) {
-				field.setValue(Float.parseFloat(value));
+				fieldValue = Float.parseFloat(value);
 			}
 			else if (type == Type.Integer) {
-				field.setValue(Integer.parseInt(value));
+				fieldValue = Integer.parseInt(value);
 			}
 			else if (type == Type.Null) {
-				field.setValue(null);
+				fieldValue = (null);
 			}
 			else if (type == Type.ComplexityEnum) {
-				field.setValue(ComplexityEnum.valueOf(value));
+				fieldValue = (ComplexityEnum.valueOf(value));
 			}
 			else if (type == Type.FunctionPointEnum) {
-				field.setValue(FunctionPointEnum.valueOf(value));
+				fieldValue = (FunctionPointEnum.valueOf(value));
 			}
 		}
 		else {
 			System.out.println("XML Element has no nodeValue. This should never happen. Check input file.");
 		}
+		
+		
+		Field field = new Field(node.getNodeName().replace("_", " "), type,
+				Boolean.parseBoolean(node.getAttribute("Editable")), proj, fieldValue);
+		
 		
 		// add everything as child Fields, except the ValueNodes
 		for (int i = 0; i < node.getChildNodes().getLength(); i++) {

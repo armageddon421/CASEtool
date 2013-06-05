@@ -6,6 +6,12 @@ import additional.CalculationEnum;
 import additional.Field;
 
 
+/**
+ * Facade for the model
+ * 
+ * @author Robert
+ * 
+ */
 public class ModelFacade implements IModelFacade {
 	
 	private static ModelFacade			_modelFacadeInstance;
@@ -14,6 +20,9 @@ public class ModelFacade implements IModelFacade {
 	private final IExport				_exporter;
 	private final IImport				_importer;
 	
+	/**
+	 * Constructor, prepares Calculation Factory and Import/Export classes
+	 */
 	private ModelFacade() {
 		_calcFactory = new CalculationFactory();
 		XML ietemp = new XML();
@@ -22,6 +31,11 @@ public class ModelFacade implements IModelFacade {
 		_importer = ietemp;
 	}
 	
+	/**
+	 * Gets and eventually creates the instance of this singleton class
+	 * 
+	 * @return singleton for this class
+	 */
 	public static ModelFacade getInstance() {
 		if (_modelFacadeInstance == null) {
 			_modelFacadeInstance = new ModelFacade();
@@ -37,8 +51,9 @@ public class ModelFacade implements IModelFacade {
 	@Override
 	public void saveProject(final String filepath) {
 		Project exportProject = this._dataContainer.getCurrentProject();
-		this._exporter.exportProject(filepath, exportProject);
-		
+		if (exportProject != null) {
+			this._exporter.exportProject(filepath, exportProject);
+		}
 	}
 	
 	@Override
