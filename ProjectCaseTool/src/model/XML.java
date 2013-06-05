@@ -45,11 +45,6 @@ public class XML implements IImport, IExport {
 		addToXML(doc, rootElement, fields);
 		
 		
-		// staff elements
-		Element staff = doc.createElement("Staff");
-		rootElement.appendChild(staff);
-		
-		
 		// write to file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer;
@@ -77,7 +72,7 @@ public class XML implements IImport, IExport {
 		
 		for (Field f : fields) {
 			
-			Element e = doc.createElement(f.getName());
+			Element e = doc.createElement(f.getName().replace(" ", "_"));
 			
 			// Attributes
 			e.setAttribute("Type", f.getType().toString());
