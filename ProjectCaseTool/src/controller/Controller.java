@@ -244,6 +244,7 @@ public class Controller {
 	
 	public void openProject(final String path) {
 		this._model.loadProject(path);
+		this.listProjects();
 		
 	}
 	
