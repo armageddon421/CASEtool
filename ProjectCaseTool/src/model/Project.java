@@ -18,6 +18,7 @@ public class Project implements IFieldable {
 	 * Contains all fields associated with the project
 	 */
 	private ArrayList<Field> _projectFields = new ArrayList<>();
+	
 	//Requirement Fields of the project
 	private Field _functionReq;
 	private Field _dataReq;
@@ -63,10 +64,17 @@ public class Project implements IFieldable {
 		return _projectFields;
 	}
 	
+	/**
+	 * @return Calculation method that is set for this project.
+	 */
 	public CalculationEnum getCalcMethod() {
 		return _calcMethodEnum;
 	}
 	
+	/**
+	 * Adds a new, empty function requirement.
+	 * @param requirementID Id, name of the requirement.
+	 */
 	public void addFunctionRequirement(String requirementID){
 		Field tempField = new Field("FunctionReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("FR Name", Type.String, true, this, "new Function Requirement"));
@@ -76,16 +84,27 @@ public class Project implements IFieldable {
 		_functionReq.addChild(tempField);
 	}
 	
+	/**
+	 * Deletes a function requirement.
+	 * @param fReqToDelete The function requirement, which should be deleted.
+	 */
 	public void deleteFunctionRequirement(Field fReqToDelete){
 		if(_functionReq.contains(fReqToDelete)){
 			_functionReq.removeChild(fReqToDelete);
 		}
 	}
 	
+	/**
+	 * @return function requirements in a field.
+	 */
 	public Field getFunctionRequirements(){
 		return _functionReq;
 	}
 	
+	/**
+	 * * Adds a new, empty data requirement.
+	 * @param requirementID Id, name of the requirement.
+	 */
 	public void addDataRequirement(String requirementID){
 		Field tempField = new Field("DataReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("DR Name", Type.String, true, this, "new Data Requirement"));
@@ -95,16 +114,27 @@ public class Project implements IFieldable {
 		_dataReq.addChild(tempField);		
 	}
 	
+	/**
+	 * Deletes a data requirement.
+	 * @param dReqToDelete The data requirement, which should be deleted.
+	 */
 	public void deleteDataRequirement(Field dReqToDelete){
 		if(_dataReq.contains(dReqToDelete)){
 			_dataReq.removeChild(dReqToDelete);
 		}
 	}
 	
+	/**
+	 * @return data requirements as a field.
+	 */
 	public Field getDataRequirements(){
 		return _dataReq;
 	}	
 	
+	/**
+	 * Adds a new, empty performance requirement.
+	 * @param requirementID Id, name of the requirement.
+	 */
 	public void addPerformanceRequirement(String requirementID){
 		Field tempField = new Field("PerformanceReq", Type.String, true, this, requirementID);
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
@@ -114,37 +144,64 @@ public class Project implements IFieldable {
 		_performanceReq.addChild(tempField);		
 	}
 	
-	public void deletePerformanceRequirement(Field dReqToDelete){
-		if(_performanceReq.contains(dReqToDelete)){
-			_performanceReq.removeChild(dReqToDelete);
+	/** * Deletes a performance requirement.
+	 * @param pReqToDelete The performance requirement, which should be deleted.
+	 */
+	public void deletePerformanceRequirement(Field pReqToDelete){
+		if(_performanceReq.contains(pReqToDelete)){
+			_performanceReq.removeChild(pReqToDelete);
 		}
 	}
 	
+	/**
+	 * @return performance requirements as a field.
+	 */
 	public Field getPerformanceRequirements(){
 		return _performanceReq;
 	}
 	
+	/**
+	 * Adds a new glossary entry.
+	 * @param keyword
+	 * @param description
+	 */
 	public void addGlossaryEntry(String keyword, String description){
 		Field tempField = new Field("Glossary Entry", Type.String, true, this, keyword);
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
 		_glossary.addChild(tempField);
 	}
 	
+	/**
+	 * Deletes a glossary entry.
+	 * @param entryToDelete Field of the glossary entry to delete.
+	 */
 	public void deleteGlossaryEntry(Field entryToDelete){
 		if(_glossary.contains(entryToDelete)) {
 			_glossary.removeChild(entryToDelete);
 		}
 	}
 	
+	/**
+	 * @return all function point parameters of the project as a field.
+	 */
 	public Field getFPParameters(){
 		return _fpParameters;
 	}
 	
+	/**
+	 * Sets the calculation method of the project.
+	 * @param calcMethodEnum CalculationEnum according to the method.
+	 * @param calcMethodInstance Instance of the calculation method.
+	 */
 	public void setCalcMethod(CalculationEnum calcMethodEnum, AbstractCalculationMethod calcMethodInstance ) {
 		this._calcMethodEnum = calcMethodEnum;
 		this._calcMethodInstance = calcMethodInstance;
 	}
 	
+	/**
+	 * Returns the result of the set calculation method. CAUTION: result may very depending on calculation method.
+	 * @return field with the results.
+	 */
 	public Field calculate(){
 		if(_calcMethodInstance != null){
 			return _calcMethodInstance.calculate(this);
@@ -154,6 +211,9 @@ public class Project implements IFieldable {
 		}
 	}
 	
+	/**
+	 * initializes the function point parameters of the project.
+	 */
 	private void initFPParameters(){
 		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
 		
