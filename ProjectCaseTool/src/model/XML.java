@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -50,6 +51,9 @@ public class XML implements IImport, IExport {
 		Transformer transformer;
 		try {
 			transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			
 		} catch (TransformerConfigurationException e) {
 			System.out.println("XML Export failed.");
 			return;
@@ -83,6 +87,8 @@ public class XML implements IImport, IExport {
 			e.setTextContent(f.getValue().toString());
 			
 			addToXML(doc, e, f.getChildren());
+			
+			parent.appendChild(e);
 			
 		}
 		
