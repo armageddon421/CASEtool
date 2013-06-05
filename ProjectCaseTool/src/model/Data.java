@@ -73,12 +73,16 @@ public class Data {
 	}
 
 	public void deleteCurrentProject() {
-		// TODO Auto-generated method stub
-		
+		if(_currentProject != null){
+			_allProjects.remove(_currentProject);
+			_currentProject = null;
+		}		
 	}
 
 	public void deleteProject(Field fieldOfProject) {
-		// TODO Auto-generated method stub
-		
+		_allProjects.remove(fieldOfProject.getOwner());
+		if(_currentProject == fieldOfProject.getOwner()){
+			_currentProject = null;
+		}
 	}
 }
