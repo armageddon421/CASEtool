@@ -15,27 +15,26 @@ import org.eclipse.swt.widgets.Text;
 
 import additional.Field;
 import controller.FieldListener;
-import controller.FilterListener;
 
 public class RequirementEditor extends Dialog {
-
-	protected Object _result;
-	protected Shell _shlAnforderungBearbeiten;
-	private Button _btnConfirm;
-	private final Field _Requirement;
-
+	
+	protected Object	_result;
+	protected Shell		_shlAnforderungBearbeiten;
+	private Button		_btnConfirm;
+	private final Field	_Requirement;
+	
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parent
 	 * @param style
 	 */
-	public RequirementEditor(Shell parent, int style, Field requirement) {
+	public RequirementEditor(final Shell parent, final int style, final Field requirement) {
 		super(parent, style);
 		this.setText("Requirement bearbeiten");
 		this._Requirement = requirement;
 	}
-
+	
 	/**
 	 * Open the dialog.
 	 * 
@@ -53,7 +52,7 @@ public class RequirementEditor extends Dialog {
 		}
 		return this._result;
 	}
-
+	
 	/**
 	 * Create contents of the dialog.
 	 */
@@ -63,7 +62,7 @@ public class RequirementEditor extends Dialog {
 		this._shlAnforderungBearbeiten.setSize(533, 461);
 		this._shlAnforderungBearbeiten.setText("Anforderung bearbeiten");
 		this._shlAnforderungBearbeiten.setLayout(new GridLayout(1, false));
-
+		
 		Composite composite = new Composite(this._shlAnforderungBearbeiten,
 				SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
@@ -77,18 +76,19 @@ public class RequirementEditor extends Dialog {
 			edit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			edit.setText(property.getValue().toString());
 			edit.addListener(SWT.CHANGED, new FieldListener(property, edit));
-			edit.addVerifyListener(new FilterListener(FilterListener.STRING));
+			// edit.addVerifyListener(new
+			// FilterListener(FilterListener.STRING));
 		}
 		Composite composite_1 = new Composite(this._shlAnforderungBearbeiten,
 				SWT.NONE);
 		composite_1.setLayout(new GridLayout(2, false));
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-
+		
 		this._btnConfirm = new Button(composite_1, SWT.NONE);
 		this._btnConfirm.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseDown(MouseEvent e) {
+			public void mouseDown(final MouseEvent e) {
 				RequirementEditor.this._shlAnforderungBearbeiten.dispose();
 			}
 		});
@@ -96,6 +96,6 @@ public class RequirementEditor extends Dialog {
 				false, 1, 1));
 		this._btnConfirm.setText("fertig");
 		new Label(composite_1, SWT.NONE);
-
+		
 	}
 }
