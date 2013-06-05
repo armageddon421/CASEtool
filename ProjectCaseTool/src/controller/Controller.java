@@ -4,29 +4,30 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 
 import additional.Field;
 
 import model.IModelFacade;
 import model.ModelFacade;
+import view.RequirementEditor;
 import view.ViewFacade;
 
 public class Controller {
@@ -159,7 +160,7 @@ private void loadChapterContents(Field field, TabItem tab){
 		//create a table to get a overview of everything
 		else{
 			tabComposite.setLayout(new GridLayout(1, false));
-			TableViewer tableviewer = new TableViewer(tabComposite, SWT.NONE);
+			final TableViewer tableviewer = new TableViewer(tabComposite, SWT.NONE);
 			
 			
 			//to find out how many columns we need and how they should be called
@@ -177,25 +178,60 @@ private void loadChapterContents(Field field, TabItem tab){
 					}
 				});
 			}
-			Table table = tableviewer.getTable();
+			final Table table = tableviewer.getTable();
 			table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			table.setHeaderVisible(true);
 			table.setLinesVisible(true); 
 			tableviewer.setContentProvider(new ArrayContentProvider());
 			tableviewer.setInput(field.getChildren());
+			table.addMouseListener(new MouseListener(){
+
+				@Override
+				public void mouseDoubleClick(MouseEvent arg0) {
+					new RequirementEditor(new Shell(Display.getDefault()), SWT.NONE,((Field) tableviewer.getElementAt(table.getSelectionIndex()))).open();
+					
+				}
+
+				@Override
+				public void mouseDown(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseUp(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 		}
-	}
+		}
 		
 	}
 
 
 
 
-///////////////////////DUMMY
+///////////////////////DUMMY//////////////////////
 private Integer idzaehler = 0;
 public void addRequirement(){
 	this._model.addFunctionRequirement(Integer.toString(idzaehler++*10));
 	this.loadContentCurProject();
+}
+////////////////////////////////////////////////////////
+public void deleteCurProject() {
+	this._model.deleteCurrentProject();
+	listProjects();
+}
+
+public void openProject(String path) {
+	this._model.loadProject(path);
+	
+}
+
+public void saveToXML(String path) {
+	this._model.saveProject(path);
 }
 
 

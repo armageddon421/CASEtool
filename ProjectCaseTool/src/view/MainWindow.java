@@ -1,6 +1,7 @@
 package view;
 
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Menu;
@@ -15,9 +16,15 @@ import org.eclipse.swt.events.SelectionEvent;
 
 public class MainWindow {
 	
-	protected Shell shlCase;
+	protected Shell _shlCase;
+	/**
+	 * @return the _shlCase
+	 */
+	public Shell getshlCase() {
+		return _shlCase;
+	}
+
 	private ViewFacade _viewFacade;
-	
 	
 	/*Gui Objects, defined here for easier access */
 
@@ -37,9 +44,9 @@ public class MainWindow {
 	public void open() {
 		Display display = Display.getDefault();
 		createContents();
-		shlCase.open();
-		shlCase.layout();
-		while (!shlCase.isDisposed()) {
+		_shlCase.open();
+		_shlCase.layout();
+		while (!_shlCase.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -51,13 +58,13 @@ public class MainWindow {
 	 * @wbp.parser.entryPoint
 	 */
 	protected void createContents() {
-		shlCase = new Shell();
-		shlCase.setSize(1000, 600);
-		shlCase.setText("CASETOOL");
-		shlCase.setLayout(new GridLayout(1, false));
+		_shlCase = new Shell();
+		_shlCase.setSize(1000, 600);
+		_shlCase.setText("CASETOOL");
+		_shlCase.setLayout(new GridLayout(1, false));
 		
-		Menu menu = new Menu(shlCase, SWT.BAR);
-		shlCase.setMenuBar(menu);
+		Menu menu = new Menu(_shlCase, SWT.BAR);
+		_shlCase.setMenuBar(menu);
 		
 		MenuItem mntmDatei = new MenuItem(menu, SWT.CASCADE);
 		mntmDatei.setText("Datei");
@@ -71,12 +78,32 @@ public class MainWindow {
 	    mntmNeuesProjektAnlegen.addListener(SWT.Selection, _viewFacade.getController().getcreateProjectListener());
 		
 		MenuItem mntmGeffnetesProjektLschen = new MenuItem(menu_1, SWT.NONE);
+		mntmGeffnetesProjektLschen.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				_viewFacade.getController().deleteCurProject();
+			}
+		});
 		mntmGeffnetesProjektLschen.setText("ge\u00F6ffnetes Projekt l\u00F6schen");
 		
 		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
+		mntmProjektffnen.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String path = new FileDialog(_shlCase,SWT.OPEN).open();
+				_viewFacade.getController().openProject(path);
+			}
+		});
 		mntmProjektffnen.setText("Projekt \u00F6ffnen");
 		
 		MenuItem mntmProjektSchlieen = new MenuItem(menu_1, SWT.NONE);
+		mntmProjektSchlieen.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				String path = new FileDialog(_shlCase, SWT.SAVE).open();
+				_viewFacade.getController().saveToXML(path);
+			}
+		});
 		mntmProjektSchlieen.setText("Projekt speichern");
 		
 		MenuItem mntmExport = new MenuItem(menu_1, SWT.CASCADE);
@@ -109,7 +136,7 @@ public class MainWindow {
 		mntmAufwandBerechnen.setText("Aufwand berechnen");
 		
 		MenuItem mntmDummy = new MenuItem(menu, SWT.CASCADE);
-		mntmDummy.setText("Dummy");
+		mntmDummy.setText("Hinzuf\u00FCgen");
 		
 		Menu menu_4 = new Menu(mntmDummy);
 		mntmDummy.setMenu(menu_4);
@@ -121,9 +148,15 @@ public class MainWindow {
 				_viewFacade.getController().addRequirement();
 			}
 		});
-		mntmNeuReq.setText("Neu Req");
+		mntmNeuReq.setText("Produktfunktion");
+		
+		MenuItem mntmProduktleistung = new MenuItem(menu_4, SWT.NONE);
+		mntmProduktleistung.setText("Produktleistung");
+		
+		MenuItem mntmGlossareintrag = new MenuItem(menu_4, SWT.NONE);
+		mntmGlossareintrag.setText("Glossareintrag");
 				
-		SashForm sashForm = new SashForm(shlCase, SWT.BORDER);
+		SashForm sashForm = new SashForm(_shlCase, SWT.BORDER);
 		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 				

@@ -3,6 +3,7 @@ package view;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
@@ -57,17 +58,24 @@ public class RequirementEditor extends Dialog {
 		shlAnforderungBearbeiten.setText("Anforderung bearbeiten");
 		shlAnforderungBearbeiten.setLayout(new GridLayout(1, false));
 		
+		
+		
 		Composite composite = new Composite(shlAnforderungBearbeiten, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
+		for (Field property : this.Requirement.getChildren()){
+			Label label = new Label(composite, SWT.NONE);
+			label.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
+			label.setText(property.getName());
+			Text edit = new Text(composite, SWT.NONE);
+			edit.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false));
+			edit.setText(property.getValue().toString());
+		}
 		Composite composite_1 = new Composite(shlAnforderungBearbeiten, SWT.NONE);
 		composite_1.setLayout(new GridLayout(2, false));
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		btnCancelEdit = new Button(composite_1, SWT.NONE);
-		btnCancelEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		btnCancelEdit.setText("Abbrechen");
+		
 		
 		btnConfirm = new Button(composite_1, SWT.NONE);
 		btnConfirm.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));

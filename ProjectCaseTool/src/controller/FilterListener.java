@@ -30,8 +30,10 @@ public class FilterListener implements VerifyListener {
 	public void verifyText(VerifyEvent e) {
 		switch (_filterMode){
 		case(FilterListener.INT):
-								e.doit = e.text.matches("d+");
+								e.doit = e.text.matches("\\d+");
 								break;
+		case (FilterListener.STRING):
+								e.doit = e.text.matches("(\\B+)|(\\s+)");
 		default:
 								break;
 		}
