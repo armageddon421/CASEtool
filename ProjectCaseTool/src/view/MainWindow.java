@@ -25,6 +25,9 @@ public class MainWindow {
 		return this._shlCase;
 	}
 
+	/*
+	 * viewfacade is used to keep a link to the controller
+	 */
 	private final ViewFacade _viewFacade;
 
 	/* Gui Objects, defined here for easier access */
