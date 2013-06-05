@@ -36,6 +36,9 @@ public class XML implements IImport, IExport {
 	public void exportProject(final String filename, final Project project) {
 		ArrayList<Field> fields = project.getFields();
 		
+		if (filename == null || filename == "") {
+			return;
+		}
 		
 		DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
@@ -185,7 +188,13 @@ public class XML implements IImport, IExport {
 	@Override
 	public void importProject(final String filename, final Project emptyProject) {
 		ArrayList<Field> fields = new ArrayList<Field>();
+		
+		if (filename == null || filename == "") {
+			return;
+		}
+		
 		File fXmlFile = new File(filename);
+		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
 		try {
