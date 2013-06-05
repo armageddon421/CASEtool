@@ -151,7 +151,22 @@ public class MainWindow {
 		mntmNeuReq.setText("Produktfunktion");
 		
 		MenuItem mntmProduktleistung = new MenuItem(menu_4, SWT.NONE);
+		mntmProduktleistung.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				_viewFacade.getController().addPerformanceReq();
+			}
+		});
 		mntmProduktleistung.setText("Produktleistung");
+		
+		MenuItem mntmProduktdatum = new MenuItem(menu_4, SWT.NONE);
+		mntmProduktdatum.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				_viewFacade.getController().addDataReq();
+			}
+		});
+		mntmProduktdatum.setText("Produktdatum");
 		
 		MenuItem mntmGlossareintrag = new MenuItem(menu_4, SWT.NONE);
 		mntmGlossareintrag.setText("Glossareintrag");
