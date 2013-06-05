@@ -261,5 +261,10 @@ public class Controller {
 		this._model.addDataRequirement(Integer.toString(this.idData++ * 10));
 		this.loadContentCurProject();
 	}
-	
+
+	public void addGlossary(String text, String text2) {
+		this._model.addGlossaryEntry(text, text2);
+
+	}
+
 }
