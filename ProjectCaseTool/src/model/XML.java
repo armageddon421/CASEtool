@@ -96,7 +96,7 @@ public class XML implements IImport, IExport {
 	}
 	
 	@Override
-	public Project importProject(final String filename) {
+	public ArrayList<Field> importProject(final String filename) {
 		File fXmlFile = new File(filename);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -107,7 +107,7 @@ public class XML implements IImport, IExport {
 			
 			for (int i = 0; i < doc.getChildNodes().getLength(); i++) {
 				Element n = (Element) doc.getChildNodes().item(i);
-				// Field
+				Field f = new Field(name, type, editable, owner, value);
 				
 				
 			}

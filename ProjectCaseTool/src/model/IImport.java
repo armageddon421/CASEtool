@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+
+import additional.Field;
+
 public interface IImport {
-	public Project importProject(String filename);
+	public ArrayList<Field> importProject(String filename);
 }
