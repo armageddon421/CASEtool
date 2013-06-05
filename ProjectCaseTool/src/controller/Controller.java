@@ -262,4 +262,9 @@ public class Controller {
 		this.loadContentCurProject();
 	}
 
+	public void addGlossary(String text, String text2) {
+		this._model.addGlossaryEntry(text, text2);
+
+	}
+
 }
