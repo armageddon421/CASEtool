@@ -226,19 +226,11 @@ public class Controller {
 	 * Counters and Functions for enabling support for Adding additional
 	 * entries...
 	 */
-<<<<<<< HEAD
-
-	private Integer _idFuncRec = 0;
-	private Integer _idPerformance = 0;
-	private Integer _idData = 0;
-
-=======
+	private Integer	_idFuncRec		= 0;
+	private Integer	_idPerformance	= 0;
+	private Integer	_idData			= 0;
 	
-	private Integer	idFuncRec		= 0;
-	private Integer	idPerformance	= 0;
-	private Integer	idData			= 0;
 	
->>>>>>> refs/remotes/origin/master
 	public void addRequirement() {
 		this._model.addFunctionRequirement(Integer
 				.toString(this._idFuncRec++ * 10));
@@ -269,10 +261,10 @@ public class Controller {
 		this._model.addDataRequirement(Integer.toString(this._idData++ * 10));
 		this.loadContentCurProject();
 	}
-
-	public void addGlossary(String text, String text2) {
+	
+	public void addGlossary(final String text, final String text2) {
 		this._model.addGlossaryEntry(text, text2);
-
+		
 	}
-
+	
 }
