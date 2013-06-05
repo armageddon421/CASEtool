@@ -25,6 +25,11 @@ import additional.Field;
 import additional.FunctionPointEnum;
 import additional.Type;
 
+/**
+ * XML Export/Import class
+ * 
+ * @auhor Robert
+ */
 public class XML implements IImport, IExport {
 	
 	@Override
@@ -76,6 +81,16 @@ public class XML implements IImport, IExport {
 		
 	}
 	
+	/**
+	 * Recursive function to import all the Fields hierarchically
+	 * 
+	 * @param doc
+	 *            Document, where the Elements will be created
+	 * @param parent
+	 *            Parent element to attach the newly generated elements to
+	 * @param fields
+	 *            Fields to parse
+	 */
 	private void addToXML(final Document doc, final Element parent, final ArrayList<Field> fields) {
 		
 		for (Field f : fields) {
@@ -101,6 +116,17 @@ public class XML implements IImport, IExport {
 		
 	}
 	
+	/**
+	 * Recursive function to import all the Fields hierarchically
+	 * 
+	 * @param node
+	 *            node to get the values from / To import
+	 * @param parent
+	 *            parent Field, currently not used
+	 * @param proj
+	 *            Project to set the Fields' parent to
+	 * @return
+	 */
 	private Field createField(final Element node, final Field parent, final Project proj) {
 		
 		Type type = Type.valueOf(node.getAttribute("Type"));
