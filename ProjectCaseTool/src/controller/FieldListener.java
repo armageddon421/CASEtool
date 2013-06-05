@@ -8,32 +8,32 @@ import org.eclipse.swt.widgets.Widget;
 import additional.Field;
 
 public class FieldListener implements Listener {
-
-	private Field _attachedField;
-	private Widget _observedWidget;
+	
+	private final Field		_attachedField;
+	private final Widget	_observedWidget;
 	
 	
-	public FieldListener(Field attachedField, Widget observedWidget) {
+	public FieldListener(final Field attachedField, final Widget observedWidget) {
 		super();
 		this._attachedField = attachedField;
 		this._observedWidget = observedWidget;
 	}
-
-
+	
+	
 	@Override
-	public void handleEvent(Event arg0) {
+	public void handleEvent(final Event arg0) {
 		
 		Class<? extends Widget> typeWidget = _observedWidget.getClass();
 		
 		switch (typeWidget.getName()) {
-		case "org.eclipse.swt.widgets.Text":
-			_attachedField.setValue(((Text)_observedWidget).getText());
-			break;
-
-		default:
-			break;
+			case "org.eclipse.swt.widgets.Text":
+				_attachedField.setValue(((Text) _observedWidget).getText());
+				break;
+			
+			default:
+				break;
 		}
-
+		
 	}
-
+	
 }

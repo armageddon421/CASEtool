@@ -156,12 +156,9 @@ public class Controller {
 			value.addVerifyListener(new FilterListener(FilterListener.STRING));
 			
 		} else {
-			if (field.getNumberOfChildren() < 1) {
+			if (field.getNumberOfChildren() > 0) {
 				
-			}
-			
-			// create a table to get a overview of everything
-			else {
+				// create a table to get a overview of everything
 				tabComposite.setLayout(new GridLayout(1, false));
 				final TableViewer tableviewer = new TableViewer(tabComposite,
 						SWT.NONE);
