@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -45,16 +46,14 @@ public class XML implements IImport, IExport {
 		addToXML(doc, rootElement, fields);
 		
 		
-		// staff elements
-		Element staff = doc.createElement("Staff");
-		rootElement.appendChild(staff);
-		
-		
 		// write to file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer;
 		try {
 			transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			
 		} catch (TransformerConfigurationException e) {
 			System.out.println("XML Export failed.");
 			return;
@@ -77,7 +76,7 @@ public class XML implements IImport, IExport {
 		
 		for (Field f : fields) {
 			
-			Element e = doc.createElement(f.getName());
+			Element e = doc.createElement(f.getName().replace(" ", "_"));
 			
 			// Attributes
 			e.setAttribute("Type", f.getType().toString());
@@ -89,13 +88,15 @@ public class XML implements IImport, IExport {
 			
 			addToXML(doc, e, f.getChildren());
 			
+			parent.appendChild(e);
+			
 		}
 		
 		
 	}
 	
 	@Override
-	public Project importProject(final String filename) {
+	public ArrayList<Field> importProject(final String filename) {
 		File fXmlFile = new File(filename);
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder;
@@ -106,7 +107,7 @@ public class XML implements IImport, IExport {
 			
 			for (int i = 0; i < doc.getChildNodes().getLength(); i++) {
 				Element n = (Element) doc.getChildNodes().item(i);
-				// Field
+				Field f = new Field(name, type, editable, owner, value);
 				
 				
 			}

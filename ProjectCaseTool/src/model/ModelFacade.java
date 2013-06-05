@@ -7,179 +7,187 @@ import additional.Field;
 
 
 public class ModelFacade implements IModelFacade {
-
-	private static ModelFacade _modelFacadeInstance;
-	private Data _dataContainer = Data.getInstance();
-	private CalculationFactory _calcFactory;
 	
-	private ModelFacade () {
+	private static ModelFacade			_modelFacadeInstance;
+	private final Data					_dataContainer	= Data.getInstance();
+	private final CalculationFactory	_calcFactory;
+	private final IExport				_exporter;
+	private final IImport				_importer;
+	
+	private ModelFacade() {
 		_calcFactory = new CalculationFactory();
+		XML ietemp = new XML();
+		// same class for Import and Export
+		_exporter = ietemp;
+		_importer = ietemp;
 	}
 	
-	public static ModelFacade getInstance(){
-		if(_modelFacadeInstance == null){
+	public static ModelFacade getInstance() {
+		if (_modelFacadeInstance == null) {
 			_modelFacadeInstance = new ModelFacade();
 		}
 		return _modelFacadeInstance;
 	}
-
+	
 	@Override
-	public void loadProject(String filepath) {
+	public void loadProject(final String filepath) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void saveProject(String filepath) {
-		// TODO Auto-generated method stub
+	public void saveProject(final String filepath) {
+		Project exportProject = this._dataContainer.getCurrentProject();
+		this._exporter.exportProject(filepath, exportProject);
 		
 	}
-
+	
 	@Override
-	public void setCurrentProject(Field fieldOfProject) {
+	public void setCurrentProject(final Field fieldOfProject) {
 		_dataContainer.setCurrentProject(fieldOfProject);
 	}
-
+	
 	@Override
-	public ArrayList<Field> getCurrentProjectFields() {		
-		if(_dataContainer.getCurrentProject() != null){
+	public ArrayList<Field> getCurrentProjectFields() {
+		if (_dataContainer.getCurrentProject() != null) {
 			return _dataContainer.getCurrentProject().getFields();
 		}
-		else{
+		else {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public ArrayList<ArrayList<Field>> getAllProjectFields() {
 		return _dataContainer.getAllProjectFields();
 	}
-
+	
 	@Override
-	public void setCalculationMethod(CalculationEnum calcMethod) {
-		if(_dataContainer.getCurrentProject() != null){
-			_dataContainer.getCurrentProject().setCalcMethod(calcMethod, _calcFactory.createCalculationMethod(calcMethod));
+	public void setCalculationMethod(final CalculationEnum calcMethod) {
+		if (_dataContainer.getCurrentProject() != null) {
+			_dataContainer.getCurrentProject().setCalcMethod(calcMethod,
+					_calcFactory.createCalculationMethod(calcMethod));
 		}
 	}
-
+	
 	@Override
 	public Field calculate() {
-		if(_dataContainer.getCurrentProject() != null){
+		if (_dataContainer.getCurrentProject() != null) {
 			return _dataContainer.getCurrentProject().calculate();
 		}
-		else{
+		else {
 			return null;
 		}
 	}
-
+	
 	@Override
 	public CalculationEnum getCalculationMethod() {
-		if(_dataContainer.getCurrentProject() != null){
+		if (_dataContainer.getCurrentProject() != null) {
 			return _dataContainer.getCurrentProject().getCalcMethod();
 		}
-		else{
+		else {
 			return null;
 		}
 	}
-
+	
 	@Override
-	public void createProject(String projectName) {
+	public void createProject(final String projectName) {
 		_dataContainer.createProject(projectName);
 	}
-
+	
 	@Override
 	public void deleteCurrentProject() {
 		_dataContainer.deleteCurrentProject();
 	}
 	
 	@Override
-	public void deleteProject(Field fieldOfProject){
+	public void deleteProject(final Field fieldOfProject) {
 		_dataContainer.deleteProject(fieldOfProject);
 	}
-
-	@Override
-	public Field getFunctionRequirements() {
-		if(_dataContainer.getCurrentProject() != null){
-			return _dataContainer.getCurrentProject().getFunctionRequirements();
-		}
-		else{
-			return null;
-		}
-	}
-
-	@Override
-	public Field getDataRequirements() {
-		if(_dataContainer.getCurrentProject() != null){
-			return _dataContainer.getCurrentProject().getDataRequirements();
-		}
-		else{
-			return null;
-		}
-	}
-
-	@Override
-	public Field getPerformanceRequirements() {
-		if(_dataContainer.getCurrentProject() != null){
-			return _dataContainer.getCurrentProject().getPerformanceRequirements();
-		}
-		else{
-			return null;
-		}
-	}
-
 	
 	@Override
-	public void addFunctionRequirement(String id){
-		if(_dataContainer.getCurrentProject() != null){
+	public Field getFunctionRequirements() {
+		if (_dataContainer.getCurrentProject() != null) {
+			return _dataContainer.getCurrentProject().getFunctionRequirements();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	@Override
+	public Field getDataRequirements() {
+		if (_dataContainer.getCurrentProject() != null) {
+			return _dataContainer.getCurrentProject().getDataRequirements();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	@Override
+	public Field getPerformanceRequirements() {
+		if (_dataContainer.getCurrentProject() != null) {
+			return _dataContainer.getCurrentProject().getPerformanceRequirements();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	
+	@Override
+	public void addFunctionRequirement(final String id) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().addFunctionRequirement(id);
 		}
 	}
 	
 	@Override
-	public void addDataRequirement(String id){
-		if(_dataContainer.getCurrentProject() != null){
+	public void addDataRequirement(final String id) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().addDataRequirement(id);
 		}
 	}
 	
 	@Override
-	public void addPerformanceRequirement(String id){
-		if(_dataContainer.getCurrentProject() != null){
+	public void addPerformanceRequirement(final String id) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().addPerformanceRequirement(id);
 		}
 	}
 	
 	@Override
-	public void addGlossaryEntry(String keyword, String description){
-		if(_dataContainer.getCurrentProject() != null){
+	public void addGlossaryEntry(final String keyword, final String description) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().addGlossaryEntry(keyword, description);
 		}
 	}
 	
 	@Override
-	public void deleteFunctionRequirement(Field fReqToDelete) {
-		if(_dataContainer.getCurrentProject() != null){
+	public void deleteFunctionRequirement(final Field fReqToDelete) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().deleteFunctionRequirement(fReqToDelete);
 		}
 	}
-
+	
 	@Override
-	public void deleteDataRequirement(Field dReqToDelete) {
-		if(_dataContainer.getCurrentProject() != null){
+	public void deleteDataRequirement(final Field dReqToDelete) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().deleteDataRequirement(dReqToDelete);
 		}
 	}
-
+	
 	@Override
-	public void deletePerformanceRequirement(Field pReqToDelete) {
-		if(_dataContainer.getCurrentProject() != null){
+	public void deletePerformanceRequirement(final Field pReqToDelete) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().deletePerformanceRequirement(pReqToDelete);
 		}
 	}
 	
 	@Override
-	public void deleteGlossaryEntry(Field entryToDelete){
-		if(_dataContainer.getCurrentProject() != null){
+	public void deleteGlossaryEntry(final Field entryToDelete) {
+		if (_dataContainer.getCurrentProject() != null) {
 			_dataContainer.getCurrentProject().deleteGlossaryEntry(entryToDelete);
 		}
 	}

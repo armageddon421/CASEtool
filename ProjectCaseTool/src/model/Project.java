@@ -51,44 +51,7 @@ public class Project implements IFieldable {
 		_projectFields.add(_glossary);
 		
 		//FP Parameters
-		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
-		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
-		input.addChild(new Field("Easy", Type.Integer, true, this, 3));
-		input.addChild(new Field("Medium", Type.Integer, true, this, 4));
-		input.addChild(new Field("Complex", Type.Integer, true, this, 6));
-		Field query = new Field("Query", Type.String, false, this, "Abfragen");
-		query.addChild(new Field("Easy", Type.Integer, true, this, 3));
-		query.addChild(new Field("Medium", Type.Integer, true, this, 4));
-		query.addChild(new Field("Complex", Type.Integer, true, this, 6));
-		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
-		output.addChild(new Field("Easy", Type.Integer, true, this, 3));
-		output.addChild(new Field("Medium", Type.Integer, true, this, 4));
-		output.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
-		Field data = new Field("Data", Type.String, false, this, "Datenbestände");
-		data.addChild(new Field("Easy", Type.Integer, true, this, 3));
-		data.addChild(new Field("Medium", Type.Integer, true, this, 4));
-		data.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
-		Field reference = new Field("Reference Data", Type.String, false, this, "Referenzdaten");
-		reference.addChild(new Field("Easy", Type.Integer, true, this, 3));
-		reference.addChild(new Field("Medium", Type.Integer, true, this, 4));
-		reference.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
-		
-		_fpParameters.addChild(input);
-		_fpParameters.addChild(query);
-		_fpParameters.addChild(output);
-		_fpParameters.addChild(data);
-		_fpParameters.addChild(reference);
-		
-		_fpParameters.addChild(new Field("Verflechtungen", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Dezentrale Daten", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Transaktionsrate", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Rechenoperationen", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Kontrollverfahren", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Ausnahmeregelungen", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Logik", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Wiederverwendbarkeit", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Datenbestandskonvertierung", Type.Integer, true, this, 0));
-		_fpParameters.addChild(new Field("Anpassbarkeit", Type.Integer, true, this, 0));
+		initFPParameters();
 		
 		//Calculation
 		_calcMethodEnum = CalculationEnum.notSet;
@@ -189,6 +152,56 @@ public class Project implements IFieldable {
 		else {
 			return null;
 		}
+	}
+	
+	private void initFPParameters(){
+		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
+		
+		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
+		input.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		input.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		input.addChild(new Field("Complex", Type.Integer, true, this, 6));
+		
+		Field query = new Field("Query", Type.String, false, this, "Abfragen");
+		query.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		query.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		query.addChild(new Field("Complex", Type.Integer, true, this, 6));
+		
+		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
+		output.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		output.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		output.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		
+		Field data = new Field("Data", Type.String, false, this, "Datenbestände");
+		data.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		data.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		data.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		
+		Field reference = new Field("Reference Data", Type.String, false, this, "Referenzdaten");
+		reference.addChild(new Field("Easy", Type.Integer, true, this, 3));
+		reference.addChild(new Field("Medium", Type.Integer, true, this, 4));
+		reference.addChild(new Field("Complex", Type.Integer, true, this, 6)); 
+		
+		Field influences = new Field("Influences", Type.String, false, this, "Einflussfaktoren");
+		influences.addChild(new Field("Verflechtungen", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Dezentrale Daten", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Transaktionsrate", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Rechenoperationen", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Kontrollverfahren", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Ausnahmeregelungen", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Logik", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Wiederverwendbarkeit", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Datenbestandskonvertierung", Type.Integer, true, this, 0));
+		influences.addChild(new Field("Anpassbarkeit", Type.Integer, true, this, 0));
+		
+		_fpParameters.addChild(input);
+		_fpParameters.addChild(query);
+		_fpParameters.addChild(output);
+		_fpParameters.addChild(data);
+		_fpParameters.addChild(reference);
+		_fpParameters.addChild(influences);
+		
+		
 	}
 
 
