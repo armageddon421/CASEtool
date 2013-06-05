@@ -4,33 +4,38 @@ import controller.Controller;
 
 public class ViewFacade {
 
-	private Controller _controller;
-	
-	
+	private final Controller _controller;
+
 	private MainWindow _mainView;
+
 	/**
 	 * @return the _mainView
 	 */
 	public MainWindow get_mainView() {
-		return _mainView;
-	}	
-	
-	public ViewFacade(Controller controller) {
-		this._controller = controller;		
+		return this._mainView;
 	}
-	public void init(){
+
+	public ViewFacade(Controller controller) {
+		this._controller = controller;
+	}
+
+	/*
+	 * opens the window and waits until the user responds
+	 */
+	public void init() {
 		try {
 			this._mainView = new MainWindow(this);
-			} catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		_mainView.open();
+		this._mainView.open();
 	}
-	
-	public Controller getController(){
-		return _controller;
-	}
-	
 
+	/*
+	 * @return the controller, for access more functions
+	 */
+	public Controller getController() {
+		return this._controller;
+	}
 
 }

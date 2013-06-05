@@ -2,6 +2,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.IModelFacade;
+import model.ModelFacade;
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
@@ -23,234 +26,240 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import additional.Field;
-
-import model.IModelFacade;
-import model.ModelFacade;
 import view.RequirementEditor;
 import view.ViewFacade;
+import additional.Field;
 
 public class Controller {
 	private static Controller _instance;
-	private ViewFacade _view;
-	private IModelFacade _model;
+	private final ViewFacade _view;
+	private final IModelFacade _model;
 	private Listener _projectListListener;
 	private int _numNewProject;
-	private ArrayList<Field> _availableProjectsInList = new ArrayList<>();
+	private final ArrayList<Field> _availableProjectsInList = new ArrayList<>();
 	private SelectionListener _projectSelectionListener;
-	private ArrayList<TabItem> _openTabs = new ArrayList<>();
-	
-	
-	private Controller(){
-		this._model = ModelFacade.getInstance() ;
+	private final ArrayList<TabItem> _openTabs = new ArrayList<>();
+
+	private Controller() {
+		this._model = ModelFacade.getInstance();
 		this._view = new ViewFacade(this);
-		
-		//must be the last command, since this will trap the program in a infinite loop
+
+		// must be the last command, since this will trap the program in a
+		// infinite loop
 		this._view.init();
 	}
-	
+
 	public static Controller getInstance() {
-		if (_instance == null){
+		if (_instance == null) {
 			_instance = new Controller();
 		}
 		return _instance;
 	}
-	
-	
-	public Listener getcreateProjectListener(){
-		_projectListListener = new Listener() {
+
+	public Listener getcreateProjectListener() {
+		this._projectListListener = new Listener() {
 
 			@Override
 			public void handleEvent(Event arg0) {
-				_numNewProject = _numNewProject +1;
-				_model.createProject("Unbenanntes Projekt " + _numNewProject);
-				
-				listProjects();
-				
+				Controller.this._numNewProject = Controller.this._numNewProject + 1;
+				Controller.this._model.createProject("Unbenanntes Projekt "
+						+ Controller.this._numNewProject);
+
+				Controller.this.listProjects();
+
 			}
 
-			
 		};
-		return _projectListListener;
+		return this._projectListListener;
 	}
-	
-	
-
 
 	private void listProjects() {
-		ArrayList<ArrayList<Field>> _projectList = _model.getAllProjectFields();
-		_view.get_mainView()._projectList.removeAll();
-		_availableProjectsInList.clear();
-		if (_projectList.isEmpty()){
-			
-		}
-		else{
-			for (ArrayList<Field>curProject : _projectList){
-					_view.get_mainView()._projectList.add((curProject.get(0).getValue()).toString());
-					_availableProjectsInList.add(curProject.get(0));
+		ArrayList<ArrayList<Field>> _projectList = this._model
+				.getAllProjectFields();
+		this._view.get_mainView()._projectList.removeAll();
+		this._availableProjectsInList.clear();
+		if (_projectList.isEmpty()) {
+
+		} else {
+			for (ArrayList<Field> curProject : _projectList) {
+				this._view.get_mainView()._projectList.add((curProject.get(0)
+						.getValue()).toString());
+				this._availableProjectsInList.add(curProject.get(0));
 			}
 
 		}
 	}
-	public SelectionListener getProjectSelectionListener (){
-		_projectSelectionListener = new SelectionListener() {
-			
+
+	public SelectionListener getProjectSelectionListener() {
+		this._projectSelectionListener = new SelectionListener() {
+
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				int selection = _view.get_mainView()._projectList.getSelectionIndex();
-				if(selection != -1){
-					_view.get_mainView()._projectList.setItem(selection, (String) _availableProjectsInList.get(selection).getValue());
-					_model.setCurrentProject(_availableProjectsInList.get(selection));
-					loadContentCurProject();
+				int selection = Controller.this._view.get_mainView()._projectList
+						.getSelectionIndex();
+				if (selection != -1) {
+					Controller.this._view.get_mainView()._projectList.setItem(
+							selection,
+							(String) Controller.this._availableProjectsInList
+									.get(selection).getValue());
+					Controller.this._model
+							.setCurrentProject(Controller.this._availableProjectsInList
+									.get(selection));
+					Controller.this.loadContentCurProject();
 				}
-				
+
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-								
+
 			}
 		};
-		return _projectSelectionListener;
+		return this._projectSelectionListener;
 	}
-	
-	
-	
-private void loadContentCurProject (){
-	deleteTabs();
-	for(Field eachChapter :_model.getCurrentProjectFields()){
-		TabItem chapterTab = new TabItem(_view.get_mainView()._tabFolder, SWT.NONE);
-		_openTabs.add(chapterTab);
-		String value = eachChapter.getValue().toString();
-		chapterTab.setText(value);
-		loadChapterContents(eachChapter, chapterTab);
-	}
-}
 
-private void deleteTabs(){
-	for (TabItem eachTab : _openTabs){
-		eachTab.dispose();
-	}
-	_openTabs.clear();
-}
-
-private void loadChapterContents(Field field, TabItem tab){
-	Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
-	tab.setControl(tabComposite);
-	
-	//only for Testpurpose, normally the if-clause should never come true
-	if(field.getNumberOfChildren()==0){
-		tabComposite.setLayout(new GridLayout(2, false));
-		Label description = new Label(tabComposite, SWT.NONE);
-		description.setText(field.getValue().toString());
-		description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, true, 1, 1));
-		Text value = new Text(tabComposite, SWT.MULTI|SWT.BORDER);
-		value.setSize(300, 100);
-		value.setText(field.getValue().toString());
-		value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		value.addListener(SWT.CHANGED, new FieldListener(field, value));
-		value.addVerifyListener(new FilterListener(FilterListener.STRING));
-		
-	}
-	else{
-		if(field.getNumberOfChildren() < 1){
-			
+	private void loadContentCurProject() {
+		this.deleteTabs();
+		for (Field eachChapter : this._model.getCurrentProjectFields()) {
+			TabItem chapterTab = new TabItem(
+					this._view.get_mainView()._tabFolder, SWT.NONE);
+			this._openTabs.add(chapterTab);
+			String value = eachChapter.getValue().toString();
+			chapterTab.setText(value);
+			this.loadChapterContents(eachChapter, chapterTab);
 		}
-		
-		//create a table to get a overview of everything
-		else{
-			tabComposite.setLayout(new GridLayout(1, false));
-			final TableViewer tableviewer = new TableViewer(tabComposite, SWT.NONE);
-			
-			
-			//to find out how many columns we need and how they should be called
-			//we look into the first child, e.g. Looking at the first requirement and then determine how
-			//many children there exist and what their names are.
-			
-			for (final Field column : (field.getChildren().get(0)).getChildren()){
-				
-				TableViewerColumn tabCol = new TableViewerColumn(tableviewer, SWT.MULTI|SWT.FULL_SELECTION);
-				tabCol.getColumn().setWidth(200);
-				tabCol.getColumn().setText(column.getType().toString());
-				tabCol.setLabelProvider(new ColumnLabelProvider(){
-					public String getText (Object object){
-						return  column.getValue().toString();
+	}
+
+	private void deleteTabs() {
+		for (TabItem eachTab : this._openTabs) {
+			eachTab.dispose();
+		}
+		this._openTabs.clear();
+	}
+
+	private void loadChapterContents(Field field, TabItem tab) {
+		Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
+		tab.setControl(tabComposite);
+
+		// only for Testpurpose, normally the if-clause should never come true
+		if (field.getNumberOfChildren() == 0) {
+			tabComposite.setLayout(new GridLayout(2, false));
+			Label description = new Label(tabComposite, SWT.NONE);
+			description.setText(field.getValue().toString());
+			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
+					true, 1, 1));
+			Text value = new Text(tabComposite, SWT.MULTI | SWT.BORDER);
+			value.setSize(300, 100);
+			value.setText(field.getValue().toString());
+			value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			value.addListener(SWT.CHANGED, new FieldListener(field, value));
+			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+
+		} else {
+			if (field.getNumberOfChildren() < 1) {
+
+			}
+
+			// create a table to get a overview of everything
+			else {
+				tabComposite.setLayout(new GridLayout(1, false));
+				final TableViewer tableviewer = new TableViewer(tabComposite,
+						SWT.NONE);
+
+				// to find out how many columns we need and how they should be
+				// called
+				// we look into the first child, e.g. Looking at the first
+				// requirement and then determine how
+				// many children there exist and what their names are.
+
+				for (final Field column : (field.getChildren().get(0))
+						.getChildren()) {
+
+					TableViewerColumn tabCol = new TableViewerColumn(
+							tableviewer, SWT.MULTI | SWT.FULL_SELECTION);
+					tabCol.getColumn().setWidth(200);
+					tabCol.getColumn().setText(column.getType().toString());
+					tabCol.setLabelProvider(new ColumnLabelProvider() {
+						@Override
+						public String getText(Object object) {
+							return column.getValue().toString();
+						}
+					});
+				}
+				final Table table = tableviewer.getTable();
+				table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+				table.setHeaderVisible(true);
+				table.setLinesVisible(true);
+				tableviewer.setContentProvider(new ArrayContentProvider());
+				tableviewer.setInput(field.getChildren());
+
+				// Add a listener to open a new editor dialog with the
+				// corresponding field
+				table.addMouseListener(new MouseListener() {
+
+					@Override
+					public void mouseDoubleClick(MouseEvent arg0) {
+						new RequirementEditor(new Shell(Display.getDefault()),
+								SWT.NONE,
+								((Field) tableviewer.getElementAt(table
+										.getSelectionIndex()))).open();
+
 					}
+
+					@Override
+					public void mouseDown(MouseEvent arg0) {
+
+					}
+
+					@Override
+					public void mouseUp(MouseEvent arg0) {
+
+					}
+
 				});
 			}
-			final Table table = tableviewer.getTable();
-			table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-			table.setHeaderVisible(true);
-			table.setLinesVisible(true); 
-			tableviewer.setContentProvider(new ArrayContentProvider());
-			tableviewer.setInput(field.getChildren());
-			table.addMouseListener(new MouseListener(){
-
-				@Override
-				public void mouseDoubleClick(MouseEvent arg0) {
-					new RequirementEditor(new Shell(Display.getDefault()), SWT.NONE,((Field) tableviewer.getElementAt(table.getSelectionIndex()))).open();
-					
-				}
-
-				@Override
-				public void mouseDown(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void mouseUp(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-			});
 		}
-		}
-		
+
 	}
 
+	/*
+	 * Counters and Functions for enabling support for Adding additional
+	 * entries...
+	 */
 
+	private Integer idFuncRec = 0;
+	private Integer idPerformance = 0;
+	private Integer idData = 0;
 
+	public void addRequirement() {
+		this._model.addFunctionRequirement(Integer
+				.toString(this.idFuncRec++ * 10));
+		this.loadContentCurProject();
+	}
 
+	public void deleteCurProject() {
+		this._model.deleteCurrentProject();
+		this.listProjects();
+	}
 
-private Integer idFuncRec = 0;
-private Integer idPerformance = 0;
-private Integer idData = 0;
+	public void openProject(String path) {
+		this._model.loadProject(path);
 
+	}
 
-public void addRequirement(){
-	this._model.addFunctionRequirement(Integer.toString(idFuncRec++*10));
-	this.loadContentCurProject();
+	public void saveToXML(String path) {
+		this._model.saveProject(path);
+	}
+
+	public void addPerformanceReq() {
+		this._model.addPerformanceRequirement(Integer
+				.toString(this.idPerformance++ * 10));
+		this.loadContentCurProject();
+	}
+
+	public void addDataReq() {
+		this._model.addDataRequirement(Integer.toString(this.idData++ * 10));
+		this.loadContentCurProject();
+	}
+
 }
-public void deleteCurProject() {
-	this._model.deleteCurrentProject();
-	listProjects();
-}
-
-public void openProject(String path) {
-	this._model.loadProject(path);
-	
-}
-
-public void saveToXML(String path) {
-	this._model.saveProject(path);
-}
-
-public void addPerformanceReq() {
-	this._model.addPerformanceRequirement(Integer.toString(idPerformance++*10));
-	this.loadContentCurProject();
-}
-public void addDataReq() {
-	this._model.addDataRequirement(Integer.toString(idData++*10));
-	this.loadContentCurProject();
-}
-
-
-
-
-
-}
-
-
-
