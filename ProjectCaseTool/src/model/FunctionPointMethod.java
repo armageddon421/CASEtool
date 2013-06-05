@@ -28,6 +28,9 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return resultField;
 	}
 	
+	/**
+	 * @return Sum of all function point of the project.
+	 */
 	private float sumRegularFP(){
 		ArrayList<Field> allFunctionReqs =  _project.getFunctionRequirements().getChildren();
 		float functionPoints = 0;
@@ -49,6 +52,12 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return functionPoints;
 	}
 	
+	/**
+	 * Calculates the value of a function point for a given function point type, complexity constellation.
+	 * @param fpEnum function point type (e.g. input/output/...) of the requirement.
+	 * @param complEnum complexity of the requirement.
+	 * @return Value of the function point. 
+	 */
 	private float calcFPforReq(FunctionPointEnum fpEnum, ComplexityEnum complEnum){
 		float fpValue = 0;
 		if(fpEnum == FunctionPointEnum.Input){
@@ -109,6 +118,13 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return fpValue;
 	}
 	
+	/**
+	 * Checks the function point parameters of the project for the given constellation of 
+	 * function point type and complexity and returns the function point value.
+	 * @param category
+	 * @param complexity
+	 * @return Value of the function point.
+	 */
 	private float getFPValue(String category, String complexity){
 		float fpValue = 0;
 		ArrayList<Field> fpParams = _project.getFPParameters().getChildren();
@@ -125,6 +141,9 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return fpValue;
 	}
 	
+	/**
+	 * @return Sum of all influence factors of the project.
+	 */
 	private float sumInfluences(){
 		float influence = 0;
 		ArrayList<Field> fpParams = _project.getFPParameters().getChildren();
