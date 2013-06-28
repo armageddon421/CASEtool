@@ -172,14 +172,19 @@ public class Controller {
 				for (final Field column : (field.getChildren().get(0))
 						.getChildren()) {
 					
+					
 					TableViewerColumn tabCol = new TableViewerColumn(
 							tableviewer, SWT.MULTI | SWT.FULL_SELECTION);
 					tabCol.getColumn().setWidth(200);
 					tabCol.getColumn().setText(column.getType().toString());
 					tabCol.setLabelProvider(new ColumnLabelProvider() {
+						
+						
 						@Override
 						public String getText(final Object object) {
-							return column.getValue().toString();
+							return ((Field) object).getChildren()
+									.get(field.getChildren().get(0).getChildren().indexOf(column)).getValue()
+									.toString();
 						}
 					});
 				}
