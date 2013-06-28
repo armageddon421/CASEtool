@@ -119,6 +119,12 @@ public class Controller {
 	}
 	
 	private void loadContentCurProject() {
+		
+		int oldTab = 0;
+		if (this._view.get_mainView()._tabFolder != null && !this._view.get_mainView()._tabFolder.isDisposed()) {
+			oldTab = this._view.get_mainView()._tabFolder.getSelectionIndex();
+		}
+		
 		this.deleteTabs();
 		for (Field eachChapter : this._model.getCurrentProjectFields()) {
 			TabItem chapterTab = new TabItem(
@@ -127,6 +133,10 @@ public class Controller {
 			String value = eachChapter.getValue().toString();
 			chapterTab.setText(value);
 			this.loadChapterContents(eachChapter, chapterTab);
+		}
+		
+		if (oldTab > 0 && oldTab <= this._view.get_mainView()._tabFolder.getTabList().length) {
+			this._view.get_mainView()._tabFolder.setSelection(oldTab);
 		}
 	}
 	
@@ -201,11 +211,16 @@ public class Controller {
 					
 					@Override
 					public void mouseDoubleClick(final MouseEvent arg0) {
-						new RequirementEditor(new Shell(Display.getDefault()),
-								SWT.NONE,
-								((Field) tableviewer.getElementAt(table
-										.getSelectionIndex()))).open();
 						
+						if (table.getSelectionIndex() < field.getChildren().size()) {
+							Field selection = ((Field) tableviewer.getElementAt(table
+									.getSelectionIndex()));
+							if (selection != null) {
+								new RequirementEditor(new Shell(Display.getDefault()),
+										SWT.NONE, selection).open();
+								loadContentCurProject();
+							}
+						}
 					}
 					
 					@Override

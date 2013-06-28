@@ -90,6 +90,7 @@ public class RequirementEditor extends Dialog {
 			@Override
 			public void mouseDown(final MouseEvent e) {
 				RequirementEditor.this._shlAnforderungBearbeiten.dispose();
+				// Controller.getInstance().loadContentCurProject();
 			}
 		});
 		this._btnConfirm.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
