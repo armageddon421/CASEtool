@@ -184,7 +184,7 @@ public class RequirementEditor extends Dialog {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
-				Text edit = new Text(composite, SWT.NONE);
+				Text edit = new Text(composite, SWT.MULTI | SWT.V_SCROLL );
 				edit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				edit.setText(property.getValue().toString());
 				edit.addListener(SWT.CHANGED, new FieldListener(property, edit));

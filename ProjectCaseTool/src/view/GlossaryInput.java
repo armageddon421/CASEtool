@@ -53,30 +53,31 @@ public class GlossaryInput {
 	 * Create contents of the shell.
 	 */
 	protected void createContents() {
-		this.shell.setLayout(new GridLayout(2, false));
+		this.shell.setLayout(new GridLayout(10, false));
 
 		Label lblBezeichnung = new Label(this.shell, SWT.NONE);
 		lblBezeichnung.setText("Bezeichnung");
+		lblBezeichnung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 3, 1));
 
 		this._text = new Text(this.shell, SWT.BORDER);
-		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 7, 1);
 		gd_text.heightHint = 34;
 		this._text.setLayoutData(gd_text);
 
 		Label lblBeschreibung = new Label(this.shell, SWT.NONE);
-		lblBeschreibung.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
-				false, false, 1, 1));
+		lblBeschreibung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
+				false, false, 3, 1));
 		lblBeschreibung.setText("Beschreibung");
 
-		this._text_1 = new Text(this.shell, SWT.BORDER | SWT.MULTI);
+		this._text_1 = new Text(this.shell, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
 		this._text_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
-				1, 1));
+				7, 1));
 		new Label(this.shell, SWT.NONE);
 
 		Composite composite = new Composite(this.shell, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
-				1, 1));
+				7, 1));
 
 		Button btnNewButton_1 = new Button(composite, SWT.NONE);
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
