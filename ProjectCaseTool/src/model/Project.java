@@ -403,8 +403,8 @@ public class Project implements IFieldable {
 	}
 	
 	private void initComplexity(Field owner){
-		owner.addChild(new Field("Easy", Type.Float, true, this, 3));
-		owner.addChild(new Field("Medium", Type.Float, true, this, 4));
-		owner.addChild(new Field("Complex", Type.Float, true, this, 6));
+		owner.addChild(new Field("Easy", Type.Float, true, this, 3.0f));
+		owner.addChild(new Field("Medium", Type.Float, true, this, 4.0f));
+		owner.addChild(new Field("Complex", Type.Float, true, this, 6.0f));
 	}
 }
