@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import additional.Field;
+import additional.Type;
 import controller.FieldListener;
 
 public class RequirementEditor extends Dialog {
@@ -69,10 +70,14 @@ public class RequirementEditor extends Dialog {
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 				1));
 		for (Field property : this._Requirement.getChildren()) {
+			int swttype = SWT.NONE;
+			if (property.getType() == Type.Text) {
+				swttype = SWT.MULTI;
+			}
 			Label label = new Label(composite, SWT.NONE);
 			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			label.setText(property.getName());
-			Text edit = new Text(composite, SWT.NONE);
+			Text edit = new Text(composite, swttype);
 			edit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			edit.setText(property.getValue().toString());
 			edit.addListener(SWT.CHANGED, new FieldListener(property, edit));

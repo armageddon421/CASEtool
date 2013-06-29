@@ -186,7 +186,7 @@ public class Controller {
 					TableViewerColumn tabCol = new TableViewerColumn(
 							tableviewer, SWT.MULTI | SWT.FULL_SELECTION);
 					tabCol.getColumn().setWidth(200);
-					tabCol.getColumn().setText(column.getType().toString());
+					tabCol.getColumn().setText(column.getName().toString());
 					tabCol.setLabelProvider(new ColumnLabelProvider() {
 						
 						
