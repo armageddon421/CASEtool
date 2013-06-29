@@ -353,33 +353,23 @@ public class Project implements IFieldable {
 		
 		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
 		input.addChild(new Field("Type", Type.String, false, this, "Eingabedaten"));
-		input.addChild(new Field("Easy", Type.Float, true, this, 3));
-		input.addChild(new Field("Medium", Type.Float, true, this, 4));
-		input.addChild(new Field("Complex", Type.Float, true, this, 6));
+		initComplexity(input);
 		
 		Field query = new Field("Query", Type.String, false, this, "Abfragen");
 		query.addChild(new Field("Query", Type.String, false, this, "Abfragen"));
-		query.addChild(new Field("Easy", Type.Float, true, this, 3));
-		query.addChild(new Field("Medium", Type.Float, true, this, 4));
-		query.addChild(new Field("Complex", Type.Float, true, this, 6));
+		initComplexity(query);
 		
 		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
 		output.addChild(new Field("Output", Type.String, false, this, "Ausgaben"));
-		output.addChild(new Field("Easy", Type.Float, true, this, 3));
-		output.addChild(new Field("Medium", Type.Float, true, this, 4));
-		output.addChild(new Field("Complex", Type.Float, true, this, 6));
+		initComplexity(output);
 		
 		Field data = new Field("Internal Data", Type.String, false, this, "Datenbestände");
 		data.addChild(new Field("Internal Data", Type.String, false, this, "Datenbestände"));
-		data.addChild(new Field("Easy", Type.Float, true, this, 3));
-		data.addChild(new Field("Medium", Type.Float, true, this, 4));
-		data.addChild(new Field("Complex", Type.Float, true, this, 6));
+		initComplexity(data);
 		
 		Field reference = new Field("External Data", Type.String, false, this, "Referenzdaten");
 		reference.addChild(new Field("External Data", Type.String, false, this, "Referenzdaten"));
-		reference.addChild(new Field("Easy", Type.Float, true, this, 3));
-		reference.addChild(new Field("Medium", Type.Float, true, this, 4));
-		reference.addChild(new Field("Complex", Type.Float, true, this, 6));
+		initComplexity(reference);
 		
 			
 		_fpParameters.addChild(input);
@@ -410,5 +400,11 @@ public class Project implements IFieldable {
 		tmp.addChild(new Field("Influence", Type.String, false, this,name));
 		tmp.addChild(new Field("Value", Type.Float, true, this, 0));
 		_fpInfluences.addChild(tmp);
+	}
+	
+	private void initComplexity(Field owner){
+		owner.addChild(new Field("Easy", Type.Float, true, this, 3));
+		owner.addChild(new Field("Medium", Type.Float, true, this, 4));
+		owner.addChild(new Field("Complex", Type.Float, true, this, 6));
 	}
 }
