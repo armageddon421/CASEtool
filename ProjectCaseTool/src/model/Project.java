@@ -107,62 +107,8 @@ public class Project implements IFieldable {
 		// FP Parameters
 		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameter");
 		_fpInfluences = new Field("FP Influences", Type.String, false, this, "FP Einflussfaktoren");
+		initFPFields();
 		
-		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
-		input.addChild(new Field("", Type.String, false, this, "Eingabedaten"));
-		input.addChild(new Field("Easy", Type.Float, true, this, 3));
-		input.addChild(new Field("Medium", Type.Float, true, this, 4));
-		input.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field query = new Field("Query", Type.String, false, this, "Abfragen");
-		query.addChild(new Field("Query", Type.String, false, this, "Abfragen"));
-		query.addChild(new Field("Easy", Type.Float, true, this, 3));
-		query.addChild(new Field("Medium", Type.Float, true, this, 4));
-		query.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
-		output.addChild(new Field("Output", Type.String, false, this, "Ausgaben"));
-		output.addChild(new Field("Easy", Type.Float, true, this, 3));
-		output.addChild(new Field("Medium", Type.Float, true, this, 4));
-		output.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field data = new Field("Internal Data", Type.String, false, this, "Datenbestände");
-		data.addChild(new Field("Internal Data", Type.String, false, this, "Datenbestände"));
-		data.addChild(new Field("Easy", Type.Float, true, this, 3));
-		data.addChild(new Field("Medium", Type.Float, true, this, 4));
-		data.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field reference = new Field("External Data", Type.String, false, this, "Referenzdaten");
-		reference.addChild(new Field("External Data", Type.String, false, this, "Referenzdaten"));
-		reference.addChild(new Field("Easy", Type.Float, true, this, 3));
-		reference.addChild(new Field("Medium", Type.Float, true, this, 4));
-		reference.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-			
-		_fpParameters.addChild(input);
-		_fpParameters.addChild(query);
-		_fpParameters.addChild(output);
-		_fpParameters.addChild(data);
-		_fpParameters.addChild(reference);
-		
-		_projectFields.add(_fpParameters);
-		
-//		Field influences = new Field("Influences", Type.String, false, this, "Einflussfaktoren");
-		
-		_fpInfluences.addChild(new Field("Verflechtungen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Dezentrale Daten", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Transaktionsrate", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Rechenoperationen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Kontrollverfahren", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Ausnahmeregelungen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Logik", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Wiederverwendbarkeit", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Datenbestandskonvertierung", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Anpassbarkeit", Type.Float, true, this, 0));
-		
-//		_fpInfluences.addChild(influences);
-		
-		_projectFields.add(_fpInfluences);
 		
 		// Calculation
 		_calcMethodEnum = CalculationEnum.notSet;
@@ -404,12 +350,9 @@ public class Project implements IFieldable {
 	}
 	
 	private void initFPFields(){
-		// FP Parameters
-		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameter");
-		_fpInfluences = new Field("FP Influences", Type.String, false, this, "FP Einflussfaktoren");
 		
 		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
-		input.addChild(new Field("", Type.String, false, this, "Eingabedaten"));
+		input.addChild(new Field("Type", Type.String, false, this, "Eingabedaten"));
 		input.addChild(new Field("Easy", Type.Float, true, this, 3));
 		input.addChild(new Field("Medium", Type.Float, true, this, 4));
 		input.addChild(new Field("Complex", Type.Float, true, this, 6));
@@ -447,22 +390,25 @@ public class Project implements IFieldable {
 		
 		_projectFields.add(_fpParameters);
 		
-//				Field influences = new Field("Influences", Type.String, false, this, "Einflussfaktoren");
-		
-		_fpInfluences.addChild(new Field("Verflechtungen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Dezentrale Daten", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Transaktionsrate", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Rechenoperationen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Kontrollverfahren", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Ausnahmeregelungen", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Logik", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Wiederverwendbarkeit", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Datenbestandskonvertierung", Type.Float, true, this, 0));
-		_fpInfluences.addChild(new Field("Anpassbarkeit", Type.Float, true, this, 0));
-		
-//				_fpInfluences.addChild(influences);
+
+		initInfluence("Verflechtung");
+		initInfluence("Dezentrale Daten");
+		initInfluence("Transaktionsrate");
+		initInfluence("Rechenoperationen");
+		initInfluence("Kontrollverfahren");
+		initInfluence("Ausnahmeregelungen");
+		initInfluence("Logik");
+		initInfluence("Wiederverwendbarkeit");
+		initInfluence("Datenbestandskonvertierung");
+		initInfluence("Anpassbarkeit");
 		
 		_projectFields.add(_fpInfluences);
 	}
 	
+	private void initInfluence(String name){
+		Field tmp = new Field(name, Type.String, true, this, name);
+		tmp.addChild(new Field("Influence", Type.String, false, this,name));
+		tmp.addChild(new Field("Value", Type.Float, true, this, 0));
+		_fpInfluences.addChild(tmp);
+	}
 }
