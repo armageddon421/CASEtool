@@ -1,11 +1,15 @@
 package controller;
 
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
 
+import additional.ComplexityEnum;
 import additional.Field;
+import additional.FunctionPointEnum;
+import additional.Type;
 
 public class FieldListener implements Listener {
 	
@@ -29,6 +33,15 @@ public class FieldListener implements Listener {
 			case "org.eclipse.swt.widgets.Text":
 				_attachedField.setValue(((Text) _observedWidget).getText());
 				break;
+				
+			case "org.eclipse.swt.widgets.Button":
+				if(_attachedField.getType() == Type.ComplexityEnum){
+					_attachedField.setValue(ComplexityEnum.valueOf(((Button) _observedWidget).getText()));
+				}
+				else if(_attachedField.getType() == Type.FunctionPointEnum){
+					_attachedField.setValue(FunctionPointEnum.valueOf(((Button) _observedWidget).getText()));
+				}
+				
 			
 			default:
 				break;
