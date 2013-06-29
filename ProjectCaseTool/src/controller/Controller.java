@@ -21,7 +21,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
@@ -132,7 +131,7 @@ public class Controller {
 			TabItem chapterTab = new TabItem(
 					this._view.get_mainView()._tabFolder, SWT.NONE);
 			this._openTabs.add(chapterTab);
-			String value = eachChapter.getValue().toString();
+			String value = eachChapter.getName().toString();
 			chapterTab.setText(value);
 			this.loadChapterContents(eachChapter, chapterTab);
 		}
@@ -153,19 +152,20 @@ public class Controller {
 		Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
 		tab.setControl(tabComposite);
 		
-		// only for Testpurpose, normally the if-clause should never come true
+		
 		if (field.getNumberOfChildren() == 0) {
-			tabComposite.setLayout(new GridLayout(2, false));
-			Label description = new Label(tabComposite, SWT.NONE);
-			description.setText(field.getValue().toString());
-			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
-					true, 1, 1));
+			tabComposite.setLayout(new GridLayout(1, false));
+//			Label description = new Label(tabComposite, SWT.NONE);
+//			description.setText(field.getName().toString());
+//			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
+//					true, 1, 1));
 			Text value = new Text(tabComposite, SWT.MULTI | SWT.BORDER);
 			value.setSize(300, 100);
 			value.setText(field.getValue().toString());
 			value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			value.addListener(SWT.CHANGED, new FieldListener(field, value));
-			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+//			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+			value.setEditable(true);
 			
 		} else {
 			if (field.getNumberOfChildren() > 0) {
@@ -323,5 +323,5 @@ public class Controller {
 		this._model.addGlossaryEntry(text, text2);
 		
 	}
-	
+		
 }

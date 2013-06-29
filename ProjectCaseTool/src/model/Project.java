@@ -51,6 +51,15 @@ public class Project implements IFieldable {
 	 * Holds the object that should do the calculation
 	 */
 	private AbstractCalculationMethod	_calcMethodInstance;
+
+	private String functionReqDescr = "\nHinzufügen von Produktfunktionen unter Hinzufügen -> Produktfunktionen." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String dataReqDescr = "\nHinzufügen von Produktdaten unter Hinzufügen -> Produktdaten." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String perReqDescr = "\nHinzufügen von Produktleistungen unter Hinzufügen -> Produktleistungen." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String glossaryDescr = "\nHinzufügen eines Glossareintrages unter Hinzufügen -> Glossareintrag." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
 	
 	/**
 	 * Empty constructor to be used with Import only
@@ -75,15 +84,15 @@ public class Project implements IFieldable {
 		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));
 		
 		// Requirement Fields
-		_functionReq = new Field("Function Requirements", Type.String, false, this, "Produktfunktionen");
+		_functionReq = new Field("Function Requirements", Type.String, false, this, functionReqDescr);
 		_projectFields.add(_functionReq);
-		_dataReq = new Field("Data Requirements", Type.String, false, this, "Produktdaten");
+		_dataReq = new Field("Data Requirements", Type.String, false, this, dataReqDescr);
 		_projectFields.add(_dataReq);
-		_performanceReq = new Field("Performance Requirements", Type.String, false, this, "Produktleistungen");
+		_performanceReq = new Field("Performance Requirements", Type.String, false, this, perReqDescr);
 		_projectFields.add(_performanceReq);
 		
 		// Glossary
-		_glossary = new Field("Glossary", Type.String, false, this, "Glossar");
+		_glossary = new Field("Glossary", Type.String, false, this, glossaryDescr);
 		_projectFields.add(_glossary);
 		
 		// FP Parameters
@@ -162,6 +171,7 @@ public class Project implements IFieldable {
 	 */
 	public void addFunctionRequirement(final String requirementID) {
 		Field tempField = new Field("FunctionReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("FR Name", Type.String, true, this, "new Function Requirement"));
 		tempField.addChild(new Field("FR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("FR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
@@ -198,6 +208,7 @@ public class Project implements IFieldable {
 	 */
 	public void addDataRequirement(final String requirementID) {
 		Field tempField = new Field("DataReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("DR Name", Type.String, true, this, "new Data Requirement"));
 		tempField.addChild(new Field("DR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("DR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
@@ -234,6 +245,7 @@ public class Project implements IFieldable {
 	 */
 	public void addPerformanceRequirement(final String requirementID) {
 		Field tempField = new Field("PerformanceReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
 		tempField.addChild(new Field("PR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));

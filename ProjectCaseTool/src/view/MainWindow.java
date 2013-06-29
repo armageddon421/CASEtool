@@ -195,7 +195,7 @@ public class MainWindow {
 		this._projectList = new List(sashForm, SWT.BORDER);
 		
 		this._tabFolder = new TabFolder(sashForm, SWT.NONE);
-		
+				
 		sashForm.setWeights(new int[] { 154, 809 });
 		this._projectList.addSelectionListener(this._viewFacade.getController()
 				.getProjectSelectionListener());
