@@ -70,8 +70,8 @@ public class Project implements IFieldable {
 		// Standard project fields
 		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
 		_projectFields.add(new Field("Project Additions", Type.Text, true, this, "Ergänzungen"));
-		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Projektziele"));
-		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Projektziele"));
+		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Produktziele"));
+		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Produkteinsatz"));
 		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));
 		
 		// Requirement Fields
@@ -87,7 +87,7 @@ public class Project implements IFieldable {
 		_projectFields.add(_glossary);
 		
 		// FP Parameters
-		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
+		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameter");
 		
 		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
 		input.addChild(new Field("Easy", Type.Float, true, this, 3));
