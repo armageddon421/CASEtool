@@ -127,14 +127,17 @@ public class Controller {
 		}
 		
 		this.deleteTabs();
-		for (Field eachChapter : this._model.getCurrentProjectFields()) {
-			TabItem chapterTab = new TabItem(
-					this._view.get_mainView()._tabFolder, SWT.NONE);
-			this._openTabs.add(chapterTab);
-			String value = eachChapter.getName().toString();
-			chapterTab.setText(value);
-			this.loadChapterContents(eachChapter, chapterTab);
+		if(_model.getCurrentProjectFields() != null){
+			for (Field eachChapter : this._model.getCurrentProjectFields()) {
+				TabItem chapterTab = new TabItem(
+						this._view.get_mainView()._tabFolder, SWT.NONE);
+				this._openTabs.add(chapterTab);
+				String value = eachChapter.getName().toString();
+				chapterTab.setText(value);
+				this.loadChapterContents(eachChapter, chapterTab);
+			}
 		}
+		
 		
 		if (oldTab > 0 && oldTab <= this._view.get_mainView()._tabFolder.getTabList().length) {
 			this._view.get_mainView()._tabFolder.setSelection(oldTab);
@@ -296,6 +299,7 @@ public class Controller {
 	public void deleteCurProject() {
 		this._model.deleteCurrentProject();
 		this.loadContentCurProject();
+		this.listProjects();
 	}
 	
 	public void openProject(final String path) {
