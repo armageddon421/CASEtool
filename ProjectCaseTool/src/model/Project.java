@@ -13,6 +13,10 @@ import additional.Type;
  * @author Patrick
  * 
  */
+/**
+ * @author Patrick
+ *
+ */
 public class Project implements IFieldable {
 	/**
 	 * Contains all fields associated with the project
@@ -41,6 +45,11 @@ public class Project implements IFieldable {
 	 */
 	private Field						_fpParameters;
 	
+	/**
+	 * Holds the field containing the influences concerning the FunctionPoint calculation.
+	 */
+	private Field						_fpInfluences;
+	
 	
 	/**
 	 * Enumerates the currently selected Calculation Method
@@ -51,6 +60,15 @@ public class Project implements IFieldable {
 	 * Holds the object that should do the calculation
 	 */
 	private AbstractCalculationMethod	_calcMethodInstance;
+
+	private String functionReqDescr = "\nHinzufügen von Produktfunktionen unter Hinzufügen -> Produktfunktionen." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String dataReqDescr = "\nHinzufügen von Produktdaten unter Hinzufügen -> Produktdaten." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String perReqDescr = "\nHinzufügen von Produktleistungen unter Hinzufügen -> Produktleistungen." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String glossaryDescr = "\nHinzufügen eines Glossareintrages unter Hinzufügen -> Glossareintrag." +
+			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
 	
 	/**
 	 * Empty constructor to be used with Import only
@@ -70,70 +88,27 @@ public class Project implements IFieldable {
 		// Standard project fields
 		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
 		_projectFields.add(new Field("Project Additions", Type.Text, true, this, "Ergänzungen"));
-		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Projektziele"));
-		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Projektziele"));
+		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Produktziele"));
+		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Produkteinsatz"));
 		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));
 		
 		// Requirement Fields
-		_functionReq = new Field("Function Requirements", Type.String, false, this, "Produktfunktionen");
+		_functionReq = new Field("Function Requirements", Type.String, false, this, functionReqDescr);
 		_projectFields.add(_functionReq);
-		_dataReq = new Field("Data Requirements", Type.String, false, this, "Produktdaten");
+		_dataReq = new Field("Data Requirements", Type.String, false, this, dataReqDescr);
 		_projectFields.add(_dataReq);
-		_performanceReq = new Field("Performance Requirements", Type.String, false, this, "Produktleistungen");
+		_performanceReq = new Field("Performance Requirements", Type.String, false, this, perReqDescr);
 		_projectFields.add(_performanceReq);
 		
 		// Glossary
-		_glossary = new Field("Glossary", Type.String, false, this, "Glossar");
+		_glossary = new Field("Glossary", Type.String, false, this, glossaryDescr);
 		_projectFields.add(_glossary);
 		
 		// FP Parameters
-		_fpParameters = new Field("FP Parameters", Type.String, false, this, "Function Point Parameter");
+		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameter");
+		_fpInfluences = new Field("FP Influences", Type.String, false, this, "FP Einflussfaktoren");
+		initFPFields();
 		
-		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
-		input.addChild(new Field("Easy", Type.Float, true, this, 3));
-		input.addChild(new Field("Medium", Type.Float, true, this, 4));
-		input.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field query = new Field("Query", Type.String, false, this, "Abfragen");
-		query.addChild(new Field("Easy", Type.Float, true, this, 3));
-		query.addChild(new Field("Medium", Type.Float, true, this, 4));
-		query.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
-		output.addChild(new Field("Easy", Type.Float, true, this, 3));
-		output.addChild(new Field("Medium", Type.Float, true, this, 4));
-		output.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field data = new Field("Internal Data", Type.String, false, this, "Datenbestände");
-		data.addChild(new Field("Easy", Type.Float, true, this, 3));
-		data.addChild(new Field("Medium", Type.Float, true, this, 4));
-		data.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field reference = new Field("External Data", Type.String, false, this, "Referenzdaten");
-		reference.addChild(new Field("Easy", Type.Float, true, this, 3));
-		reference.addChild(new Field("Medium", Type.Float, true, this, 4));
-		reference.addChild(new Field("Complex", Type.Float, true, this, 6));
-		
-		Field influences = new Field("Influences", Type.String, false, this, "Einflussfaktoren");
-		influences.addChild(new Field("Verflechtungen", Type.Float, true, this, 0));
-		influences.addChild(new Field("Dezentrale Daten", Type.Float, true, this, 0));
-		influences.addChild(new Field("Transaktionsrate", Type.Float, true, this, 0));
-		influences.addChild(new Field("Rechenoperationen", Type.Float, true, this, 0));
-		influences.addChild(new Field("Kontrollverfahren", Type.Float, true, this, 0));
-		influences.addChild(new Field("Ausnahmeregelungen", Type.Float, true, this, 0));
-		influences.addChild(new Field("Logik", Type.Float, true, this, 0));
-		influences.addChild(new Field("Wiederverwendbarkeit", Type.Float, true, this, 0));
-		influences.addChild(new Field("Datenbestandskonvertierung", Type.Float, true, this, 0));
-		influences.addChild(new Field("Anpassbarkeit", Type.Float, true, this, 0));
-		
-		_fpParameters.addChild(input);
-		_fpParameters.addChild(query);
-		_fpParameters.addChild(output);
-		_fpParameters.addChild(data);
-		_fpParameters.addChild(reference);
-		_fpParameters.addChild(influences);
-		
-		_projectFields.add(_fpParameters);
 		
 		// Calculation
 		_calcMethodEnum = CalculationEnum.notSet;
@@ -162,6 +137,7 @@ public class Project implements IFieldable {
 	 */
 	public void addFunctionRequirement(final String requirementID) {
 		Field tempField = new Field("FunctionReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("FR Name", Type.String, true, this, "new Function Requirement"));
 		tempField.addChild(new Field("FR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("FR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
@@ -198,6 +174,7 @@ public class Project implements IFieldable {
 	 */
 	public void addDataRequirement(final String requirementID) {
 		Field tempField = new Field("DataReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("DR Name", Type.String, true, this, "new Data Requirement"));
 		tempField.addChild(new Field("DR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("DR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
@@ -234,6 +211,7 @@ public class Project implements IFieldable {
 	 */
 	public void addPerformanceRequirement(final String requirementID) {
 		Field tempField = new Field("PerformanceReq", Type.String, true, this, requirementID);
+		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
 		tempField.addChild(new Field("PR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
@@ -271,7 +249,8 @@ public class Project implements IFieldable {
 	 *            Description to assign to this Entry
 	 */
 	public void addGlossaryEntry(final String keyword, final String description) {
-		Field tempField = new Field("Glossary Entry", Type.String, true, this, keyword);
+		Field tempField = new Field("Glossary Entry", Type.String, false, this, "Glossareintrag");
+		tempField.addChild(new Field("Key", Type.String, true, this, keyword));
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
 		_glossary.addChild(tempField);
 	}
@@ -357,6 +336,9 @@ public class Project implements IFieldable {
 			else if (field.getName().equals("FP Parameters")) {
 				_fpParameters = field;
 			}
+			else if (field.getName().equals("FP Influences")){
+				_fpInfluences = field;
+			}
 			
 		}
 		
@@ -367,4 +349,62 @@ public class Project implements IFieldable {
 		
 	}
 	
+	private void initFPFields(){
+		
+		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
+		input.addChild(new Field("Type", Type.String, false, this, "Eingabedaten"));
+		initComplexity(input);
+		
+		Field query = new Field("Query", Type.String, false, this, "Abfragen");
+		query.addChild(new Field("Query", Type.String, false, this, "Abfragen"));
+		initComplexity(query);
+		
+		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
+		output.addChild(new Field("Output", Type.String, false, this, "Ausgaben"));
+		initComplexity(output);
+		
+		Field data = new Field("Internal Data", Type.String, false, this, "Datenbestände");
+		data.addChild(new Field("Internal Data", Type.String, false, this, "Datenbestände"));
+		initComplexity(data);
+		
+		Field reference = new Field("External Data", Type.String, false, this, "Referenzdaten");
+		reference.addChild(new Field("External Data", Type.String, false, this, "Referenzdaten"));
+		initComplexity(reference);
+		
+			
+		_fpParameters.addChild(input);
+		_fpParameters.addChild(query);
+		_fpParameters.addChild(output);
+		_fpParameters.addChild(data);
+		_fpParameters.addChild(reference);
+		
+		_projectFields.add(_fpParameters);
+		
+
+		initInfluence("Verflechtung");
+		initInfluence("Dezentrale Daten");
+		initInfluence("Transaktionsrate");
+		initInfluence("Rechenoperationen");
+		initInfluence("Kontrollverfahren");
+		initInfluence("Ausnahmeregelungen");
+		initInfluence("Logik");
+		initInfluence("Wiederverwendbarkeit");
+		initInfluence("Datenbestandskonvertierung");
+		initInfluence("Anpassbarkeit");
+		
+		_projectFields.add(_fpInfluences);
+	}
+	
+	private void initInfluence(String name){
+		Field tmp = new Field(name, Type.String, true, this, name);
+		tmp.addChild(new Field("Influence", Type.String, false, this,name));
+		tmp.addChild(new Field("Value", Type.Float, true, this, 0));
+		_fpInfluences.addChild(tmp);
+	}
+	
+	private void initComplexity(Field owner){
+		owner.addChild(new Field("Easy", Type.Float, true, this, 3));
+		owner.addChild(new Field("Medium", Type.Float, true, this, 4));
+		owner.addChild(new Field("Complex", Type.Float, true, this, 6));
+	}
 }

@@ -10,6 +10,8 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -19,7 +21,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
@@ -130,7 +131,7 @@ public class Controller {
 			TabItem chapterTab = new TabItem(
 					this._view.get_mainView()._tabFolder, SWT.NONE);
 			this._openTabs.add(chapterTab);
-			String value = eachChapter.getValue().toString();
+			String value = eachChapter.getName().toString();
 			chapterTab.setText(value);
 			this.loadChapterContents(eachChapter, chapterTab);
 		}
@@ -151,19 +152,20 @@ public class Controller {
 		Composite tabComposite = new Composite(tab.getParent(), SWT.NONE);
 		tab.setControl(tabComposite);
 		
-		// only for Testpurpose, normally the if-clause should never come true
+		
 		if (field.getNumberOfChildren() == 0) {
-			tabComposite.setLayout(new GridLayout(2, false));
-			Label description = new Label(tabComposite, SWT.NONE);
-			description.setText(field.getValue().toString());
-			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
-					true, 1, 1));
+			tabComposite.setLayout(new GridLayout(1, false));
+//			Label description = new Label(tabComposite, SWT.NONE);
+//			description.setText(field.getName().toString());
+//			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
+//					true, 1, 1));
 			Text value = new Text(tabComposite, SWT.MULTI | SWT.BORDER);
 			value.setSize(300, 100);
 			value.setText(field.getValue().toString());
 			value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			value.addListener(SWT.CHANGED, new FieldListener(field, value));
-			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+//			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+			value.setEditable(true);
 			
 		} else {
 			if (field.getNumberOfChildren() > 0) {
@@ -234,9 +236,46 @@ public class Controller {
 					}
 					
 				});
+				table.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyReleased(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent arg0) {
+						if(arg0.keyCode == SWT.DEL){
+							if (table.getSelectionIndex() < field.getChildren().size()) {
+								Field selection = ((Field) tableviewer.getElementAt(table
+										.getSelectionIndex()));
+								if (selection != null) {
+									deleteFromTable(selection);
+								}
+							}
+						}						
+					}
+				});
 			}
 		}
 		
+	}
+	
+	private void deleteFromTable(Field fieldToDelete){
+		if(fieldToDelete.getName() == "FunctionReq"){
+			this._model.deleteFunctionRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "DataReq"){
+			this._model.deleteDataRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "PerformanceReq"){
+			this._model.deletePerformanceRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "Glossary Entry"){
+			this._model.deleteGlossaryEntry(fieldToDelete);
+		}
+		loadContentCurProject();
 	}
 	
 	/*
@@ -282,7 +321,7 @@ public class Controller {
 	
 	public void addGlossary(final String text, final String text2) {
 		this._model.addGlossaryEntry(text, text2);
-		
+		this.loadContentCurProject();
 	}
-	
+		
 }

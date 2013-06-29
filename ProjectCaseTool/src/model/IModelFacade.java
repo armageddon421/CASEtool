@@ -58,8 +58,7 @@ public interface IModelFacade {
 	 */
 	public void setCurrentProject(Field fieldOfProject);
 	
-	// TODO check what really happens if currentproject == null and change
-	// accordingly
+
 	/**
 	 * Does nothing if current project is not set.
 	 * 
