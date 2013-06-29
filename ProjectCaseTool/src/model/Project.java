@@ -283,7 +283,8 @@ public class Project implements IFieldable {
 	 *            Description to assign to this Entry
 	 */
 	public void addGlossaryEntry(final String keyword, final String description) {
-		Field tempField = new Field("Glossary Entry", Type.String, true, this, keyword);
+		Field tempField = new Field("Glossary Entry", Type.String, false, this, "Glossareintrag");
+		tempField.addChild(new Field("Key", Type.String, true, this, keyword));
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
 		_glossary.addChild(tempField);
 	}
