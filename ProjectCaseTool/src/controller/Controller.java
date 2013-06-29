@@ -10,6 +10,8 @@ import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionEvent;
@@ -234,9 +236,46 @@ public class Controller {
 					}
 					
 				});
+				table.addKeyListener(new KeyListener() {
+					
+					@Override
+					public void keyReleased(KeyEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+					
+					@Override
+					public void keyPressed(KeyEvent arg0) {
+						if(arg0.keyCode == SWT.DEL){
+							if (table.getSelectionIndex() < field.getChildren().size()) {
+								Field selection = ((Field) tableviewer.getElementAt(table
+										.getSelectionIndex()));
+								if (selection != null) {
+									deleteFromTable(selection);
+								}
+							}
+						}						
+					}
+				});
 			}
 		}
 		
+	}
+	
+	private void deleteFromTable(Field fieldToDelete){
+		if(fieldToDelete.getName() == "FunctionReq"){
+			this._model.deleteFunctionRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "DataReq"){
+			this._model.deleteDataRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "PerformanceReq"){
+			this._model.deletePerformanceRequirement(fieldToDelete);
+		}
+		else if(fieldToDelete.getName() == "Glossary Entry"){
+			this._model.deleteGlossaryEntry(fieldToDelete);
+		}
+		loadContentCurProject();
 	}
 	
 	/*
