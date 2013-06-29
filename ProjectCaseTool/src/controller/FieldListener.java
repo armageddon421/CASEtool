@@ -41,7 +41,7 @@ public class FieldListener implements Listener {
 				else if(_attachedField.getType() == Type.FunctionPointEnum){
 					_attachedField.setValue(FunctionPointEnum.valueOf(((Button) _observedWidget).getText()));
 				}
-				
+				break;
 			
 			default:
 				break;
