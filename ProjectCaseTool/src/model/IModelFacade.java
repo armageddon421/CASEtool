@@ -58,7 +58,7 @@ public interface IModelFacade {
 	 */
 	public void setCurrentProject(Field fieldOfProject);
 	
-
+	
 	/**
 	 * Does nothing if current project is not set.
 	 * 
@@ -174,4 +174,6 @@ public interface IModelFacade {
 	 * @return Returns the calculation field of the current project.
 	 */
 	public Field calculate();
+	
+	public Field getFPClaculationResults();
 }

@@ -127,7 +127,7 @@ public class Controller {
 		}
 		
 		this.deleteTabs();
-		if(_model.getCurrentProjectFields() != null){
+		if (_model.getCurrentProjectFields() != null) {
 			for (Field eachChapter : this._model.getCurrentProjectFields()) {
 				TabItem chapterTab = new TabItem(
 						this._view.get_mainView()._tabFolder, SWT.NONE);
@@ -158,16 +158,18 @@ public class Controller {
 		
 		if (field.getNumberOfChildren() == 0) {
 			tabComposite.setLayout(new GridLayout(1, false));
-//			Label description = new Label(tabComposite, SWT.NONE);
-//			description.setText(field.getName().toString());
-//			description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true,
-//					true, 1, 1));
+			// Label description = new Label(tabComposite, SWT.NONE);
+			// description.setText(field.getName().toString());
+			// description.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+			// true,
+			// true, 1, 1));
 			Text value = new Text(tabComposite, SWT.MULTI | SWT.BORDER);
 			value.setSize(300, 100);
 			value.setText(field.getValue().toString());
 			value.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 			value.addListener(SWT.CHANGED, new FieldListener(field, value));
-//			value.addVerifyListener(new FilterListener(FilterListener.STRING));
+			// value.addVerifyListener(new
+			// FilterListener(FilterListener.STRING));
 			value.setEditable(true);
 			
 		} else {
@@ -242,14 +244,14 @@ public class Controller {
 				table.addKeyListener(new KeyListener() {
 					
 					@Override
-					public void keyReleased(KeyEvent arg0) {
+					public void keyReleased(final KeyEvent arg0) {
 						// TODO Auto-generated method stub
 						
 					}
 					
 					@Override
-					public void keyPressed(KeyEvent arg0) {
-						if(arg0.keyCode == SWT.DEL){
+					public void keyPressed(final KeyEvent arg0) {
+						if (arg0.keyCode == SWT.DEL) {
 							if (table.getSelectionIndex() < field.getChildren().size()) {
 								Field selection = ((Field) tableviewer.getElementAt(table
 										.getSelectionIndex()));
@@ -257,7 +259,7 @@ public class Controller {
 									deleteFromTable(selection);
 								}
 							}
-						}						
+						}
 					}
 				});
 			}
@@ -265,17 +267,17 @@ public class Controller {
 		
 	}
 	
-	private void deleteFromTable(Field fieldToDelete){
-		if(fieldToDelete.getName() == "FunctionReq"){
+	private void deleteFromTable(final Field fieldToDelete) {
+		if (fieldToDelete.getName() == "FunctionReq") {
 			this._model.deleteFunctionRequirement(fieldToDelete);
 		}
-		else if(fieldToDelete.getName() == "DataReq"){
+		else if (fieldToDelete.getName() == "DataReq") {
 			this._model.deleteDataRequirement(fieldToDelete);
 		}
-		else if(fieldToDelete.getName() == "PerformanceReq"){
+		else if (fieldToDelete.getName() == "PerformanceReq") {
 			this._model.deletePerformanceRequirement(fieldToDelete);
 		}
-		else if(fieldToDelete.getName() == "Glossary Entry"){
+		else if (fieldToDelete.getName() == "Glossary Entry") {
 			this._model.deleteGlossaryEntry(fieldToDelete);
 		}
 		loadContentCurProject();
@@ -327,5 +329,9 @@ public class Controller {
 		this._model.addGlossaryEntry(text, text2);
 		this.loadContentCurProject();
 	}
-		
+	
+	public Field getFPClaculationResults() {
+		return this._model.getFPClaculationResults();
+	}
+	
 }

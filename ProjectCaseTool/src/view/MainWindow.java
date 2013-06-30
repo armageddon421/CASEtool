@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 
+import additional.Field;
+
 public class MainWindow {
 	
 	protected Shell	_shlCase;
@@ -140,11 +142,24 @@ public class MainWindow {
 		Menu menu_3 = new Menu(mntmProjekt);
 		mntmProjekt.setMenu(menu_3);
 		
-		MenuItem mntmAufwandsmethodeAuswhlen = new MenuItem(menu_3, SWT.NONE);
-		mntmAufwandsmethodeAuswhlen.setText("Aufwandsmethode ausw\u00E4hlen");
+		/*
+		 * MenuItem mntmAufwandsmethodeAuswhlen = new MenuItem(menu_3,
+		 * SWT.NONE);
+		 * mntmAufwandsmethodeAuswhlen.setText("Aufwandsmethode ausw\u00E4hlen"
+		 * );
+		 */
 		
 		MenuItem mntmAufwandBerechnen = new MenuItem(menu_3, SWT.NONE);
-		mntmAufwandBerechnen.setText("Aufwand berechnen");
+		mntmAufwandBerechnen.setText("Aufwand berechnen FP");
+		mntmAufwandBerechnen.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				
+				Field results = MainWindow.this._viewFacade.getController().getFPClaculationResults();
+				ResultViewer rv = new ResultViewer(new Shell(Display.getDefault()), results);
+				rv.open();
+			}
+		});
 		
 		MenuItem mntmDummy = new MenuItem(menu, SWT.CASCADE);
 		mntmDummy.setText("Hinzuf\u00FCgen");
@@ -195,7 +210,7 @@ public class MainWindow {
 		this._projectList = new List(sashForm, SWT.BORDER);
 		
 		this._tabFolder = new TabFolder(sashForm, SWT.NONE);
-				
+		
 		sashForm.setWeights(new int[] { 154, 809 });
 		this._projectList.addSelectionListener(this._viewFacade.getController()
 				.getProjectSelectionListener());

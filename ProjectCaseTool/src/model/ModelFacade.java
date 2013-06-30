@@ -225,5 +225,14 @@ public class ModelFacade implements IModelFacade {
 		}
 	}
 	
+	@Override
+	public Field getFPClaculationResults() {
+		if (_dataContainer.getCurrentProject() != null) {
+			FunctionPointMethod fp = new FunctionPointMethod();
+			Field results = fp.calculate(_dataContainer.getCurrentProject());
+			return results;
+		}
+		return null;
+	}
 	
 }
