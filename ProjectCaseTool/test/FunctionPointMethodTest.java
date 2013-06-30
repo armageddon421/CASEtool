@@ -1,7 +1,4 @@
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
+import static org.junit.Assert.assertEquals;
 import model.FunctionPointMethod;
 import model.Project;
 
@@ -10,7 +7,6 @@ import org.junit.Test;
 import additional.ComplexityEnum;
 import additional.Field;
 import additional.FunctionPointEnum;
-import additional.Type;
 
 
 public class FunctionPointMethodTest {
