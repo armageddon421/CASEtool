@@ -247,8 +247,6 @@ public class Controller {
 					
 					@Override
 					public void keyReleased(final KeyEvent arg0) {
-						// TODO Auto-generated method stub
-						
 					}
 					
 					@Override

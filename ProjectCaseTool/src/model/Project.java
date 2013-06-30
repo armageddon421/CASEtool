@@ -354,6 +354,9 @@ public class Project implements IFieldable {
 		
 	}
 	
+	/**
+	 * Init of the field concerning the Function Point calculation.
+	 */
 	private void initFPFields(){
 		
 		Field input = new Field("Input", Type.String, false, this, "Input");
@@ -400,6 +403,10 @@ public class Project implements IFieldable {
 		_projectFields.add(_fpInfluences);
 	}
 	
+	/**
+	 * Init of an influence.
+	 * @param name Name of the influences to initialize.
+	 */
 	private void initInfluence(String name){
 		Field tmp = new Field(name, Type.String, true, this, name);
 		tmp.addChild(new Field("Influence", Type.String, false, this,name));
@@ -407,6 +414,10 @@ public class Project implements IFieldable {
 		_fpInfluences.addChild(tmp);
 	}
 	
+	/**
+	 * Init of the complexity of a requirement.
+	 * @param owner Requirement.
+	 */
 	private void initComplexity(Field owner){
 		owner.addChild(new Field("Easy", Type.Float, true, this, 3.0f));
 		owner.addChild(new Field("Medium", Type.Float, true, this, 4.0f));

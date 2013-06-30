@@ -39,6 +39,10 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		return functionPoints;
 	}
 	
+	/**
+	 * @param requirements
+	 * @return Sum of function points from a single type of requirement.
+	 */
 	private float sumSingleTypeReq(ArrayList<Field> requirements){
 		float functionPoints = 0;
 		for(Field fReq : requirements){

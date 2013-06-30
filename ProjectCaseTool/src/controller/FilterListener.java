@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package controller;
 
 import org.eclipse.swt.events.VerifyEvent;
@@ -18,7 +16,7 @@ public class FilterListener implements VerifyListener {
 
 	private final int _filterMode;
 
-	/*
+	/**
 	 * @param type: sets the type what should be filtered.
 	 */
 	public FilterListener(int type) {

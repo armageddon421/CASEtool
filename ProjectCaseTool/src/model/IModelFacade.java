@@ -8,8 +8,6 @@ import additional.Field;
 /**
  * Interface for model facades
  * 
- * @author armageddon
- * 
  */
 public interface IModelFacade {
 	/**
