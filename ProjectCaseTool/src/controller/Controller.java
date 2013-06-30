@@ -65,7 +65,7 @@ public class Controller {
 			@Override
 			public void handleEvent(final Event arg0) {
 				Controller.this._numNewProject = Controller.this._numNewProject + 1;
-				Controller.this._model.createProject("Unbenanntes Projekt "
+				Controller.this._model.createProject("Unnamed Project "
 						+ Controller.this._numNewProject);
 				
 				Controller.this.listProjects();

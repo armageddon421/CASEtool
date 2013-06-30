@@ -61,14 +61,14 @@ public class Project implements IFieldable {
 	 */
 	private AbstractCalculationMethod	_calcMethodInstance;
 
-	private String functionReqDescr = "\nHinzufügen von Produktfunktionen unter Hinzufügen -> Produktfunktionen." +
-			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
-	private String dataReqDescr = "\nHinzufügen von Produktdaten unter Hinzufügen -> Produktdaten." +
-			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
-	private String perReqDescr = "\nHinzufügen von Produktleistungen unter Hinzufügen -> Produktleistungen." +
-			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
-	private String glossaryDescr = "\nHinzufügen eines Glossareintrages unter Hinzufügen -> Glossareintrag." +
-			"\n\nLöschen durch Selektieren und Drücken von ENTF." ;
+	private String functionReqDescr = "\nAdd function requirements: Add -> Function Requirement." +
+			"\n\nDelete a Requirement by pressing DEL." ;
+	private String dataReqDescr = "\nAdd data requirements: Add -> Data Requirement." +
+			"\n\nDelete a Requirement by pressing DEL." ;
+	private String perReqDescr = "\nAdd performance requirements: Add -> Performance Requirement." +
+			"\n\nDelete a Requirement by pressing DEL." ;
+	private String glossaryDescr = "\nAdd glossary entry: Add -> Glossary Entry." +
+			"\n\nDelete a Requirement by pressing DEL." ;
 	
 	/**
 	 * Empty constructor to be used with Import only
@@ -86,11 +86,11 @@ public class Project implements IFieldable {
 	 */
 	public Project(final String projectName) {
 		// Standard project fields
-		_projectFields.add(new Field("Project Name", Type.String, true, this, projectName));
-		_projectFields.add(new Field("Project Additions", Type.Text, true, this, "Ergänzungen"));
-		_projectFields.add(new Field("Project Objectives", Type.Text, true, this, "Produktziele"));
-		_projectFields.add(new Field("Project Use", Type.Text, true, this, "Produkteinsatz"));
-		_projectFields.add(new Field("Summary", Type.Text, true, this, "Zusammenfassung"));
+		_projectFields.add(new Field("Name", Type.String, true, this, projectName));
+		_projectFields.add(new Field("Summary", Type.Text, true, this, "Summary"));
+		_projectFields.add(new Field("Objective", Type.Text, true, this, "Project Objectives"));
+		_projectFields.add(new Field("Use", Type.Text, true, this, "Project Use"));
+		_projectFields.add(new Field("Additions", Type.Text, true, this, "Project Additions"));
 		
 		// Requirement Fields
 		_functionReq = new Field("Function Requirements", Type.String, false, this, functionReqDescr);
@@ -105,8 +105,8 @@ public class Project implements IFieldable {
 		_projectFields.add(_glossary);
 		
 		// FP Parameters
-		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameter");
-		_fpInfluences = new Field("FP Influences", Type.String, false, this, "FP Einflussfaktoren");
+		_fpParameters = new Field("FP Parameters", Type.String, false, this, "FP Parameters");
+		_fpInfluences = new Field("FP Influences", Type.String, false, this, "FP Influences");
 		initFPFields();
 		
 		
@@ -249,7 +249,7 @@ public class Project implements IFieldable {
 	 *            Description to assign to this Entry
 	 */
 	public void addGlossaryEntry(final String keyword, final String description) {
-		Field tempField = new Field("Glossary Entry", Type.String, false, this, "Glossareintrag");
+		Field tempField = new Field("Glossary Entry", Type.String, false, this, "Glossary Entry");
 		tempField.addChild(new Field("Key", Type.String, true, this, keyword));
 		tempField.addChild(new Field("Description", Type.Text, true, this, description));
 		_glossary.addChild(tempField);
@@ -361,24 +361,24 @@ public class Project implements IFieldable {
 	
 	private void initFPFields(){
 		
-		Field input = new Field("Input", Type.String, false, this, "Eingabedaten");
-		input.addChild(new Field("Type", Type.String, false, this, "Eingabedaten"));
+		Field input = new Field("Input", Type.String, false, this, "Input");
+		input.addChild(new Field("Type", Type.String, false, this, "Input"));
 		initComplexity(input);
 		
-		Field query = new Field("Query", Type.String, false, this, "Abfragen");
-		query.addChild(new Field("Query", Type.String, false, this, "Abfragen"));
+		Field query = new Field("Query", Type.String, false, this, "Query");
+		query.addChild(new Field("Query", Type.String, false, this, "Query"));
 		initComplexity(query);
 		
-		Field output = new Field("Output", Type.String, false, this, "Ausgaben");
-		output.addChild(new Field("Output", Type.String, false, this, "Ausgaben"));
+		Field output = new Field("Output", Type.String, false, this, "Output");
+		output.addChild(new Field("Output", Type.String, false, this, "Output"));
 		initComplexity(output);
 		
-		Field data = new Field("Internal Data", Type.String, false, this, "Datenbestände");
-		data.addChild(new Field("Internal Data", Type.String, false, this, "Datenbestände"));
+		Field data = new Field("Internal Data", Type.String, false, this, "Internal Data");
+		data.addChild(new Field("Internal Data", Type.String, false, this, "Internal Data"));
 		initComplexity(data);
 		
-		Field reference = new Field("External Data", Type.String, false, this, "Referenzdaten");
-		reference.addChild(new Field("External Data", Type.String, false, this, "Referenzdaten"));
+		Field reference = new Field("External Data", Type.String, false, this, "External Data");
+		reference.addChild(new Field("External Data", Type.String, false, this, "External Data"));
 		initComplexity(reference);
 		
 			

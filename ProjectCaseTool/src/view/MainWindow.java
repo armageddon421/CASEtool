@@ -14,8 +14,6 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 
-import additional.Field;
-
 public class MainWindow {
 	
 	protected Shell	_shlCase;
@@ -72,13 +70,13 @@ public class MainWindow {
 		this._shlCase.setMenuBar(menu);
 		
 		MenuItem mntmDatei = new MenuItem(menu, SWT.CASCADE);
-		mntmDatei.setText("Datei");
+		mntmDatei.setText("File");
 		
 		Menu menu_1 = new Menu(mntmDatei);
 		mntmDatei.setMenu(menu_1);
 		
 		MenuItem mntmNeuesProjektAnlegen = new MenuItem(menu_1, SWT.NONE);
-		mntmNeuesProjektAnlegen.setText("Neues Projekt anlegen");
+		mntmNeuesProjektAnlegen.setText("New Project");
 		
 		mntmNeuesProjektAnlegen.addListener(SWT.Selection, this._viewFacade
 				.getController().getcreateProjectListener());
@@ -91,7 +89,7 @@ public class MainWindow {
 			}
 		});
 		mntmGeffnetesProjektLschen
-				.setText("ge\u00F6ffnetes Projekt l\u00F6schen");
+				.setText("Delete Project");
 		
 		MenuItem mntmProjektffnen = new MenuItem(menu_1, SWT.NONE);
 		mntmProjektffnen.addSelectionListener(new SelectionAdapter() {
@@ -101,7 +99,7 @@ public class MainWindow {
 			}
 			
 		});
-		mntmProjektffnen.setText("Projekt \u00F6ffnen");
+		mntmProjektffnen.setText("Open Project");
 		
 		MenuItem mntmProjektSchlieen = new MenuItem(menu_1, SWT.NONE);
 		mntmProjektSchlieen.addSelectionListener(new SelectionAdapter() {
@@ -111,7 +109,7 @@ public class MainWindow {
 			}
 			
 		});
-		mntmProjektSchlieen.setText("Projekt speichern");
+		mntmProjektSchlieen.setText("Save Project");
 		
 		MenuItem mntmExport = new MenuItem(menu_1, SWT.CASCADE);
 		mntmExport.setText("XML");
@@ -129,15 +127,21 @@ public class MainWindow {
 		mntmExport_1.setText("Export");
 		
 		MenuItem mntmImport = new MenuItem(menu_2, SWT.NONE);
+		mntmImport.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				MainWindow.this.load();
+			}
+		});
 		mntmImport.setText("Import");
 		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
 		MenuItem mntmBeenden = new MenuItem(menu_1, SWT.NONE);
-		mntmBeenden.setText("Beenden");
+		mntmBeenden.setText("Exit");
 		
 		MenuItem mntmProjekt = new MenuItem(menu, SWT.CASCADE);
-		mntmProjekt.setText("Projekt");
+		mntmProjekt.setText("Project");
 		
 		Menu menu_3 = new Menu(mntmProjekt);
 		mntmProjekt.setMenu(menu_3);
@@ -150,19 +154,16 @@ public class MainWindow {
 		 */
 		
 		MenuItem mntmAufwandBerechnen = new MenuItem(menu_3, SWT.NONE);
-		mntmAufwandBerechnen.setText("Aufwand berechnen FP");
+		mntmAufwandBerechnen.setText("Calculate Effort");
 		mntmAufwandBerechnen.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
 				MainWindow.this._viewFacade.getController().showFPcalc();
-//				Field results = MainWindow.this._viewFacade.getController().getFPClaculationResults();
-//				ResultViewer rv = new ResultViewer(new Shell(Display.getDefault()), results);
-//				rv.open();
 			}
 		});
 		
 		MenuItem mntmDummy = new MenuItem(menu, SWT.CASCADE);
-		mntmDummy.setText("Hinzuf\u00FCgen");
+		mntmDummy.setText("Add");
 		
 		Menu menu_4 = new Menu(mntmDummy);
 		mntmDummy.setMenu(menu_4);
@@ -174,7 +175,7 @@ public class MainWindow {
 				MainWindow.this._viewFacade.getController().addRequirement();
 			}
 		});
-		mntmNeuReq.setText("Produktfunktion");
+		mntmNeuReq.setText("Function Requirement");
 		
 		MenuItem mntmProduktleistung = new MenuItem(menu_4, SWT.NONE);
 		mntmProduktleistung.addSelectionListener(new SelectionAdapter() {
@@ -183,7 +184,7 @@ public class MainWindow {
 				MainWindow.this._viewFacade.getController().addPerformanceReq();
 			}
 		});
-		mntmProduktleistung.setText("Produktleistung");
+		mntmProduktleistung.setText("Performance Requirement");
 		
 		MenuItem mntmProduktdatum = new MenuItem(menu_4, SWT.NONE);
 		mntmProduktdatum.addSelectionListener(new SelectionAdapter() {
@@ -192,7 +193,7 @@ public class MainWindow {
 				MainWindow.this._viewFacade.getController().addDataReq();
 			}
 		});
-		mntmProduktdatum.setText("Produktdatum");
+		mntmProduktdatum.setText("Data Requirement");
 		
 		MenuItem mntmGlossareintrag = new MenuItem(menu_4, SWT.NONE);
 		mntmGlossareintrag.addSelectionListener(new SelectionAdapter() {
@@ -201,7 +202,7 @@ public class MainWindow {
 				new GlossaryInput(MainWindow.this._viewFacade);
 			}
 		});
-		mntmGlossareintrag.setText("Glossareintrag");
+		mntmGlossareintrag.setText("Glossary Entry");
 		
 		SashForm sashForm = new SashForm(this._shlCase, SWT.BORDER);
 		sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
