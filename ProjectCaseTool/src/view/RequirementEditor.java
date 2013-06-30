@@ -15,10 +15,7 @@ import org.eclipse.swt.widgets.Text;
 
 import additional.ComplexityEnum;
 import additional.Field;
-<<<<<<< HEAD
-=======
 import additional.FunctionPointEnum;
->>>>>>> refs/remotes/origin/master
 import additional.Type;
 import controller.FieldListener;
 
@@ -75,22 +72,7 @@ public class RequirementEditor extends Dialog {
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 				1));
 		for (Field property : this._Requirement.getChildren()) {
-<<<<<<< HEAD
-			int swttype = SWT.NONE;
-			if (property.getType() == Type.Text) {
-				swttype = SWT.MULTI;
-			}
-			Label label = new Label(composite, SWT.NONE);
-			label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-			label.setText(property.getName());
-			Text edit = new Text(composite, swttype);
-			edit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-			edit.setText(property.getValue().toString());
-			edit.addListener(SWT.CHANGED, new FieldListener(property, edit));
-			// edit.addVerifyListener(new
-			// FilterListener(FilterListener.STRING));
-=======
-			if(property.getType() == Type.ComplexityEnum){
+			if (property.getType() == Type.ComplexityEnum) {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
@@ -101,34 +83,34 @@ public class RequirementEditor extends Dialog {
 				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 						1));
 				
-				Button b1 = new Button (togglecomposite, SWT.RADIO);
+				Button b1 = new Button(togglecomposite, SWT.RADIO);
 				b1.setText(ComplexityEnum.Easy.toString());
 				b1.addListener(SWT.Selection, new FieldListener(property, b1));
 				
-				Button b2 = new Button (togglecomposite, SWT.RADIO);
+				Button b2 = new Button(togglecomposite, SWT.RADIO);
 				b2.setText(ComplexityEnum.Medium.toString());
 				b2.addListener(SWT.Selection, new FieldListener(property, b2));
 				
-				Button b3 = new Button (togglecomposite, SWT.RADIO);
+				Button b3 = new Button(togglecomposite, SWT.RADIO);
 				b3.setText(ComplexityEnum.Complex.toString());
 				b3.addListener(SWT.Selection, new FieldListener(property, b3));
 				
-				switch ((ComplexityEnum) property.getValue()){
-					case Easy: 
+				switch ((ComplexityEnum) property.getValue()) {
+					case Easy:
 						b1.setSelection(true);
 						break;
-					case Medium: 
+					case Medium:
 						b2.setSelection(true);
 						break;
-					case Complex: 
+					case Complex:
 						b3.setSelection(true);
 						break;
-					default: 
+					default:
 						break;
 				}
 				
 			}
-			else if(property.getType() == Type.FunctionPointEnum){
+			else if (property.getType() == Type.FunctionPointEnum) {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
@@ -139,60 +121,59 @@ public class RequirementEditor extends Dialog {
 				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 						1));
 				
-				Button b1 = new Button (togglecomposite, SWT.RADIO);
+				Button b1 = new Button(togglecomposite, SWT.RADIO);
 				b1.setText(FunctionPointEnum.Input.toString());
 				b1.addListener(SWT.Selection, new FieldListener(property, b1));
 				
-				Button b2 = new Button (togglecomposite, SWT.RADIO);
+				Button b2 = new Button(togglecomposite, SWT.RADIO);
 				b2.setText(FunctionPointEnum.Output.toString());
 				b2.addListener(SWT.Selection, new FieldListener(property, b2));
 				
-				Button b3 = new Button (togglecomposite, SWT.RADIO);
+				Button b3 = new Button(togglecomposite, SWT.RADIO);
 				b3.setText(FunctionPointEnum.InternalData.toString());
 				b3.addListener(SWT.Selection, new FieldListener(property, b3));
 				
-				Button b4 = new Button (togglecomposite, SWT.RADIO);
+				Button b4 = new Button(togglecomposite, SWT.RADIO);
 				b4.setText(FunctionPointEnum.ExternalData.toString());
 				b4.addListener(SWT.Selection, new FieldListener(property, b4));
 				
-				Button b5 = new Button (togglecomposite, SWT.RADIO);
+				Button b5 = new Button(togglecomposite, SWT.RADIO);
 				b5.setText(FunctionPointEnum.Query.toString());
 				b5.addListener(SWT.Selection, new FieldListener(property, b5));
 				
-				switch ((FunctionPointEnum) property.getValue()){
-				case Input: 
-					b1.setSelection(true);
-					break;
-				case Output: 
-					b2.setSelection(true);
-					break;
-				case InternalData: 
-					b3.setSelection(true);
-					break;
-				case ExternalData:
-					b4.setSelection(true);
-					break;
-				case Query:
-					b5.setSelection(true);
-					break;
-				default: 
-					break;
+				switch ((FunctionPointEnum) property.getValue()) {
+					case Input:
+						b1.setSelection(true);
+						break;
+					case Output:
+						b2.setSelection(true);
+						break;
+					case InternalData:
+						b3.setSelection(true);
+						break;
+					case ExternalData:
+						b4.setSelection(true);
+						break;
+					case Query:
+						b5.setSelection(true);
+						break;
+					default:
+						break;
 				}
-					
+				
 			}
 			else {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
-				Text edit = new Text(composite, SWT.MULTI | SWT.V_SCROLL );
+				Text edit = new Text(composite, SWT.MULTI | SWT.V_SCROLL);
 				edit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				edit.setText(property.getValue().toString());
 				edit.addListener(SWT.CHANGED, new FieldListener(property, edit));
 				// edit.addVerifyListener(new
 				// FilterListener(FilterListener.STRING));
 			}
-
->>>>>>> refs/remotes/origin/master
+			
 		}
 		Composite composite_1 = new Composite(this._shlAnforderungBearbeiten,
 				SWT.NONE);
