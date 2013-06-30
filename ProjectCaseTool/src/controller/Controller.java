@@ -28,7 +28,9 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import view.RequirementEditor;
+import view.ResultViewer;
 import view.ViewFacade;
+import additional.CalculationEnum;
 import additional.Field;
 
 public class Controller {
@@ -329,9 +331,16 @@ public class Controller {
 		this._model.addGlossaryEntry(text, text2);
 		this.loadContentCurProject();
 	}
-	
-	public Field getFPClaculationResults() {
-		return this._model.getFPClaculationResults();
+
+	public void showFPcalc() {
+		/* Check which calculation method is currently set. Current: Only FP implemented */
+		this._model.setCalculationMethod(CalculationEnum.FunctionPoint);
+		if(this._model.getCalculationMethod() == CalculationEnum.FunctionPoint){
+			Field results = this._model.calculate();
+			ResultViewer rv = new ResultViewer(new Shell(Display.getDefault()), results);
+			rv.open();
+		} 
+
 	}
 	
 }

@@ -154,10 +154,10 @@ public class MainWindow {
 		mntmAufwandBerechnen.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				
-				Field results = MainWindow.this._viewFacade.getController().getFPClaculationResults();
-				ResultViewer rv = new ResultViewer(new Shell(Display.getDefault()), results);
-				rv.open();
+				MainWindow.this._viewFacade.getController().showFPcalc();
+//				Field results = MainWindow.this._viewFacade.getController().getFPClaculationResults();
+//				ResultViewer rv = new ResultViewer(new Shell(Display.getDefault()), results);
+//				rv.open();
 			}
 		});
 		

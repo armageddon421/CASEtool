@@ -175,5 +175,4 @@ public interface IModelFacade {
 	 */
 	public Field calculate();
 	
-	public Field getFPClaculationResults();
 }
