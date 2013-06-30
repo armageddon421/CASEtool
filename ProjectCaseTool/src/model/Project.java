@@ -9,10 +9,7 @@ import additional.FunctionPointEnum;
 import additional.IFieldable;
 import additional.Type;
 
-/**
- * @author Patrick
- * 
- */
+
 /**
  * @author Patrick
  *
@@ -214,8 +211,6 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
 		tempField.addChild(new Field("PR Description", Type.Text, true, this, ""));
-//		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
-//		tempField.addChild(new Field("PR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
 		_performanceReq.addChild(tempField);
 	}
 	
