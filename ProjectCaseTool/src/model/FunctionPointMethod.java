@@ -19,7 +19,8 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 		float influences = sumInfluences();
 		float weightedFP = (float) ((influences * 0.01 + 0.7) * regularFP);
 		float duration = (float) Math.pow(weightedFP, 0.4);
-		float manpower = Math.round(weightedFP / 150);
+		/* Add 0.49 for rounding to next higher Integer value */
+		float manpower = Math.round((weightedFP / 150) + 0.49);
 		float effort = duration * manpower;
 		resultField.addChild(new Field("Weighted FP", Type.Float, false, this, weightedFP));
 		resultField.addChild(new Field("Duration", Type.Float, false, this, duration));
@@ -33,8 +34,14 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 	 */
 	private float sumRegularFP(){
 		ArrayList<Field> allFunctionReqs =  _project.getFunctionRequirements().getChildren();
+		ArrayList<Field> allDataReqs = _project.getDataRequirements().getChildren();
+		float functionPoints = sumSingleTypeReq(allFunctionReqs) + sumSingleTypeReq(allDataReqs);		
+		return functionPoints;
+	}
+	
+	private float sumSingleTypeReq(ArrayList<Field> requirements){
 		float functionPoints = 0;
-		for(Field fReq : allFunctionReqs){
+		for(Field fReq : requirements){
 			FunctionPointEnum fpEnum = null;	
 			ComplexityEnum complEnum = null;
 			for(Field reqAttribute : fReq.getChildren()){
@@ -146,16 +153,9 @@ public class FunctionPointMethod extends AbstractCalculationMethod {
 	 */
 	private float sumInfluences(){
 		float influence = 0;
-		ArrayList<Field> fpParams = _project.getFPParameters().getChildren();
-		for(Field param : fpParams){
-			if(param.getName() == "Influences"){
-				ArrayList<Field> allInfluences = param.getChildren();
-				for(Field influenceField : allInfluences){
-					if(influenceField.getType() == Type.Float){
-						influence = influence + (float) influenceField.getValue();
-					}
-				}
-			}
+		ArrayList<Field> fpInfluences = _project.getFPInfluences().getChildren();
+		for(Field singleInfluence : fpInfluences){
+			influence = influence + (float) singleInfluence.getChildren().get(1).getValue();
 		}
 		return influence;
 	}

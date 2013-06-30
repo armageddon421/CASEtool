@@ -178,7 +178,7 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("DR Name", Type.String, true, this, "new Data Requirement"));
 		tempField.addChild(new Field("DR Description", Type.Text, true, this, ""));
 		tempField.addChild(new Field("DR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
-		tempField.addChild(new Field("DR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
+		tempField.addChild(new Field("DR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.InternalData));
 		_dataReq.addChild(tempField);
 	}
 	
@@ -214,8 +214,8 @@ public class Project implements IFieldable {
 		tempField.addChild(new Field("ID", Type.String, true, this, requirementID));
 		tempField.addChild(new Field("PR Name", Type.String, true, this, "new Performance Requirement"));
 		tempField.addChild(new Field("PR Description", Type.Text, true, this, ""));
-		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
-		tempField.addChild(new Field("PR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
+//		tempField.addChild(new Field("PR Complexity", Type.ComplexityEnum, true, this, ComplexityEnum.Easy));
+//		tempField.addChild(new Field("PR FP Type", Type.FunctionPointEnum, true, this, FunctionPointEnum.Query));
 		_performanceReq.addChild(tempField);
 	}
 	
@@ -275,6 +275,16 @@ public class Project implements IFieldable {
 	 */
 	public Field getFPParameters() {
 		return _fpParameters;
+	}
+	
+	/**
+	 * Returns the field containing all FunctionPoint Influences as
+	 * Children
+	 * 
+	 * @return Field
+	 */
+	public Field getFPInfluences() {
+		return _fpInfluences;
 	}
 	
 	/**
@@ -398,7 +408,7 @@ public class Project implements IFieldable {
 	private void initInfluence(String name){
 		Field tmp = new Field(name, Type.String, true, this, name);
 		tmp.addChild(new Field("Influence", Type.String, false, this,name));
-		tmp.addChild(new Field("Value", Type.Float, true, this, 0));
+		tmp.addChild(new Field("Value", Type.Float, true, this, 0.0f));
 		_fpInfluences.addChild(tmp);
 	}
 	
