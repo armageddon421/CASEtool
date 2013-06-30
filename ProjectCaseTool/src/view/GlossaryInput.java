@@ -44,7 +44,7 @@ public class GlossaryInput {
 	public GlossaryInput(ViewFacade view) {
 
 		this._viewFacade = view;
-		this.shell = new Shell(this.display);
+		this.shell = new Shell();
 		this.createContents();
 
 	}
@@ -57,7 +57,8 @@ public class GlossaryInput {
 
 		Label lblBezeichnung = new Label(this.shell, SWT.NONE);
 		lblBezeichnung.setText("Bezeichnung");
-		lblBezeichnung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 3, 1));
+		lblBezeichnung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
+				false, 3, 1));
 
 		this._text = new Text(this.shell, SWT.BORDER);
 		GridData gd_text = new GridData(SWT.FILL, SWT.CENTER, true, false, 7, 1);
@@ -65,11 +66,12 @@ public class GlossaryInput {
 		this._text.setLayoutData(gd_text);
 
 		Label lblBeschreibung = new Label(this.shell, SWT.NONE);
-		lblBeschreibung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
-				false, false, 3, 1));
+		lblBeschreibung.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
+				false, 3, 1));
 		lblBeschreibung.setText("Beschreibung");
 
-		this._text_1 = new Text(this.shell, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL);
+		this._text_1 = new Text(this.shell, SWT.BORDER | SWT.MULTI
+				| SWT.V_SCROLL);
 		this._text_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
 				7, 1));
 		new Label(this.shell, SWT.NONE);

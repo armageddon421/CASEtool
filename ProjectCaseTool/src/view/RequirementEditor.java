@@ -20,24 +20,25 @@ import additional.Type;
 import controller.FieldListener;
 
 public class RequirementEditor extends Dialog {
-	
-	protected Object	_result;
-	protected Shell		_shlAnforderungBearbeiten;
-	private Button		_btnConfirm;
-	private final Field	_Requirement;
-	
+
+	protected Object _result;
+	protected Shell _shlAnforderungBearbeiten;
+	private Button _btnConfirm;
+	private final Field _Requirement;
+
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parent
 	 * @param style
 	 */
-	public RequirementEditor(final Shell parent, final int style, final Field requirement) {
+	public RequirementEditor(final Shell parent, final int style,
+			final Field requirement) {
 		super(parent, style);
 		this.setText("Requirement bearbeiten");
 		this._Requirement = requirement;
 	}
-	
+
 	/**
 	 * Open the dialog.
 	 * 
@@ -55,17 +56,16 @@ public class RequirementEditor extends Dialog {
 		}
 		return this._result;
 	}
-	
+
 	/**
 	 * Create contents of the dialog.
 	 */
 	private void createContents() {
-		this._shlAnforderungBearbeiten = new Shell(this.getParent(),
-				this.getStyle());
+		this._shlAnforderungBearbeiten = new Shell();
 		this._shlAnforderungBearbeiten.setSize(533, 461);
 		this._shlAnforderungBearbeiten.setText("Anforderung bearbeiten");
 		this._shlAnforderungBearbeiten.setLayout(new GridLayout(1, false));
-		
+
 		Composite composite = new Composite(this._shlAnforderungBearbeiten,
 				SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
@@ -76,93 +76,89 @@ public class RequirementEditor extends Dialog {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
-				
-				Composite togglecomposite = new Composite(composite,
-						SWT.NONE);
+
+				Composite togglecomposite = new Composite(composite, SWT.NONE);
 				togglecomposite.setLayout(new GridLayout(3, false));
-				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
-						1));
-				
+				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+						true, true, 1, 1));
+
 				Button b1 = new Button(togglecomposite, SWT.RADIO);
 				b1.setText(ComplexityEnum.Easy.toString());
 				b1.addListener(SWT.Selection, new FieldListener(property, b1));
-				
+
 				Button b2 = new Button(togglecomposite, SWT.RADIO);
 				b2.setText(ComplexityEnum.Medium.toString());
 				b2.addListener(SWT.Selection, new FieldListener(property, b2));
-				
+
 				Button b3 = new Button(togglecomposite, SWT.RADIO);
 				b3.setText(ComplexityEnum.Complex.toString());
 				b3.addListener(SWT.Selection, new FieldListener(property, b3));
-				
+
 				switch ((ComplexityEnum) property.getValue()) {
-					case Easy:
-						b1.setSelection(true);
-						break;
-					case Medium:
-						b2.setSelection(true);
-						break;
-					case Complex:
-						b3.setSelection(true);
-						break;
-					default:
-						break;
+				case Easy:
+					b1.setSelection(true);
+					break;
+				case Medium:
+					b2.setSelection(true);
+					break;
+				case Complex:
+					b3.setSelection(true);
+					break;
+				default:
+					break;
 				}
-				
-			}
-			else if (property.getType() == Type.FunctionPointEnum) {
+
+			} else if (property.getType() == Type.FunctionPointEnum) {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
-				
-				Composite togglecomposite = new Composite(composite,
-						SWT.NONE);
+
+				Composite togglecomposite = new Composite(composite, SWT.NONE);
 				togglecomposite.setLayout(new GridLayout(5, false));
-				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
-						1));
-				
+				togglecomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+						true, true, 1, 1));
+
 				Button b1 = new Button(togglecomposite, SWT.RADIO);
 				b1.setText(FunctionPointEnum.Input.toString());
 				b1.addListener(SWT.Selection, new FieldListener(property, b1));
-				
+
 				Button b2 = new Button(togglecomposite, SWT.RADIO);
 				b2.setText(FunctionPointEnum.Output.toString());
 				b2.addListener(SWT.Selection, new FieldListener(property, b2));
-				
+
 				Button b3 = new Button(togglecomposite, SWT.RADIO);
 				b3.setText(FunctionPointEnum.InternalData.toString());
 				b3.addListener(SWT.Selection, new FieldListener(property, b3));
-				
+
 				Button b4 = new Button(togglecomposite, SWT.RADIO);
 				b4.setText(FunctionPointEnum.ExternalData.toString());
 				b4.addListener(SWT.Selection, new FieldListener(property, b4));
-				
+
 				Button b5 = new Button(togglecomposite, SWT.RADIO);
 				b5.setText(FunctionPointEnum.Query.toString());
 				b5.addListener(SWT.Selection, new FieldListener(property, b5));
-				
+
 				switch ((FunctionPointEnum) property.getValue()) {
-					case Input:
-						b1.setSelection(true);
-						break;
-					case Output:
-						b2.setSelection(true);
-						break;
-					case InternalData:
-						b3.setSelection(true);
-						break;
-					case ExternalData:
-						b4.setSelection(true);
-						break;
-					case Query:
-						b5.setSelection(true);
-						break;
-					default:
-						break;
+				case Input:
+					b1.setSelection(true);
+					break;
+				case Output:
+					b2.setSelection(true);
+					break;
+				case InternalData:
+					b3.setSelection(true);
+					break;
+				case ExternalData:
+					b4.setSelection(true);
+					break;
+				case Query:
+					b5.setSelection(true);
+					break;
+				default:
+					break;
 				}
-				
-			}
-			else {
+
+			} else {
 				Label label = new Label(composite, SWT.NONE);
 				label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 				label.setText(property.getName());
@@ -173,14 +169,14 @@ public class RequirementEditor extends Dialog {
 				// edit.addVerifyListener(new
 				// FilterListener(FilterListener.STRING));
 			}
-			
+
 		}
 		Composite composite_1 = new Composite(this._shlAnforderungBearbeiten,
 				SWT.NONE);
 		composite_1.setLayout(new GridLayout(2, false));
 		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-		
+
 		this._btnConfirm = new Button(composite_1, SWT.NONE);
 		this._btnConfirm.addMouseListener(new MouseAdapter() {
 			@Override
@@ -193,6 +189,6 @@ public class RequirementEditor extends Dialog {
 				false, 1, 1));
 		this._btnConfirm.setText("fertig");
 		new Label(composite_1, SWT.NONE);
-		
+
 	}
 }
